@@ -8,7 +8,7 @@ const ACCENT_LIGHT = "#D4E4F7";
 interface NavItem { id: string; label: string; icon: string; }
 
 const navItems: NavItem[] = [
-  { id: "overview",  label: "에루란 왕국",      icon: "👑" },
+  { id: "overview",  label: "에를랑 왕국",      icon: "👑" },
   { id: "history",   label: "역사",             icon: "📜" },
   { id: "geography", label: "지세와 산업",       icon: "🏔️" },
   { id: "politics",  label: "정치와 군사",       icon: "⚜️" },
@@ -48,7 +48,7 @@ function OverviewSection() {
   return (
     <div>
       <div style={{ background: "#fff", border: `2px solid ${ACCENT}30`, borderRadius: 10, padding: "20px 24px", marginBottom: 24 }}>
-        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14, letterSpacing: "0.08em" }}>에루란 왕국 기본 데이터</div>
+        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14, letterSpacing: "0.08em" }}>에를랑 왕국 기본 데이터</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 20px" }}>
           {capitalData.stats.map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, fontSize: "13px", borderBottom: "1px solid #F0ECE5", paddingBottom: 6 }}>
@@ -65,19 +65,19 @@ function OverviewSection() {
 
 function HistorySection() {
   const events = [
-    { year: "성력 300년경", content: "에루란 왕국 건국. 에린디르 서방 최고(最古)의 왕국으로 알려진다." },
-    { year: "성력 370년경", content: "에루란 왕국과 하트파스 왕국의 전쟁. '사자공자전쟁'이라 불린다." },
-    { year: "성력 500년경", content: "에루란 왕국의 중원 출병. 파리스 왕국과의 전쟁(파리스 전쟁)이 발발하였으나 에루란이 승리하였다." },
-    { year: "성력 600년경", content: "에루란 왕국과 '돌의 거리' 바르데르와의 전쟁." },
-    { year: "성력 700년경", content: "에루란 왕국의 각 지역이 자립하기 시작해 왕국의 판도가 축소된다." },
-    { year: "성력 1002년", content: "파리스 동맹 결성. 신성 반즈탄 제국을 견제하는 4대국 체제가 확립된다." },
+    { year: "성력 300년경", content: "에를랑 왕국 건국. 에린디르 서방 최고(最古)의 왕국으로 알려진다." },
+    { year: "성력 370년경", content: "에를랑 왕국과 하트파스 왕국의 전쟁. '사자공자전쟁'이라 불린다." },
+    { year: "성력 500년경", content: "에를랑 왕국의 중원 출병. 파리스 왕국과의 전쟁(파리스 전쟁)이 발발하였으나 에를랑이 승리하였다." },
+    { year: "성력 600년경", content: "에를랑 왕국과 '돌의 거리' 바르데르와의 전쟁." },
+    { year: "성력 700년경", content: "에를랑 왕국의 각 지역이 자립하기 시작해 왕국의 판도가 축소된다." },
+    { year: "성력 1002년", content: "파리스 동맹 결성. 신성 번스터 제국을 견제하는 4대국 체제가 확립된다." },
     { year: "성력 1004년", content: "국왕 여왕 에안나 및 국왕 에루트 13세에 대한 암살 미수 사건 발생." },
     { year: "성력 1010년", content: "왕도 프로글레스에서 '전설의 스파이' 프렛차가 격퇴됐다는 소문이 돈다." },
     { year: "성력 1012년", content: "왕도 프로글레스에서 마족 그시온에 의한 크리처 사건이 저지된다." },
   ];
   return (
     <div>
-      <Prose text={"에루란 왕국은 에린디르 서방에서 가장 오래된 역사를 가진 왕국이다. 성립 이후 에린디르 서방의 정치적 중심으로서 수백 년에 걸쳐 그 영향력을 유지해 왔다."} />
+      <Prose text={"에를랑 왕국은 에린디르 서방에서 가장 오래된 역사를 가진 왕국이다. 성립 이후 에린디르 서방의 정치적 중심으로서 수백 년에 걸쳐 그 영향력을 유지해 왔다."} />
       <div style={{ position: "relative", marginTop: 20 }}>
         <div style={{ position: "absolute", left: 100, top: 0, bottom: 0, width: 2, background: `${ACCENT}25` }} />
         {events.map((e, i) => (
@@ -99,7 +99,7 @@ function HistorySection() {
 function GeographySection() {
   return (
     <div>
-      <Prose text={"에루란 왕국은 에린디르 대륙 서방의 중부에 위치한다. 넓은 평원과 산지를 포함하는 광대한 영토를 가지며, 왕도 프로글레스는 교통의 요지에 세워졌다.\n\n기후는 온화하며 농업에 적합하다. 곡물과 포도주 등의 농산물 생산이 왕성하고, 지하에서는 철광석과 각종 광물도 채굴된다. 또한 에린디르 서방의 내륙 무역로가 왕도를 통과하고 있어 상업도 발달해 있다."} />
+      <Prose text={"에를랑 왕국은 에린디르 대륙 서방의 중부에 위치한다. 넓은 평원과 산지를 포함하는 광대한 영토를 가지며, 왕도 프로글레스는 교통의 요지에 세워졌다.\n\n기후는 온화하며 농업에 적합하다. 곡물과 포도주 등의 농산물 생산이 왕성하고, 지하에서는 철광석과 각종 광물도 채굴된다. 또한 에린디르 서방의 내륙 무역로가 왕도를 통과하고 있어 상업도 발달해 있다."} />
     </div>
   );
 }
@@ -108,17 +108,17 @@ function PoliticsSection() {
   return (
     <div>
       <SecTitle title="정치 체제" />
-      <Prose text={"에루란 왕국은 왕정 국가로, 에루란 왕가가 대대로 통치해 왔다. 현 국왕은 에루트 13세이며, 왕비 에안나와 함께 왕국을 다스리고 있다.\n\n귀족 의회가 존재하여 국정에 참여하지만, 최종 결정권은 국왕이 쥐고 있다. 오래된 왕국인 만큼 귀족들의 정치적 영향력도 상당하다."} />
+      <Prose text={"에를랑 왕국은 왕정 국가로, 에를랑 왕가가 대대로 통치해 왔다. 현 국왕은 에루트 13세이며, 왕비 에안나와 함께 왕국을 다스리고 있다.\n\n귀족 의회가 존재하여 국정에 참여하지만, 최종 결정권은 국왕이 쥐고 있다. 오래된 왕국인 만큼 귀족들의 정치적 영향력도 상당하다."} />
       <SecTitle title="군사" />
-      <Prose text={"에루란 왕국의 군사력은 에린디르 서방에서도 손꼽히는 수준이다. 왕도 프로글레스를 중심으로 한 왕국 기사단이 편성되어 있으며, 유사시에는 각 지방의 귀족군도 동원된다.\n\n오래된 전통과 역사에서 비롯된 강고한 군사 기반을 보유하고 있으나, 근래에는 마족의 활성화에 대응하기 위해 방위력 강화에 주력하고 있다."} />
+      <Prose text={"에를랑 왕국의 군사력은 에린디르 서방에서도 손꼽히는 수준이다. 왕도 프로글레스를 중심으로 한 왕국 기사단이 편성되어 있으며, 유사시에는 각 지방의 귀족군도 동원된다.\n\n오래된 전통과 역사에서 비롯된 강고한 군사 기반을 보유하고 있으나, 근래에는 마족의 활성화에 대응하기 위해 방위력 강화에 주력하고 있다."} />
     </div>
   );
 }
 
 function RelationsSection() {
   const relations = [
-    { name: "신성 반즈탄 제국", content: "동방 진출을 노리는 반즈탄 제국과는 전통적으로 긴장 관계에 있다. 4대국 체제 아래 상호 견제 상태이나, 반즈탄 제국이 다시 개전을 준비하고 있다는 소문이 돌아 경계를 강화하고 있다." },
-    { name: "파리스 동맹",     content: "파리스 동맹에는 직접 가입하지 않지만 우호 관계를 유지하고 있다. 동맹과의 교역과 외교를 통해 반즈탄 제국을 함께 견제하는 구도를 형성하고 있다." },
+    { name: "신성 번스터 제국", content: "동방 진출을 노리는 번스터 제국과는 전통적으로 긴장 관계에 있다. 4대국 체제 아래 상호 견제 상태이나, 번스터 제국이 다시 개전을 준비하고 있다는 소문이 돌아 경계를 강화하고 있다." },
+    { name: "파리스 동맹",     content: "파리스 동맹에는 직접 가입하지 않지만 우호 관계를 유지하고 있다. 동맹과의 교역과 외교를 통해 번스터 제국을 함께 견제하는 구도를 형성하고 있다." },
     { name: "키르디아 공화국", content: "무한의 사막을 사이에 두고 있어 직접 충돌은 적지만, 교역로의 이해관계가 얽혀 있다. 기본적으로 불간섭 원칙을 유지하고 있다." },
   ];
   return (
@@ -185,7 +185,7 @@ export default function ErlanPage() {
       }}>
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#607080", marginBottom: 6 }}>ERINDIL WEST · KINGDOM</div>
-          <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>에루란 왕국</div>
+          <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>에를랑 왕국</div>
         </div>
         <div style={{ padding: "10px 0", flex: 1, overflowY: "auto" }}>
           {navItems.map(item => (
