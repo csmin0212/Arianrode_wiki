@@ -15,11 +15,11 @@ interface Character {
 }
 
 const navItems: NavItem[] = [
-  { id: "vanstar",       label: "천공의 거리 반즈탄", icon: "🌟" },
+  { id: "vanstar",       label: "천공의 거리 번스터", icon: "🌟" },
   { id: "structure",     label: "거리 구조",           icon: "🗺️" },
   { id: "facilities",   label: "주요 시설",            icon: "🏛️" },
   { id: "organizations", label: "조직",                icon: "⚔️" },
-  { id: "people",        label: "반즈탄의 인물들",     icon: "👥" },
+  { id: "people",        label: "번스터의 인물들",     icon: "👥" },
 ];
 
 const vanstarCityStats = {
@@ -44,7 +44,7 @@ const vanstarCityStats = {
   ],
 };
 
-const vanstarCityHistory = `반즈탄은 핀지아스 섬이 초대 황제 바펠에 의해 통일되기 약 300년 전에, 새 수도로 계획된 도시이다. 반즈 산 중턱에 위치하여 산 경사면을 이용한 다층 구조의 도시 경관이 특징적이며, 항상 전방위를 감시하는 8개의 감시탑을 갖추고 있어 \"천공의 거리\"라 불린다.
+const vanstarCityHistory = `번스터은 핀지아스 섬이 초대 황제 바펠에 의해 통일되기 약 300년 전에, 새 수도로 계획된 도시이다. 반즈 산 중턱에 위치하여 산 경사면을 이용한 다층 구조의 도시 경관이 특징적이며, 항상 전방위를 감시하는 8개의 감시탑을 갖추고 있어 \"천공의 거리\"라 불린다.
 
 도시 내부에도 성벽이 성채를 동심원처럼 에워싸도록 배치되어 있으며, 시가지도 성벽에 맞춰 구획이 나뉘어 있다. 거리 걸음 마다 도시 전체가 바라보이는 장소가 있어, 도시 아래의 풍경을 볼 수 있다.`;
 
@@ -63,7 +63,7 @@ const vanstarCityDistricts = [
   },
   {
     name: "제2성벽 (시민 거주 구역)",
-    content: "도시의 방어 성벽은 팔망성 형태로 뻗어 있으며, 각각의 꼭대기에는 감시탑이 존재한다. 제1성벽의 거점과 연계하는 천공 병단의 병사들도 경비에 임한다. 중앙구의 사이에는 일반 시민의 주거지, 공방, 음식점 등이 있다. 반즈탄 시민의 90%가 이 구역에서 생활한다.",
+    content: "도시의 방어 성벽은 팔망성 형태로 뻗어 있으며, 각각의 꼭대기에는 감시탑이 존재한다. 제1성벽의 거점과 연계하는 천공 병단의 병사들도 경비에 임한다. 중앙구의 사이에는 일반 시민의 주거지, 공방, 음식점 등이 있다. 번스터 시민의 90%가 이 구역에서 생활한다.",
   },
 ];
 
@@ -73,7 +73,7 @@ const vanstarCityFacilities: Facility[] = [
     content: "신성 제국이 자랑하는 연금술의 연구 기관. 설립자인 황제 제단의 의향에 따라 주로 군사적 활용에 대해 추구하고 있다. 네바프의 대형 연금 공업마 강화, 인공 공업마, 총탄 강화 등 에린딜에서 二지를 다투는 규모의 연금술 병기 개발이 진행되고 있다.\n\n협회에 가입하면 국가에서 보조금이 나오는 장점이 있다. 다만, 가입하려면 어려운 시험을 통과해야 하며, 정기적인 성과를 내지 않으면 자격 박탈도 있는 엄격한 환경이다.",
   },
   {
-    name: "반즈탄 신전",
+    name: "번스터 신전",
     content: "아르케라브를 모시는 제도 최대의 신전. 한 신관장과 3명의 인장의 합의로 운영된다. 신앙 형태, 사업 활동, 훈련자 관리 등을 독자적으로 담당하며, 독자적으로 기사단을 조직하고 있는 것이 특징이다.\n\n신전 직속의 3개 기사단 사이에는 예전에는 의미 있는 대립이 없었지만, 대형 신전 상부가 관련된 \"장미의 화재\" 이후 신관장이 집결의 중심인물이었던 마티아스를 대신하여 조엘이라는 인물이 되었다. 3개의 성기사단은 이후 더욱 분열되는 결과가 됐다.",
   },
   {
@@ -90,14 +90,14 @@ const vanstarCityOrganizations: Org[] = [
   {
     name: "천공 병단",
     type: "군사 조직",
-    base: "반즈탄 성",
+    base: "번스터 성",
     leader: '"하늘의 눈" 아로이스',
     content: "반즈 산맥에 서식하는 두앙 천익족으로 구성된 항공 부대. 강력한 전투력과 정찰 능력을 갖추고 있다. 두앙 천익족이 날아다니는 항공 부대로서의 역할을 담당한다. 단장 아로이스는 두앙 천익족의 지도자 중 한 명이다.",
   },
   {
     name: "클란의 광견",
     type: "황제 직속 특수 조직",
-    base: "반즈탄 성",
+    base: "번스터 성",
     leader: '"신성 황제" 제단',
     content: "황제 직속의 특수 부대. 활동의 대부분은 수수께끼에 싸여 있다. 단원 구성은 하나로 통합된 전투 능력을 갖는다고 알려져 있다. 정보부 제13반은 이 조직의 첩보 담당부서이다.",
   },
@@ -111,21 +111,21 @@ const vanstarCityOrganizations: Org[] = [
   {
     name: "고우라 성기사대",
     type: "군사 조직",
-    base: "반즈탄 신전",
+    base: "번스터 신전",
     leader: "고우라·노던레이들",
-    content: "반즈탄 신전이 보유하는 3개의 성기사대 중 하나. 기사대의 전투력은 실제로도 제국에서 가장 강력한 기사단 중 하나로 평가된다. 대장 고우라 노던레이들은 품행 바른 기사이며, 적에게도 예의를 잊지 않는다.",
+    content: "번스터 신전이 보유하는 3개의 성기사대 중 하나. 기사대의 전투력은 실제로도 제국에서 가장 강력한 기사단 중 하나로 평가된다. 대장 고우라 노던레이들은 품행 바른 기사이며, 적에게도 예의를 잊지 않는다.",
   },
   {
-    name: "반즈탄 석공 조합",
+    name: "번스터 석공 조합",
     type: "직인 조합",
     base: "남문 앞, 석공 조합관",
     leader: "오린·헤리",
-    content: "제도 반즈탄의 성벽, 건물의 관리, 유지에 종사하는 석공들의 조합. 일의 로테이션 조정, 가격 협의, 부품이나 중간 관리자와의 교류를 담당하고 있다. 오래된 인맥을 가지고 있어, 경찰관과 접하는 기회가 많기 때문에 의외로 사정통이다.",
+    content: "제도 번스터의 성벽, 건물의 관리, 유지에 종사하는 석공들의 조합. 일의 로테이션 조정, 가격 협의, 부품이나 중간 관리자와의 교류를 담당하고 있다. 오래된 인맥을 가지고 있어, 경찰관과 접하는 기회가 많기 때문에 의외로 사정통이다.",
   },
   {
     name: "정보부 제13반",
     type: "황제 직속 첩보 조직",
-    base: "반즈탄 (극비)",
+    base: "번스터 (극비)",
     leader: "재뉴어리",
     content: "클란의 광견 산하의 첩보 조직. 표면상 해산된 것으로 알려져 있으나, 실제로는 재뉴어리라는 엘다난 여성의 지휘 아래 활동이 지속되고 있다. 에린딜 전역의 정보망을 통해 각국의 동향을 파악하고 있으며, 조직의 요원 줄라이가 현장 공작을 담당한다.",
   },
@@ -138,7 +138,7 @@ const vanstarCityCharacters: Character[] = [
     quote: "짐은 신의 뜻에 따라 에린딜를 통일하리라",
     race: "휴린", gender: "남", age: "32",
     hairColor: "금", eyeColor: "파란", skinColor: "흰",
-    title: "신성 반즈탄 제국 황제",
+    title: "신성 번스터 제국 황제",
     content: "황위 계승 후보들이 잇따라 몰락한 끝에 황제의 자리에 앉게 된 젊은 황제. 아르케라브 신앙에 기반한 강력한 신념을 가지고 있으며, 에린딜 통일을 신의 뜻으로 인식하고 있다. 반대파를 일소하고 연금술사들을 대거 등용하는 등 과감한 개혁을 단행했다. 그 수수께끼 같은 즉위 과정에 대해서는 아직도 다양한 소문이 끊이지 않는다.",
   },
   {
@@ -166,7 +166,7 @@ const vanstarCityCharacters: Character[] = [
     race: "휴린", gender: "남", age: "33",
     hairColor: "금", eyeColor: "갈색", skinColor: "흰",
     title: "고우라 성기사대장",
-    content: "신전 소속 성기사단 중 하나를 이끄는 기사. 선발된 백금 기사단원으로 품행 정직하며, 굳은 의지에 적에게도 예의를 잊지 않는 인물이지만, 임무에 충실할 때는 잔인하다고 판단받는 경우도 있다. 기사단의 가르침에 따라 강함과 부드러움을 갖추고 반즈탄을 지키고 있다.",
+    content: "신전 소속 성기사단 중 하나를 이끄는 기사. 선발된 백금 기사단원으로 품행 정직하며, 굳은 의지에 적에게도 예의를 잊지 않는 인물이지만, 임무에 충실할 때는 잔인하다고 판단받는 경우도 있다. 기사단의 가르침에 따라 강함과 부드러움을 갖추고 번스터을 지키고 있다.",
   },
   {
     name: "ジュライ",
@@ -213,7 +213,7 @@ function VanstarSection() {
   return (
     <div>
       <div style={{ background: "#fff", border: `2px solid ${ACCENT}30`, borderRadius: 10, padding: "20px 24px", marginBottom: 24 }}>
-        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>신성 반즈탄 제국 수도 반즈탄 기본 데이터</div>
+        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>신성 번스터 제국 수도 번스터 기본 데이터</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 20px", marginBottom: 16 }}>
           {vanstarCityStats.stats.map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, fontSize: "13px", borderBottom: "1px solid #F0ECE5", paddingBottom: 6 }}>
@@ -237,9 +237,9 @@ function VanstarSection() {
           ))}
         </div>
       </div>
-      <SecTitle title="반즈탄의 역사" />
+      <SecTitle title="번스터의 역사" />
       <Prose text={vanstarCityHistory} />
-      <SecTitle title="반즈탄의 현황" />
+      <SecTitle title="번스터의 현황" />
       <Prose text={vanstarCityCurrentStatus} />
     </div>
   );
@@ -248,7 +248,7 @@ function VanstarSection() {
 function StructureSection() {
   return (
     <div>
-      <Prose text={"반즈탄의 거리는 제국의 중요 거점으로서 계획적으로 건설됐다. 외부로부터 몸을 지키기 위해 세운 외벽은 팔망성(八芒星) 형태를 하고 있으며, 8개의 감시탑이 모든 방향을 항상 경계한다. 도시 내부에도 성벽이 지어져, 중앙에 가까울수록 고급스러운 건물들이 늘어선다."} />
+      <Prose text={"번스터의 거리는 제국의 중요 거점으로서 계획적으로 건설됐다. 외부로부터 몸을 지키기 위해 세운 외벽은 팔망성(八芒星) 형태를 하고 있으며, 8개의 감시탑이 모든 방향을 항상 경계한다. 도시 내부에도 성벽이 지어져, 중앙에 가까울수록 고급스러운 건물들이 늘어선다."} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
         {vanstarCityDistricts.map((d, i) => (
           <Card key={i}>
@@ -265,7 +265,7 @@ function FacilitiesSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        제국 수도 반즈탄의 주요 시설을 소개한다. 황제의 뜻이 직접 반영된 강력한 군사·종교 시설들이 도시의 중심을 이루고 있다.
+        제국 수도 번스터의 주요 시설을 소개한다. 황제의 뜻이 직접 반영된 강력한 군사·종교 시설들이 도시의 중심을 이루고 있다.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {vanstarCityFacilities.map((f, i) => (
@@ -283,7 +283,7 @@ function OrganizationsSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        반즈탄과 관련이 깊은 조직을 소개한다. PC의 의뢰나 커넥션 대상으로 활용하거나, 적대 세력으로서 시나리오에 등장시킬 수 있다.
+        번스터과 관련이 깊은 조직을 소개한다. PC의 의뢰나 커넥션 대상으로 활용하거나, 적대 세력으로서 시나리오에 등장시킬 수 있다.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {vanstarCityOrganizations.map((o, i) => (
@@ -308,7 +308,7 @@ function PeopleSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        "천공의 거리" 반즈탄의 주요 인물들을 소개한다. 이들은 PC의 의뢰인, 협력자 혹은 강력한 적대자로서 시나리오에 등장할 수 있다.
+        "천공의 거리" 번스터의 주요 인물들을 소개한다. 이들은 PC의 의뢰인, 협력자 혹은 강력한 적대자로서 시나리오에 등장할 수 있다.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 14 }}>
         {vanstarCityCharacters.map((c, i) => (
@@ -403,7 +403,7 @@ export default function VanstarCityPage() {
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#806070", marginBottom: 6 }}>HOLY VANSTAR EMPIRE · CAPITAL</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>
-            "천공의 거리"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>반즈탄</span>
+            "천공의 거리"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>번스터</span>
           </div>
         </div>
         <div style={{ padding: "10px 0", flex: 1, overflowY: "auto" }}>
@@ -423,7 +423,7 @@ export default function VanstarCityPage() {
           ))}
         </div>
         <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#504040", lineHeight: 1.6 }}>
-          <a href="/vanstar" style={{ color: "#806070", textDecoration: "none", fontSize: "11px" }}>← 신성 반즈탄 제국으로</a>
+          <a href="/vanstar" style={{ color: "#806070", textDecoration: "none", fontSize: "11px" }}>← 신성 번스터 제국으로</a>
           <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>

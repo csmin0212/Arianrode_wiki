@@ -48,7 +48,7 @@ const durgHistory = `두르가라는 핀지아스 섬과 에린딜 본토 대륙
 
 (*) 에린딜에서의 바이킹은 배의 보유에 능하고, 교역과 용병, 약탈 등 돈벌이를 생업으로 삼는 자들을 가리킨다. 그들은 항해와 전투 기술을 대대로 전하며 바다를 누빈다.
 
-약 60년 전, 일제히 해적 토벌에 나선 반즈탄 제국이 공략해 들어오기 전까지, 어느 도시의 지배자도 도저히 손을 쓸 수 없었다. 항복의 대가로 자치를 인정받은 두르가라는, 표면상 제국의 종속 도시가 됐지만 오래된 자치 경향을 유지하고 있다. 현재도 도시의 거리 곳곳에 바이킹 시대의 성채나 항구의 흔적이 남아 있으며, 지금은 수수께끼로 여겨지는 정도이다.`;
+약 60년 전, 일제히 해적 토벌에 나선 번스터 제국이 공략해 들어오기 전까지, 어느 도시의 지배자도 도저히 손을 쓸 수 없었다. 항복의 대가로 자치를 인정받은 두르가라는, 표면상 제국의 종속 도시가 됐지만 오래된 자치 경향을 유지하고 있다. 현재도 도시의 거리 곳곳에 바이킹 시대의 성채나 항구의 흔적이 남아 있으며, 지금은 수수께끼로 여겨지는 정도이다.`;
 
 const durgCurrentStatus = `거리의 주민 대부분은 바이킹 혹은 바이킹 관계자이며, 생업은 교역과 선박 건조가 중심이다. 신앙은 항구를 중심으로 한 대로 주변에 성행하며, 다양한 사람들이 모여드는 분위기는 크게 변하지 않았다. 거리는 항구를 중심으로 혼잡스럽고 활기가 넘친다.
 
@@ -222,7 +222,7 @@ function DurgSection() {
   return (
     <div>
       <div style={{ background: "#fff", border: `2px solid ${ACCENT}30`, borderRadius: 10, padding: "20px 24px", marginBottom: 24 }}>
-        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>신성 반즈탄 제국 도시 두르가라 기본 데이터</div>
+        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>신성 번스터 제국 도시 두르가라 기본 데이터</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 20px", marginBottom: 16 }}>
           {durgStats.stats.map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, fontSize: "13px", borderBottom: "1px solid #F0ECE5", paddingBottom: 6 }}>
@@ -432,7 +432,7 @@ export default function DurgaPage() {
           ))}
         </div>
         <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#283848", lineHeight: 1.6 }}>
-          <a href="/vanstar" style={{ color: "#405870", textDecoration: "none", fontSize: "11px" }}>← 신성 반즈탄 제국으로</a>
+          <a href="/vanstar" style={{ color: "#405870", textDecoration: "none", fontSize: "11px" }}>← 신성 번스터 제국으로</a>
           <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
