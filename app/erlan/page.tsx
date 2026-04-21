@@ -60,14 +60,14 @@ function OverviewSection() {
           ))}
         </div>
       </div>
-      <Prose text={"에린디르 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경에 건국된 것으로 알려져 있으며, 오랫동안 에린디르 서방의 정치적 중심 역할을 담당해 왔다.\n\n성력 1002년 파리스 동맹 성립 이후 4대국의 세력 균형이 유지되고 있으며, 전통과 권위를 상징하는 나라로 자리잡고 있다."} />
+      <Prose text={"에린딜 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경에 건국된 것으로 알려져 있으며, 오랫동안 에린딜 서방의 정치적 중심 역할을 담당해 왔다.\n\n성력 1002년 파리스 동맹 성립 이후 4대국의 세력 균형이 유지되고 있으며, 전통과 권위를 상징하는 나라로 자리잡고 있다."} />
     </div>
   );
 }
 
 function HistorySection() {
   const events = [
-    { year: "성력 300년경", content: "에를랑 왕국 건국. 에린디르 서방 최고(最古)의 왕국으로 알려진다." },
+    { year: "성력 300년경", content: "에를랑 왕국 건국. 에린딜 서방 최고(最古)의 왕국으로 알려진다." },
     { year: "성력 370년경", content: "에를랑 왕국과 하트파스 왕국의 전쟁. '사자공자전쟁'이라 불린다." },
     { year: "성력 500년경", content: "에를랑 왕국의 중원 출병. 파리스 왕국과의 전쟁(파리스 전쟁)이 발발하였으나 에를랑이 승리하였다." },
     { year: "성력 600년경", content: "에를랑 왕국과 '돌의 거리' 바르데르와의 전쟁." },
@@ -79,7 +79,7 @@ function HistorySection() {
   ];
   return (
     <div>
-      <Prose text={"에를랑 왕국은 에린디르 서방에서 가장 오래된 역사를 가진 왕국이다. 성립 이후 에린디르 서방의 정치적 중심으로서 수백 년에 걸쳐 그 영향력을 유지해 왔다."} />
+      <Prose text={"에를랑 왕국은 에린딜 서방에서 가장 오래된 역사를 가진 왕국이다. 성립 이후 에린딜 서방의 정치적 중심으로서 수백 년에 걸쳐 그 영향력을 유지해 왔다."} />
       <div style={{ position: "relative", marginTop: 20 }}>
         <div style={{ position: "absolute", left: 100, top: 0, bottom: 0, width: 2, background: `${ACCENT}25` }} />
         {events.map((e, i) => (
@@ -101,7 +101,7 @@ function HistorySection() {
 function GeographySection() {
   return (
     <div>
-      <Prose text={"에를랑 왕국은 에린디르 대륙 서방의 중부에 위치한다. 넓은 평원과 산지를 포함하는 광대한 영토를 가지며, 왕도 로그레스는 교통의 요지에 세워졌다.\n\n기후는 온화하며 농업에 적합하다. 곡물과 포도주 등의 농산물 생산이 왕성하고, 지하에서는 철광석과 각종 광물도 채굴된다. 또한 에린디르 서방의 내륙 무역로가 왕도를 통과하고 있어 상업도 발달해 있다."} />
+      <Prose text={"에를랑 왕국은 에린딜 대륙 서방의 중부에 위치한다. 넓은 평원과 산지를 포함하는 광대한 영토를 가지며, 왕도 로그레스는 교통의 요지에 세워졌다.\n\n기후는 온화하며 농업에 적합하다. 곡물과 포도주 등의 농산물 생산이 왕성하고, 지하에서는 철광석과 각종 광물도 채굴된다. 또한 에린딜 서방의 내륙 무역로가 왕도를 통과하고 있어 상업도 발달해 있다."} />
     </div>
   );
 }
@@ -112,7 +112,7 @@ function PoliticsSection() {
       <SecTitle title="정치 체제" />
       <Prose text={"에를랑 왕국은 왕정 국가로, 에를랑 왕가가 대대로 통치해 왔다. 현 국왕은 엘13세이며, 왕녀 아나와 함께 왕국의 앞날을 이어 나가고 있다.\n\n귀족 의회가 존재하여 국정에 참여하지만, 최종 결정권은 국왕이 쥐고 있다. 오래된 왕국인 만큼 귀족들의 정치적 영향력도 상당하다."} />
       <SecTitle title="군사" />
-      <Prose text={"에를랑 왕국의 군사력은 에린디르 서방에서도 손꼽히는 수준이다. 왕도 로그레스를 중심으로 한 왕국 기사단이 편성되어 있으며, 유사시에는 각 지방의 귀족군도 동원된다.\n\n오래된 전통과 역사에서 비롯된 강고한 군사 기반을 보유하고 있으나, 근래에는 마족의 활성화에 대응하기 위해 방위력 강화에 주력하고 있다."} />
+      <Prose text={"에를랑 왕국의 군사력은 에린딜 서방에서도 손꼽히는 수준이다. 왕도 로그레스를 중심으로 한 왕국 기사단이 편성되어 있으며, 유사시에는 각 지방의 귀족군도 동원된다.\n\n오래된 전통과 역사에서 비롯된 강고한 군사 기반을 보유하고 있으나, 근래에는 마족의 활성화에 대응하기 위해 방위력 강화에 주력하고 있다."} />
     </div>
   );
 }
@@ -133,7 +133,7 @@ function EventsSection() {
     },
     {
       title: "요마의 무리",
-      content: "에를랑 왕국과 신성 반즈탄 제국 사이의 평화는, 벌레가 먹은 목재와 같다. 언제가는 부러진다. 신성 제국이 에린디르를 통일하는 것을 목표로 하는 한, 언젠가는 어려운 시련을 겪게 될 것이다.\n\n전쟁이 되면 피가 흘린다. 이 두 나라의 긴장이 고조되는 것에 맞추어, 요마에 의한 재해가 증가하고, 마족이 에를랑 왕국을 공격하고 있는 것이 아닐까라는 의심이 왕국 내에 싹트고 있다. 왕국 시민들의 이 제국에 대한 원망은 그들의 눈을 가리고 있으며, 민심이 옆으로 향하지 않는다는 것을 왕국은 알고 있다.",
+      content: "에를랑 왕국과 신성 반즈탄 제국 사이의 평화는, 벌레가 먹은 목재와 같다. 언제가는 부러진다. 신성 제국이 에린딜를 통일하는 것을 목표로 하는 한, 언젠가는 어려운 시련을 겪게 될 것이다.\n\n전쟁이 되면 피가 흘린다. 이 두 나라의 긴장이 고조되는 것에 맞추어, 요마에 의한 재해가 증가하고, 마족이 에를랑 왕국을 공격하고 있는 것이 아닐까라는 의심이 왕국 내에 싹트고 있다. 왕국 시민들의 이 제국에 대한 원망은 그들의 눈을 가리고 있으며, 민심이 옆으로 향하지 않는다는 것을 왕국은 알고 있다.",
     },
     {
       title: "요마의 선봉",
@@ -179,6 +179,47 @@ function RelationsSection() {
   );
 }
 
+function CitiesSection() {
+  const cities = [
+    {
+      name: '"불야의 거리" 로그레스',
+      href: "/logres",
+      desc: "에를랑 왕국의 왕도. 야광석으로 밤을 채색하는 대도시. 인구 50만명으로 에린딜 서방 최대 규모의 수도이다.",
+      icon: "🌙",
+      sub: "왕도 · 인구 50만명",
+    },
+    {
+      name: '"온천의 거리" 루네스',
+      href: "/runes",
+      desc: "슈펜거 백작령의 온천 마을. 80종류 이상의 온천을 보유하는 에린딜 최대의 요양지로 에를랑 신앙의 영향을 강하게 받는다.",
+      icon: "♨️",
+      sub: "슈펜거 백작령 · 인구 1만5천명",
+    },
+  ];
+  return (
+    <div>
+      <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
+        에를랑 왕국의 주요 도시들을 소개한다. 왕도 로그레스를 중심으로 지방 곳곳에 개성 넘치는 거리들이 자리하고 있다.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {cities.map((c, i) => (
+          <a key={i} href={c.href} style={{ textDecoration: "none", color: "inherit" }}>
+            <div style={{ background: "#fff", border: `1px solid ${ACCENT}30`, borderRadius: 10, padding: "16px 20px", display: "flex", alignItems: "center", gap: 16, cursor: "pointer", transition: "border-color 0.15s" }}>
+              <span style={{ fontSize: "30px", flexShrink: 0 }}>{c.icon}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 3 }}>{c.name}</div>
+                <div style={{ fontSize: "11px", color: "#999", marginBottom: 5 }}>{c.sub}</div>
+                <div style={{ fontSize: "13px", color: "#666", lineHeight: 1.7 }}>{c.desc}</div>
+              </div>
+              <span style={{ fontSize: "16px", color: `${ACCENT}60`, flexShrink: 0 }}>→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ---- 메인 컴포넌트 ----
 
 export default function ErlanPage() {
@@ -207,6 +248,7 @@ export default function ErlanPage() {
       case "history":   return <HistorySection />;
       case "geography": return <GeographySection />;
       case "politics":  return <PoliticsSection />;
+      case "cities":    return <CitiesSection />;
       case "events":    return <EventsSection />;
       case "relations": return <RelationsSection />;
       default:          return null;
@@ -249,7 +291,7 @@ export default function ErlanPage() {
           ))}
         </div>
         <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#4a5060", lineHeight: 1.6 }}>
-          <a href="/erindil-west" style={{ color: "#607080", textDecoration: "none", fontSize: "11px" }}>← 에린디르 서방으로</a>
+          <a href="/erindil-west" style={{ color: "#607080", textDecoration: "none", fontSize: "11px" }}>← 에린딜 서방으로</a>
           <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>

@@ -23,10 +23,10 @@ const nations: Nation[] = [
   {
     name: "에를랑 왕국",
     nameEn: "Kingdom of Erlan",
-    tag: "에린디르 서방 최고(最古)의 왕국",
+    tag: "에린딜 서방 최고(最古)의 왕국",
     color: "#2A5F9E", accentBg: "#D4E4F7",
     founded: "성력 300년경", capital: "왕도 로그레스", government: "왕정",
-    summary: "에린디르 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경에 건국된 것으로 알려져 있으며, 오랫동안 에린디르 서방의 정치적 중심 역할을 담당해 왔다. 전통과 권위를 상징하는 나라로, 4대국 중 가장 강고한 역사적 기반을 가진다.",
+    summary: "에린딜 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경에 건국된 것으로 알려져 있으며, 오랫동안 에린딜 서방의 정치적 중심 역할을 담당해 왔다. 전통과 권위를 상징하는 나라로, 4대국 중 가장 강고한 역사적 기반을 가진다.",
     href: "/erlan", icon: "👑",
   },
   {
@@ -44,7 +44,7 @@ const nations: Nation[] = [
     tag: "신성 반즈탄 제국에 대항하는 연합",
     color: "#1A6B4A", accentBg: "#D5EDDF",
     founded: "성력 1002년", capital: "그랑펠덴 (그랑펠덴 왕국)", government: "도시 연합",
-    summary: "신성 반즈탄 제국의 침략에 대항하기 위해 성립된 국가 연합. 에린디르 서방 중원의 도시 국가들로 구성된다. 북방에서 마족의 대침공을 받은 이후, 동맹의 결속과 방위 강화가 과제가 되고 있다.",
+    summary: "신성 반즈탄 제국의 침략에 대항하기 위해 성립된 국가 연합. 에린딜 서방 중원의 도시 국가들로 구성된다. 북방에서 마족의 대침공을 받은 이후, 동맹의 결속과 방위 강화가 과제가 되고 있다.",
     href: "/gran-felden", icon: "🤝",
   },
   {
@@ -81,7 +81,7 @@ function SectionTitle({ title }: { title: string }) {
 function OverviewSection() {
   return (
     <div>
-      <Prose text={"에린디르 대륙 서방은 약 800만 평방킬로미터의 광대한 지역으로, 에린디르 대륙의 서쪽 절반에 해당한다. 서방 남쪽은 빙원, 북동쪽은 사막이 넓게 분포하며, 중앙 부근에는 광대한 저지가 펼쳐진다.\n\n목초 성장이 빠르며 소·말·염소 등의 목축이 왕성하다. 주요 농작물은 밀, 호밀, 귀리, 오트밀, 감자 등이다.\n\n문명은 지구의 15~16세기 유럽에 가까우며, 마법이 당연하게 사용되고 황야에는 위험한 몬스터가 존재한다. 대륙 각지에 신화·전설 시대의 유적이 남아 있으며, 유물과 연금술 덕분에 일부 기술 레벨은 18세기 수준에 달한다."} />
+      <Prose text={"에린딜 대륙 서방은 약 800만 평방킬로미터의 광대한 지역으로, 에린딜 대륙의 서쪽 절반에 해당한다. 서방 남쪽은 빙원, 북동쪽은 사막이 넓게 분포하며, 중앙 부근에는 광대한 저지가 펼쳐진다.\n\n목초 성장이 빠르며 소·말·염소 등의 목축이 왕성하다. 주요 농작물은 밀, 호밀, 귀리, 오트밀, 감자 등이다.\n\n문명은 지구의 15~16세기 유럽에 가까우며, 마법이 당연하게 사용되고 황야에는 위험한 몬스터가 존재한다. 대륙 각지에 신화·전설 시대의 유적이 남아 있으며, 유물과 연금술 덕분에 일부 기술 레벨은 18세기 수준에 달한다."} />
       <SectionTitle title="현재 세력 구도" />
       <Prose text={"현재는 신성 반즈탄 제국, 에를랑 왕국, 파리스 동맹, 키르디아 공화국의 4국 세력이 크다. 성력 1002년 파리스 동맹 성립 이후 국가 간의 큰 싸움은 거의 일어나지 않고 있지만, 현재도 많은 국가 간 경계선 부근에서 마찰이 빈번히 일어나며 다양한 교섭이 이루어지고 있다.\n\n더욱이 북방에서 마족의 대규모 침략을 받은 파리스 동맹은 가까스로 쫓겨난 상태이며, 이를 계기로 신성 반즈탄 제국이 다시 개전을 준비하고 있다는 소문도 있어 예단을 허용하지 않는 상황이다."} />
     </div>
@@ -92,9 +92,9 @@ function NationsSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        에린디르 서방에서 가장 큰 세력을 가진 4개 국가. 각 국가 카드를 클릭하면 상세 정보를 볼 수 있다.
+        에린딜 서방에서 가장 큰 세력을 가진 4개 국가. 각 국가 카드를 클릭하면 상세 정보를 볼 수 있다.
       </p>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 28 }}>
         {nations.map((n, i) => (
           <a key={i} href={n.href} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
             <div style={{
@@ -130,6 +130,25 @@ function NationsSection() {
               </div>
 
               <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>{n.summary}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 600, color: ACCENT, borderBottom: `2px solid ${ACCENT}`, paddingBottom: 6, marginBottom: 16 }}>독립 도시 국가</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        {[
+          { name: '"현자의 거리" 엘크레스트', tag: "학술·유적 탐사 거점의 독립 도시", href: "/elcrest", note: "에린딜 서방 중남부, 로아셀 호수 기슭에 위치한 독립 도시 국가. 전기제 대학 엘크레스트 칼리지를 보유하며, 정령마법 연구에서 에린딜 최고 수준을 자랑한다. 에를랑·반즈탄·파리스 동맹 3국의 완충지대에 위치해 중립을 유지한다." },
+        ].map((city, i) => (
+          <a key={i} href={city.href} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+            <div style={{ background: "#fff", border: "1px solid #3A6B4830", borderLeft: "5px solid #3A6B48", borderRadius: 10, padding: "16px 20px", transition: "box-shadow 0.15s" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 8 }}>
+                <div>
+                  <span style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color: "#3A6B48" }}>{city.name}</span>
+                  <div style={{ fontSize: "11px", background: "#D0EDD8", color: "#3A6B48", padding: "2px 8px", borderRadius: 4, fontWeight: 500, display: "inline-block", marginTop: 4 }}>{city.tag}</div>
+                </div>
+                <span style={{ fontSize: "12px", color: "#3A6B48", fontWeight: 500, flexShrink: 0, background: "#D0EDD8", padding: "4px 12px", borderRadius: 6 }}>자세히 보기 →</span>
+              </div>
+              <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>{city.note}</div>
             </div>
           </a>
         ))}
@@ -186,7 +205,7 @@ export default function ErindilWestPage() {
       }}>
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#7a8070", marginBottom: 6 }}>ERINDIL CONTINENT · WEST</div>
-          <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>에린디르 대륙<br /><span style={{ fontSize: "13px", opacity: 0.7 }}>서방 지역</span></div>
+          <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>에린딜 대륙<br /><span style={{ fontSize: "13px", opacity: 0.7 }}>서방 지역</span></div>
         </div>
         <div style={{ padding: "10px 0", flex: 1, overflowY: "auto" }}>
           {navItems.map(item => (

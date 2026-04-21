@@ -12,16 +12,22 @@ const navItems: NavItem[] = [
   { id: "history",   label: "역사",             icon: "📜" },
   { id: "geography", label: "지세와 산업",       icon: "🌵" },
   { id: "politics",  label: "정치와 군사",       icon: "⚜️" },
+  { id: "cities",    label: "주요 도시",         icon: "🏙️" },
+  { id: "events",    label: "전설과 사건",       icon: "📖" },
   { id: "relations", label: "타국과의 관계",     icon: "🤝" },
 ];
 
 const capitalData = {
   stats: [
     { label: "국가 형태", value: "공화국" },
-    { label: "정치 체제", value: "공화제" },
-    { label: "위치",       value: '"무한의 사막"' },
+    { label: "정치 체제", value: "장로 합의제" },
+    { label: "현재 주석", value: "킬드" },
+    { label: "수도",       value: "미스" },
+    { label: "성도",       value: "디아스론드 (공동 관리)" },
     { label: "건국",       value: "성력 996년" },
-    { label: "주요 언어", value: "공통어" },
+    { label: "주요 언어", value: "공통어, 고두앙어" },
+    { label: "주요 종교", value: "칠대신 신앙 (그란아인 주봉)" },
+    { label: "기후",       value: "건조, 연간 강수량 극소" },
   ],
 };
 
@@ -57,7 +63,7 @@ function OverviewSection() {
           ))}
         </div>
       </div>
-      <Prose text={'광대한 "무한의 사막"에 건국된 공화국. 성력 996년에 건국됐다.\n\n사막을 기반으로 독자적인 문화와 정치 체계를 발전시켜, 4대국의 균형에서 독특한 위치를 차지하고 있다. 4국 중 가장 신생 국가이지만, 사막 지형을 활용한 독자 노선으로 영향력을 키워왔다.'} />
+      <Prose text={'광대한 "무한의 사막"에 건국된 공화국. 성력 996년에 건국됐다.\n\n국민 대다수는 사막에서 유목 생활을 영위하는 이들로, 중원과는 다른 문화를 지닌다. 7개 사막 부족(에르그, 하마드, 호가르, 티베스, 타만, 라세트, 라주르)이 연대하여 각 부족의 족장이나 그 대리인, 상인 등 유력자들에 의한 장로 합의 정치가 이루어진다.\n\n동서 무역의 중계점으로서 급속히 발전하고 있다. 4대국 중 가장 신생 국가이지만, 사막 지형을 활용한 독자 노선과 경제력으로 에린딜 서방에서 독특한 위치를 차지하고 있다.'} />
     </div>
   );
 }
@@ -92,7 +98,7 @@ function GeographySection() {
   return (
     <div>
       <SecTitle title='"무한의 사막"' />
-      <Prose text={'키르디아 공화국이 위치하는 "무한의 사막"은 에린디르 서방과 동방 사이를 가르는 광대한 사막 지대이다. 이름 그대로 끝이 보이지 않을 만큼 넓어, 이 사막을 횡단하는 것은 상당한 준비와 경험을 필요로 한다.\n\n한낮의 극심한 더위와 밤의 혹독한 추위 사이에서 독자적인 생존 방식을 발전시켜 온 공화국 사람들은 사막의 지식에 있어 타의 추종을 불허한다.'} />
+      <Prose text={'키르디아 공화국이 위치하는 "무한의 사막"은 에린딜 서방과 동방 사이를 가르는 광대한 사막 지대이다. 이름 그대로 끝이 보이지 않을 만큼 넓어, 이 사막을 횡단하는 것은 상당한 준비와 경험을 필요로 한다.\n\n한낮의 극심한 더위와 밤의 혹독한 추위 사이에서 독자적인 생존 방식을 발전시켜 온 공화국 사람들은 사막의 지식에 있어 타의 추종을 불허한다.'} />
       <SecTitle title="이중의 거리 다브를" />
       <Prose text={'건국과 함께 건설된 "이중의 거리" 다브를은 키르디아 공화국의 중요 도시 중 하나이다. "이중의 거리"라는 별명은 도시가 두 구획으로 나뉘어 있어 각기 다른 문화권이 공존하는 독특한 구조에서 유래한다.'} />
     </div>
@@ -103,9 +109,97 @@ function PoliticsSection() {
   return (
     <div>
       <SecTitle title="정치 체제" />
-      <Prose text={"키르디아 공화국은 공화제를 채택한 에린디르 서방의 유일한 주요 국가이다. 왕이나 황제가 아닌 선출직 대표자들이 국정을 운영하며, 이 독특한 정치 구조가 공화국에 특별한 정체성을 부여하고 있다.\n\n공화제라는 체제는 4대국 중 유일하며, 이것이 다른 국가들과의 외교에서 독특한 입장을 만들어내기도 한다."} />
+      <Prose text={"키르디아 공화국은 공화제를 채택한 에린딜 서방의 유일한 주요 국가이다. 왕이나 황제가 아닌 선출직 대표자들이 국정을 운영하며, 이 독특한 정치 구조가 공화국에 특별한 정체성을 부여하고 있다.\n\n공화제라는 체제는 4대국 중 유일하며, 이것이 다른 국가들과의 외교에서 독특한 입장을 만들어내기도 한다."} />
       <SecTitle title="군사" />
       <Prose text={"사막을 기반으로 한 키르디아 공화국의 군사 전략은 독특하다. 사막 지형을 최대한 활용한 방어 전술을 발전시켜, 외세의 침략을 막아내는 데 특화되어 있다.\n\n직접적인 군사 충돌보다는 상업적 교류나 외교를 통한 세력 유지를 선호하는 경향이 있다."} />
+    </div>
+  );
+}
+
+function CitiesSection() {
+  const cities = [
+    {
+      name: '"새로운 거리" 미스',
+      href: "/mises",
+      desc: "키르디아 공화국의 수도. 킬드가 그란아인의 신탁을 받아 건설한 성스러운 거리. 두앙 문화의 중심지.",
+      icon: "🌵",
+      sub: "수도 · 인구 5만명",
+    },
+    {
+      name: '"황금의 거리" 칼칸드',
+      href: "/kalkand",
+      desc: "키르디아 공화국 남부의 교역 도시. 에린 산맥과 사막 사이에 위치하며, 고대 조드리아인의 지하 도시 위에 건설된 발굴품 거래의 중심지.",
+      icon: "🏺",
+      sub: "교역 도시 · 인구 2만명",
+    },
+    {
+      name: '"대학 도시" 오카',
+      href: "/okar",
+      desc: "성력 1010년에 설립된 신생 학술 도시. 현대 지구의 중해대학이 에린으로 이전되어 탄생한 특별한 거리.",
+      icon: "🎓",
+      sub: "디아스론드 근교 · 인구 약 2만명",
+    },
+  ];
+  return (
+    <div>
+      <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
+        키르디아 공화국에 속하거나 그 영향권 내에 있는 주요 거리들을 소개한다.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {cities.map((c, i) => (
+          <a key={i} href={c.href} style={{ textDecoration: "none", color: "inherit" }}>
+            <div style={{ background: "#fff", border: `1px solid ${ACCENT}30`, borderRadius: 10, padding: "16px 20px", display: "flex", alignItems: "center", gap: 16, cursor: "pointer" }}>
+              <span style={{ fontSize: "30px", flexShrink: 0 }}>{c.icon}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 3 }}>{c.name}</div>
+                <div style={{ fontSize: "11px", color: "#999", marginBottom: 5 }}>{c.sub}</div>
+                <div style={{ fontSize: "13px", color: "#666", lineHeight: 1.7 }}>{c.desc}</div>
+              </div>
+              <span style={{ fontSize: "16px", color: `${ACCENT}60`, flexShrink: 0 }}>→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EventsSection() {
+  const events = [
+    {
+      title: "장로 회의",
+      content: "키르디아 공화국은 소속 부족의 대표(*)에 의한 합의제로 운영된다. 이 회의는 '고도의 민(古の民)' 엘다가 남긴 수정 텔레크루스에 의해 중계되어, 장로들은 원격지에서도 회의에 출석할 수 있다.\n\n회의는 대외적·국내 정치 두 가지에 관해서 장로들의 의견을 청취하는 형태를 취한다. 주석 킬드가 현황과 방침을 보고하고 그에 대한 반박 응수가 이루어진다. 기본적으로 킬드에 이의를 제기하는 일은 없다. 다만 장로들의 대다수는 유목에 필요한 정보 교환과 조율을 우선하며, 외교 국정을 중시하지 않는 경향이 있다.\n\n(*) 소속 부족의 대표: 그 부족의 족장, 또는 족장을 대행하는 역할을 맡는 자를 '장로'라고 부른다.",
+    },
+    {
+      title: "마족의 전생",
+      content: "사막의 전승에는 '요마의 여왕' 바라르와 함께 신에 반기를 든 신과 정령왕 들을 괴롭힌 '그라브베아의 여왕' 에프네의 이야기가 전해진다. 에프네는 신의 손에 의해 두앙의 도시로 다시 태어나, 현재는 사막에 존재하는 두앙의 거리에 봉인되어 있다고 한다. 현재 그 거리의 모래 속에는 두앙의 도시에 태어나 사라진 에프네의 '잔여 기억'이 잠들어 있다고 알려진다.",
+    },
+    {
+      title: "사룡",
+      content: "사막 상인들이 모래 속에서 움직이는 재앙으로 두려워하는 것이 사드웜이다. 지렁이를 닮은 모습에 불어오는 거대한 생물로, 군집을 이루어 거대한 행상을 습격한다. 더욱이 사드웜의 몸 안에는 생명력을 결집한 용석이라 불리는 것이 있다. 동방 세계에서는 불로불사의 사약과 마찬가지로, 약학이나 연금 기사적 가치가 높은 일품이다. 그 용석을 구하여, 모험자들은 위험하지만 성공하면 큰돈이 되는 사룡 사냥에 나선다.",
+    },
+    {
+      title: "뱀파이어의 왕",
+      content: "사막 한가운데 홀연히 솟은 백아의 성이 있다. 기묘하게도 그 성 주변에는 짙은 안개가 자욱하며, 햇빛이 들지 않는 불가사의한 성. 뱀파이어 왕 블레아스의 거처, 시딘벨 성이다.\n\n시딘벨 성의 주변에는 마기에 의해 썩은 늪이 둘러싸고, 마성에 도전하는 자는 먼저 이 악마의 습지를 통과해야 하며, 그 다음은 두 겹으로 둘러싼 벽, 민족 간의 관문이 계속된다. 그 선봉에 이르는 방법에 관해서는 살아서 정보를 가지고 돌아온 자가 없다고 한다.",
+    },
+    {
+      title: "그란아인의 발톱을 둘러싼 싸움",
+      content: "패왕의 민이 전하는 전설검 '패왕의 발톱 듀란달'은, 대를 이은 수호자들에 의해 그란아인의 발톱의 하나로 '미행의 거리' 멘달의 신전에 보관되어 있었다.\n\n이 아이템은 '진행의 거리' 멘달의 신전에 보관되어 있어, 대대로 멘달의 '어둠의 달' 리리스가 관리해 왔다. 리리스는 저주한 타자의 정신을 빼앗는 능력을 가지고 있어, 문을 지키는 병사나 고문이 간단히 신관에 홀려 버렸다. 더욱이 그녀는 아리팡이라는 능력의 여성이며, 수천의 모래 주머니를 사용하여 마을을 공격하였다.",
+    },
+  ];
+  return (
+    <div>
+      <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
+        키르디아 공화국에 얽힌 전설과 현재 진행 중인 사건들을 소개한다.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {events.map((e, i) => (
+          <div key={i} style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 8, padding: "16px 20px", borderLeft: `4px solid ${ACCENT}` }}>
+            <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 8 }}>{e.title}</div>
+            <div style={{ fontSize: "13px", lineHeight: 1.85, color: "#555" }}>{e.content}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -158,6 +252,8 @@ export default function KirdiaPage() {
       case "history":   return <HistorySection />;
       case "geography": return <GeographySection />;
       case "politics":  return <PoliticsSection />;
+      case "cities":    return <CitiesSection />;
+      case "events":    return <EventsSection />;
       case "relations": return <RelationsSection />;
       default:          return null;
     }
@@ -199,7 +295,7 @@ export default function KirdiaPage() {
           ))}
         </div>
         <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#504830", lineHeight: 1.6 }}>
-          <a href="/erindil-west" style={{ color: "#807050", textDecoration: "none", fontSize: "11px" }}>← 에린디르 서방으로</a>
+          <a href="/erindil-west" style={{ color: "#807050", textDecoration: "none", fontSize: "11px" }}>← 에린딜 서방으로</a>
           <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
