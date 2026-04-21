@@ -157,11 +157,11 @@ const regions: RegionItem[] = [
   },
 ];
 
-const otherRegions = [
+const otherRegions: { name: string; content: string; href?: string }[] = [
   { name: '"해저 도시" 카칼',    content: '에린딜와 마제라니카 사이의 해저에, 샤히긴이 사는 해저 도시가 있다.' },
   { name: '"원환의 거리" 티르밀리', content: '탈탈·한 제국의 황야를 훨씬 넘어 북쪽에 있다고 전해지는 도시. 요정들이 사는 환상적인 도시가 있다고 전해진다.' },
-  { name: '"실낙원" 테니아',    content: '공중에 떠 있던 아름다운 정원이었지만 마계에 추락했다. 추락의 이유는 불명이다.' },
-  { name: '"영원의 도시" 아발론',  content: '유계에 있는 거리의 하나로, "신의 부름을 받은 자"들이 살며 이방자를 맞이하고 있다.' },
+  { name: '"실낙원" 테니아',    content: '공중에 떠 있던 아름다운 정원이었지만 마계에 추락했다. 추락의 이유는 불명이다.', href: "/tenia" },
+  { name: '"영원의 도시" 아발론',  content: '유계에 있는 거리의 하나로, "신의 부름을 받은 자"들이 살며 이방자를 맞이하고 있다.', href: "/avalon" },
   { name: '노탄디 대륙',           content: '에린딜 대륙의 남방에 있는 대륙이지만, 이름 이외에는 알려지지 않았다.' },
 ];
 
@@ -540,7 +540,20 @@ function RegionsSection({ color }: { color: string }) {
       </div>
       <SectionTitle title="그 외의 대륙이나 지역" color={color} />
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {otherRegions.map((r, i) => (
+        {otherRegions.map((r, i) => r.href ? (
+          <a key={i} href={r.href} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+            <div style={{
+              background: "#fff", border: "1px solid #E8E3DA", borderRadius: 8,
+              padding: "12px 16px", display: "flex", gap: 14, justifyContent: "space-between", alignItems: "center",
+            }}>
+              <div style={{ display: "flex", gap: 14, flex: 1 }}>
+                <span style={{ fontWeight: 600, color, flexShrink: 0, fontSize: "13px", minWidth: 148 }}>{r.name}</span>
+                <span style={{ fontSize: "14px", color: "#555", lineHeight: 1.7 }}>{r.content}</span>
+              </div>
+              <span style={{ fontSize: "11px", color, background: `${color}15`, padding: "3px 10px", borderRadius: 10, flexShrink: 0, fontWeight: 500 }}>자세히 →</span>
+            </div>
+          </a>
+        ) : (
           <div key={i} style={{
             background: "#fff", border: "1px solid #E8E3DA", borderRadius: 8,
             padding: "12px 16px", display: "flex", gap: 14,
@@ -752,8 +765,20 @@ export default function ArianrodWiki() {
             </button>
           ))}
         </div>
-        <div style={{ padding: "14px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#5a5040", lineHeight: 1.6 }}>
-          異床同夢 · 이상동몽<br />아리안로드 2E 캠페인
+        <div style={{ padding: "14px 20px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <a href="/secrets" style={{
+            display: "flex", alignItems: "center", gap: 8,
+            fontSize: "12px", color: "#9A7A18", textDecoration: "none",
+            background: "rgba(154,122,24,0.08)", borderRadius: 6,
+            padding: "7px 10px", marginBottom: 10,
+            border: "1px solid rgba(154,122,24,0.2)",
+          }}>
+            <span>🔐</span>
+            <span style={{ fontWeight: 500 }}>GM 비밀 정보</span>
+          </a>
+          <div style={{ fontSize: "10px", color: "#5a5040", lineHeight: 1.6 }}>
+            異床同夢 · 이상동몽<br />아리안로드 2E 캠페인
+          </div>
         </div>
       </nav>
 
