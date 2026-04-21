@@ -15,11 +15,11 @@ interface Character {
 }
 
 const navItems: NavItem[] = [
-  { id: "clanvel",       label: "클란=베르",           icon: "💧" },
+  { id: "clanvel",       label: "크란벨",           icon: "💧" },
   { id: "structure",     label: "거리 구조",            icon: "🗺️" },
   { id: "facilities",    label: "주요 시설",            icon: "🏛️" },
   { id: "organizations", label: "조직",                 icon: "🔱" },
-  { id: "people",        label: "클란=베르의 인물들",   icon: "👥" },
+  { id: "people",        label: "크란벨의 인물들",   icon: "👥" },
 ];
 
 const clanvelStats = {
@@ -44,7 +44,7 @@ const clanvelStats = {
   ],
 };
 
-const clanvelHistory = `클란=베르는 파리스 동맹 남부, 강과 운하가 교차하는 수상 도시다. 도시 이름은 창건의 전설에 유래하는데, "아버지 클란"과 "어머니 베르"라 불리는 두 영웅이 이 땅을 개척하여 도시를 세웠다고 전해진다.
+const clanvelHistory = `크란벨는 파리스 동맹 남부, 강과 운하가 교차하는 수상 도시다. 도시 이름은 창건의 전설에 유래하는데, "아버지 클란"과 "어머니 베르"라 불리는 두 영웅이 이 땅을 개척하여 도시를 세웠다고 전해진다.
 
 고대부터 수계 교통의 요충으로 기능해 왔으며, 정령 신앙과 7대 신 신앙이 융합된 독자적인 신앙 문화를 발전시켜 왔다. 현재도 신전이 도시 통치를 맡고 있으며, 신관장 웰치가 도시 전반의 행정을 주관한다.`;
 
@@ -59,7 +59,7 @@ const clanvelDistricts = [
   },
   {
     name: "신전 지구",
-    content: "클란=베르 대신전을 중심으로 한 종교적 중심 구역. 신관들의 숙소와 수련 시설, 의료 시설이 밀집해 있다. 도시 통치의 실질적인 중심이기도 하며, 신관장 웰치의 집무실도 이곳에 있다. 아에마 신앙과 정령 신앙의 의식이 수시로 열린다.",
+    content: "크란벨 대신전을 중심으로 한 종교적 중심 구역. 신관들의 숙소와 수련 시설, 의료 시설이 밀집해 있다. 도시 통치의 실질적인 중심이기도 하며, 신관장 웰치의 집무실도 이곳에 있다. 아에마 신앙과 정령 신앙의 의식이 수시로 열린다.",
   },
   {
     name: "주택 지구",
@@ -74,19 +74,19 @@ const clanvelDistricts = [
 const clanvelFacilities: Facility[] = [
   {
     name: "몬스터 콜로세움",
-    content: "클란=베르의 명물이자 파리스 동맹 최대 규모의 전투 경기장. 모험자와 몬스터가 맞붙는 경기가 정기적으로 개최되며, 강함을 겨루는 문화가 이 도시에 깊이 뿌리내리고 있다는 증거이기도 하다. 경기는 F리그가 운영을 맡고 있으며, 우승자에게는 큰 상금과 명예가 주어진다. 도시를 방문한 모험자라면 한 번쯤 도전하거나 관전하게 되는 도시의 상징적인 시설이다.",
+    content: "크란벨의 명물이자 파리스 동맹 최대 규모의 전투 경기장. 모험자와 몬스터가 맞붙는 경기가 정기적으로 개최되며, 강함을 겨루는 문화가 이 도시에 깊이 뿌리내리고 있다는 증거이기도 하다. 경기는 F리그가 운영을 맡고 있으며, 우승자에게는 큰 상금과 명예가 주어진다. 도시를 방문한 모험자라면 한 번쯤 도전하거나 관전하게 되는 도시의 상징적인 시설이다.",
   },
   {
     name: "아버지 클란과 어머니 베르의 문",
-    content: "도시의 정문에 해당하는 거대한 수문. 도시 창건의 전설에 나오는 두 영웅 \"아버지 클란\"과 \"어머니 베르\"의 이름을 딴 것으로, 수백 년의 역사를 자랑한다. 연간 도시 축제 때는 이 문을 중심으로 화려한 의식이 거행되며, 클란=베르 시민들에게는 가장 소중한 상징물 중 하나다.",
+    content: "도시의 정문에 해당하는 거대한 수문. 도시 창건의 전설에 나오는 두 영웅 \"아버지 클란\"과 \"어머니 베르\"의 이름을 딴 것으로, 수백 년의 역사를 자랑한다. 연간 도시 축제 때는 이 문을 중심으로 화려한 의식이 거행되며, 크란벨 시민들에게는 가장 소중한 상징물 중 하나다.",
   },
   {
-    name: "클란=베르 대신전",
-    content: "아에마를 주신으로 모시는 클란=베르의 종교적 중심. 건물 전체가 흰 석재로 지어졌으며, 운하에 면한 정면 파사드가 수면에 반사되는 모습이 이 도시의 대표적인 절경이다. 신관장 웰치가 이곳을 거점으로 도시 행정과 종교 업무를 동시에 관할한다. 치유 마법과 정령 의식이 정기적으로 행해지며, 시민들의 신앙 생활의 중심이 된다.",
+    name: "크란벨 대신전",
+    content: "아에마를 주신으로 모시는 크란벨의 종교적 중심. 건물 전체가 흰 석재로 지어졌으며, 운하에 면한 정면 파사드가 수면에 반사되는 모습이 이 도시의 대표적인 절경이다. 신관장 웰치가 이곳을 거점으로 도시 행정과 종교 업무를 동시에 관할한다. 치유 마법과 정령 의식이 정기적으로 행해지며, 시민들의 신앙 생활의 중심이 된다.",
   },
   {
     name: "그란데 대로",
-    content: "클란=베르를 남북으로 관통하는 주요 가로. 수문 지구에서 시작하여 신전 지구까지 이어지는 이 도로는 도시의 대동맥으로, 각종 상점과 시장이 늘어서 있다. 정기 시장이 서는 날에는 파리스 동맹 각지에서 상인들이 모여 물산을 교역한다. 도로 곳곳에 운하와 연결되는 소형 선착장이 마련되어 있어 수로 이동과의 환승도 편리하다.",
+    content: "크란벨를 남북으로 관통하는 주요 가로. 수문 지구에서 시작하여 신전 지구까지 이어지는 이 도로는 도시의 대동맥으로, 각종 상점과 시장이 늘어서 있다. 정기 시장이 서는 날에는 파리스 동맹 각지에서 상인들이 모여 물산을 교역한다. 도로 곳곳에 운하와 연결되는 소형 선착장이 마련되어 있어 수로 이동과의 환승도 편리하다.",
   },
 ];
 
@@ -96,10 +96,10 @@ const clanvelOrganizations: Org[] = [
     type: "군사 조직",
     base: "수문 지구, 의용대 본부",
     leader: "리오나·칼리",
-    content: "클란=베르의 방위와 질서 유지를 담당하는 의용대. 도시 내 치안 활동을 주로 맡으며, 콜로세움 경기 때의 경비도 이들의 몫이다. 대장 리오나·칼리는 젊고 패기 넘치는 전사로, 부하들에게 깊이 신뢰받고 있다.",
+    content: "크란벨의 방위와 질서 유지를 담당하는 의용대. 도시 내 치안 활동을 주로 맡으며, 콜로세움 경기 때의 경비도 이들의 몫이다. 대장 리오나·칼리는 젊고 패기 넘치는 전사로, 부하들에게 깊이 신뢰받고 있다.",
   },
   {
-    name: "클란=베르 수상 경비대",
+    name: "크란벨 수상 경비대",
     type: "군사 조직",
     base: "수문 지구, 경비대 선착장",
     leader: "리오나·모니",
@@ -113,7 +113,7 @@ const clanvelOrganizations: Org[] = [
     content: "몬스터 콜로세움의 전투 리그를 주관하는 기관. 경기 일정, 참가자 모집, 심판, 상금 지급까지 모든 운영을 담당한다. 대표 산토스는 전직 투기사 출신의 바나묘족 남성으로, 공정한 운영으로 파리스 동맹 전역에서 신뢰를 얻고 있다.",
   },
   {
-    name: "클란=베르 수운 조합",
+    name: "크란벨 수운 조합",
     type: "상업 조합",
     base: "수문 지구, 조합 사무소",
     leader: "핀바·파렐",
@@ -124,7 +124,7 @@ const clanvelOrganizations: Org[] = [
     type: "사설 경호 조직",
     base: "주택 지구, 마티아스 저택",
     leader: "마티아스·아딘셀",
-    content: "클란=베르의 실력자 마티아스·아딘셀이 직접 이끄는 사설 경호 및 정보 조직. 표면상 마티아스 본인과 그 자산의 보호를 목적으로 하지만, 도시 정치에 보이지 않는 영향력을 행사한다는 소문이 끊이지 않는다.",
+    content: "크란벨의 실력자 마티아스·아딘셀이 직접 이끄는 사설 경호 및 정보 조직. 표면상 마티아스 본인과 그 자산의 보호를 목적으로 하지만, 도시 정치에 보이지 않는 영향력을 행사한다는 소문이 끊이지 않는다.",
   },
 ];
 
@@ -135,8 +135,8 @@ const clanvelCharacters: Character[] = [
     quote: "이 도시의 물은 아에마 여신의 은총입니다",
     race: "휴린", gender: "여", age: "22",
     hairColor: "붉은 갈색", eyeColor: "호박색", skinColor: "흰",
-    title: "클란=베르 신관장",
-    content: "클란=베르 대신전의 수장이자 도시 전체의 통치자. 약관의 나이에 신관장에 취임했으나, 아에마 여신에 대한 깊은 신앙심과 침착한 판단력으로 시민들의 신뢰를 얻고 있다. 신전 업무와 도시 행정을 동시에 처리하는 능력자이며, 정령과 교신할 수 있다는 소문도 있다.",
+    title: "크란벨 신관장",
+    content: "크란벨 대신전의 수장이자 도시 전체의 통치자. 약관의 나이에 신관장에 취임했으나, 아에마 여신에 대한 깊은 신앙심과 침착한 판단력으로 시민들의 신뢰를 얻고 있다. 신전 업무와 도시 행정을 동시에 처리하는 능력자이며, 정령과 교신할 수 있다는 소문도 있다.",
   },
   {
     name: "マティアス・アディンセル",
@@ -144,8 +144,8 @@ const clanvelCharacters: Character[] = [
     quote: "힘이란 가진 자가 사용하는 것이오",
     race: "휴린", gender: "남", age: "46",
     hairColor: "없음 (대머리)", eyeColor: "갈색", skinColor: "갈색",
-    title: "클란=베르의 실력자",
-    content: "클란=베르에서 막대한 부와 인맥을 가진 실력자. 자신의 친위대를 거느리며 도시의 이면에서 큰 영향력을 행사한다. 표면상으로는 상인이자 후원자로서 콜로세움과 F리그를 지원하고 있지만, 그 진짜 목적은 불분명하다. 카난의 파리스 동맹 평의회 대리 뮤즈·알두라와도 접점이 있는 것으로 알려져 있다.",
+    title: "크란벨의 실력자",
+    content: "크란벨에서 막대한 부와 인맥을 가진 실력자. 자신의 친위대를 거느리며 도시의 이면에서 큰 영향력을 행사한다. 표면상으로는 상인이자 후원자로서 콜로세움과 F리그를 지원하고 있지만, 그 진짜 목적은 불분명하다. 카난의 파리스 동맹 평의회 대리 뮤즈·알두라와도 접점이 있는 것으로 알려져 있다.",
   },
   {
     name: "サントス",
@@ -162,8 +162,8 @@ const clanvelCharacters: Character[] = [
     quote: "물의 목소리를 들어보세요",
     race: "엘다난", gender: "여", age: "30",
     hairColor: "금", eyeColor: "파란", skinColor: "흰",
-    title: "클란=베르 신전 사제",
-    content: "클란=베르 대신전에서 정령 신앙 의식을 담당하는 엘다난 사제. 수계 정령과의 교신에 뛰어난 재능을 가지고 있으며, 신관장 웰치의 최측근이기도 하다. 도시의 운하를 관리하는 수계 정령들과 정기적인 의식을 통해 소통하며, 수문 조작이나 홍수 예방에도 기여하고 있다.",
+    title: "크란벨 신전 사제",
+    content: "크란벨 대신전에서 정령 신앙 의식을 담당하는 엘다난 사제. 수계 정령과의 교신에 뛰어난 재능을 가지고 있으며, 신관장 웰치의 최측근이기도 하다. 도시의 운하를 관리하는 수계 정령들과 정기적인 의식을 통해 소통하며, 수문 조작이나 홍수 예방에도 기여하고 있다.",
   },
   {
     name: "ディガム・マクギガン",
@@ -172,7 +172,7 @@ const clanvelCharacters: Character[] = [
     race: "두앙천익족", gender: "남", age: "39",
     hairColor: "금", eyeColor: "갈색", skinColor: "갈색",
     title: "수상 경비대 정찰 대원",
-    content: "클란=베르 수상 경비대 소속의 두앙천익족 정찰 대원. 날개를 이용한 하늘에서의 감시 임무를 주로 담당하며, 수계 전반의 이상 탐지에 활약한다. 경쾌한 성격으로 경비대 내에서 인기가 높으며, 도시 지리를 하늘과 수면 양쪽에서 파악하는 몇 안 되는 인물이다.",
+    content: "크란벨 수상 경비대 소속의 두앙천익족 정찰 대원. 날개를 이용한 하늘에서의 감시 임무를 주로 담당하며, 수계 전반의 이상 탐지에 활약한다. 경쾌한 성격으로 경비대 내에서 인기가 높으며, 도시 지리를 하늘과 수면 양쪽에서 파악하는 몇 안 되는 인물이다.",
   },
 ];
 
@@ -210,7 +210,7 @@ function ClanvelSection() {
   return (
     <div>
       <div style={{ background: "#fff", border: `2px solid ${ACCENT}30`, borderRadius: 10, padding: "20px 24px", marginBottom: 24 }}>
-        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>파리스 동맹 도시 클란=베르 기본 데이터</div>
+        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>파리스 동맹 도시 크란벨 기본 데이터</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 20px", marginBottom: 16 }}>
           {clanvelStats.stats.map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, fontSize: "13px", borderBottom: "1px solid #F0ECE5", paddingBottom: 6 }}>
@@ -234,9 +234,9 @@ function ClanvelSection() {
           ))}
         </div>
       </div>
-      <SecTitle title="클란=베르의 역사" />
+      <SecTitle title="크란벨의 역사" />
       <Prose text={clanvelHistory} />
-      <SecTitle title="클란=베르의 현황" />
+      <SecTitle title="크란벨의 현황" />
       <Prose text={clanvelCurrentStatus} />
     </div>
   );
@@ -245,7 +245,7 @@ function ClanvelSection() {
 function StructureSection() {
   return (
     <div>
-      <Prose text={"클란=베르는 운하를 중심으로 네 개의 주요 지구로 나뉜다. 수문 지구, 신전 지구, 주택 지구, 투기장 지구가 각각의 기능을 담당하며, 운하와 다리로 유기적으로 연결되어 있다."} />
+      <Prose text={"크란벨는 운하를 중심으로 네 개의 주요 지구로 나뉜다. 수문 지구, 신전 지구, 주택 지구, 투기장 지구가 각각의 기능을 담당하며, 운하와 다리로 유기적으로 연결되어 있다."} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
         {clanvelDistricts.map((d, i) => (
           <Card key={i}>
@@ -262,7 +262,7 @@ function FacilitiesSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        클란=베르의 주요 시설을 소개한다. 수상 도시 특유의 경관과 활기찬 투기 문화를 반영한 시설들이 이 도시의 매력을 이루고 있다.
+        크란벨의 주요 시설을 소개한다. 수상 도시 특유의 경관과 활기찬 투기 문화를 반영한 시설들이 이 도시의 매력을 이루고 있다.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {clanvelFacilities.map((f, i) => (
@@ -280,7 +280,7 @@ function OrganizationsSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        클란=베르와 관련이 깊은 조직을 소개한다. PC의 의뢰나 커넥션 대상으로 활용할 수 있다.
+        크란벨와 관련이 깊은 조직을 소개한다. PC의 의뢰나 커넥션 대상으로 활용할 수 있다.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {clanvelOrganizations.map((o, i) => (
@@ -305,7 +305,7 @@ function PeopleSection() {
   return (
     <div>
       <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 20 }}>
-        "물의 거리" 클란=베르의 주요 인물들을 소개한다. PC의 의뢰인이나 협력자, 혹은 적대자로서 시나리오에 등장할 수 있다.
+        "물의 거리" 크란벨의 주요 인물들을 소개한다. PC의 의뢰인이나 협력자, 혹은 적대자로서 시나리오에 등장할 수 있다.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 14 }}>
         {clanvelCharacters.map((c, i) => (
@@ -400,7 +400,7 @@ export default function ClanVelPage() {
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#305870", marginBottom: 6 }}>PARIS ALLIANCE · CLAN-VEL</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>
-            "물의 거리"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>클란=베르</span>
+            "물의 거리"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>크란벨</span>
           </div>
         </div>
         <div style={{ padding: "10px 0", flex: 1, overflowY: "auto" }}>
