@@ -482,7 +482,7 @@ function WestSection() {
       <SecTitle title="아스란 (アースラン)" />
       <div style={{ background: "#1A0808", border: "1px solid #8A2A1A", borderRadius: 10, padding: "16px 18px", marginTop: 8 }}>
         <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: "#EEA090", marginBottom: 8 }}>🏔️ 영원한 투쟁의 땅</div>
-        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#CCC", marginBottom: 12 }}>레이워르 왕국의 서쪽, 비룡으로도 비행 마법을 써도 넘을 수 없는 절벽 산맥 너머에 존재하는 고립된 세계. 「검의 여신」 그로비스와 「부패의 신」 세르노그가 오랜 세월 다투어 온 전장이다. 에린딜·알디온과 달리, 신에게 이끌린 자 이외에는 다가설 수 없는 특수한 지역이다.</div>
+        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#CCC", marginBottom: 12 }}>레이워르 왕국의 서쪽, 비룡으로도 비행 마법을 써도 넘을 수 없는 절벽 산맥 너머에 존재하는 고립된 세계. 「검의 여신」 글로비스와 「부패의 신」 세르노그가 오랜 세월 다투어 온 전장이다. 에린딜·알디온과 달리, 신에게 이끌린 자 이외에는 다가설 수 없는 특수한 지역이다.</div>
         <a href="/arslan" style={{ display: "inline-block", background: "#8A2A1A", color: "#fff", padding: "6px 16px", borderRadius: 8, fontSize: "12px", fontWeight: 600, textDecoration: "none" }}>자세히 보기 →</a>
       </div>
     </div>

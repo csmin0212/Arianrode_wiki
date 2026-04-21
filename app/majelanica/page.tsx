@@ -191,11 +191,11 @@ function EventsSection() {
       </div>
       <SecTitle title="「세계를 나누는 구」" />
       <div style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 10, padding: "16px 18px", marginBottom: 16 }}>
-        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>그로비스 령과 세르노그 령의 경계에는, 지의 깊은 곳에 가볍다고 일컬어지는 계곡이 있다. 그레브르라 불리는 이 깊은 계곡은, 각각의 진영이 걸친 다리 사이에 어느 쪽의 영역도 아닌 중립 지대가 그 경계를 두고 있어, 인간들이 살고 있다는 점에서는 죽음의 구역으로 여겨지고 있다. 邪神의 기운에서 죽자를 빼앗는 마소가 그 구역에 충만하다고 하여, 그로비스 령에서는 사자를 빼앗는 장소로 여겨지고 있다.</div>
+        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>글로비스 령과 세르노그 령의 경계에는, 지의 깊은 곳에 가볍다고 일컬어지는 계곡이 있다. 그레브르라 불리는 이 깊은 계곡은, 각각의 진영이 걸친 다리 사이에 어느 쪽의 영역도 아닌 중립 지대가 그 경계를 두고 있어, 인간들이 살고 있다는 점에서는 죽음의 구역으로 여겨지고 있다. 邪神의 기운에서 죽자를 빼앗는 마소가 그 구역에 충만하다고 하여, 글로비스 령에서는 사자를 빼앗는 장소로 여겨지고 있다.</div>
       </div>
       <SecTitle title="전설의 신구를 소환한 자" />
       <div style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 10, padding: "16px 18px", marginBottom: 16 }}>
-        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>세계를 파괴하는 것이 가능한 3가지의 신구가 있다. 어딘가에 그 이름을 이어받은 에르다의 하나인 것이, 이 중의 하나의 신구를 소환했다. 그로비스와 싸우겠다고 맹세한 에르다를 두려워한 에르고의 전사들은, 이 3가지 신구의 소환에 관련하는 기술을 아는 자를 찾아 보고 있으나, 아스란 전역에서 빈틈없이 소문은 퍼져있다고 전해진다. 신구를 부르는 방법이 어딘가에 남아 있지 않는가, 찾아 구하는 마물도 많다고 한다.</div>
+        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>세계를 파괴하는 것이 가능한 3가지의 신구가 있다. 어딘가에 그 이름을 이어받은 에르다의 하나인 것이, 이 중의 하나의 신구를 소환했다. 글로비스와 싸우겠다고 맹세한 에르다를 두려워한 에르고의 전사들은, 이 3가지 신구의 소환에 관련하는 기술을 아는 자를 찾아 보고 있으나, 아스란 전역에서 빈틈없이 소문은 퍼져있다고 전해진다. 신구를 부르는 방법이 어딘가에 남아 있지 않는가, 찾아 구하는 마물도 많다고 한다.</div>
       </div>
       <SecTitle title="「마룡」 브리트라의 부활" />
       <div style={{ background: "#1A0808", border: "1px solid #5A1A1A", borderRadius: 10, padding: "16px 18px", marginBottom: 16 }}>

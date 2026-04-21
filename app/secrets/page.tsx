@@ -246,7 +246,7 @@ function BalmunkSection() {
       <SecTitle title="十三神将 (아스란 관련)" />
       <div style={{ background: "#0A0808", border: "1px solid #5A3A18", borderRadius: 8, padding: 14 }}>
         <p style={{ color: "#D8CCA8", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-          그로비스 직속의 영광의 13명의 용사들. 사람들의 존경을 모으며, 전장을 비롯한 다양한 장면에서 의지가 되는 존재다. 용사 중 가장 유력한 자가 신장필두(神将筆頭)로 선발된다. PC가 十三神将 혹은 그 제자가 되어 활약하기 위한 데이터이기도 하다.
+          글로비스 직속의 영광의 13명의 용사들. 사람들의 존경을 모으며, 전장을 비롯한 다양한 장면에서 의지가 되는 존재다. 용사 중 가장 유력한 자가 신장필두(神将筆頭)로 선발된다. PC가 十三神将 혹은 그 제자가 되어 활약하기 위한 데이터이기도 하다.
           <br /><br />
           <span style={{ color: "#A87A30", fontSize: 12 }}>에리어: 아르디온 대륙 서방 지역 아스란</span>
         </p>
