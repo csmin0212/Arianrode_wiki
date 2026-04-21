@@ -13,6 +13,7 @@ const navItems: NavItem[] = [
   { id: "nations",   label: "3대 국가",             icon: "🏛️" },
   { id: "culture",   label: "동방의 문명",           icon: "📜" },
   { id: "exchange",  label: "동서 교류",             icon: "🚢" },
+  { id: "others",    label: "기타 소국들",           icon: "🌴" },
 ];
 
 function Prose({ text }: { text: string }) {
@@ -40,8 +41,8 @@ function OverviewSection() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 14, marginTop: 24 }}>
         {[
           { name: "타루타루·한국", en: "Tartar Han", icon: "🐎", desc: "동방 북부 중원의 대초원을 영역으로 하는 유목 기마민족의 나라. 서방에서 사막을 건너면 처음으로 만나게 되는 동방 국가.", href: "/tartar-han", color: "#7A4A14" },
-          { name: "세리아 대제국", en: "Seria Empire", icon: "⛩️", desc: "에린딜 대륙 동해 연안을 따라 존재하는 대제국. 가장 풍요로운 평야를 지배하며, 서방 국가들이 모두 들어갈 만큼의 광대한 영토를 자랑한다.", href: null, color: "#8A3A4A" },
-          { name: "다이와 군도국", en: "Daiwa Islands", icon: "⚔️", desc: "에린딜 대륙 동해에 떠 있는 섬들을 영토로 하는 나라. 사무라이와 닌자의 발상지로도 유명하다. 타이쿤을 정점으로 다이묘들이 각지를 통치한다.", href: null, color: "#4A5A8A" },
+          { name: "세리아 대제국", en: "Seria Empire", icon: "⛩️", desc: "에린딜 대륙 동해 연안을 따라 존재하는 대제국. 가장 풍요로운 평야를 지배하며, 서방 국가들이 모두 들어갈 만큼의 광대한 영토를 자랑한다.", href: "/seria", color: "#8A3A4A" },
+          { name: "다이와 군도국", en: "Daiwa Islands", icon: "⚔️", desc: "에린딜 대륙 동해에 떠 있는 섬들을 영토로 하는 나라. 사무라이와 닌자의 발상지로도 유명하다. 타이쿤을 정점으로 다이묘들이 각지를 통치한다.", href: "/daiwa", color: "#4A5A8A" },
         ].map((n, i) => (
           <div key={i} style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 10, padding: "16px 18px", borderLeft: `4px solid ${n.color}` }}>
             <div style={{ fontSize: "22px", marginBottom: 8 }}>{n.icon}</div>
@@ -109,6 +110,71 @@ function ExchangeSection() {
   );
 }
 
+function OthersSection() {
+  const pops = [
+    { label: "휴린",   pct: 70, color: "#4A3A8A" },
+    { label: "엘다난", pct: 20, color: "#2A6B5A" },
+    { label: "기타",   pct: 10, color: "#7A7A8A" },
+  ];
+  return (
+    <div>
+      <Prose text={"동방 세계의 대표적인 국가는 타루타루·한국, 세리아 대제국, 다이와 군도국 3개이지만, 그 외에도 무수한 나라들이 존재한다."} />
+
+      <SecTitle title="미개척 밀림 지대" />
+      <Prose text={"남부의 밀림 지대는 사막과 함께 오랜 세월 인간의 발길을 막아왔다. 사막은 모래와 바위, 한낮의 열기와 야간의 혹독한 냉기 외에는 아무것도 없다. 아무것도 없다는 것 자체가 두려움이다. 밀림은 '무엇이 있는지 모른다'는 것이 두렵다. 어떤 자연의 덫이 기다리고 있는지, 어떤 루트를 잡아야 목적지에 다다를 수 있는지, 인간은 밀림에 대해 알아야 할 모든 것을 모른다. 이 때문에 이 일대는 두렵고 사람들의 접근을 막고 있다."} />
+      <Prose text={"대육상 해안에 이르게 된 탐험대는 해안 곳곳에 집락을 쌓아 나갔다. 그들은 주로 세리아 대제국의 평야부에서 찾아온 탐험대로, 밀림 깊은 곳의 미지의 땅을 조사하고 밀림으로의 진입을 추진했다."} />
+
+      <SecTitle title="밀림 지대의 소국가군" />
+      <Prose text={"밀림 지대에는 수많은 나라들이 난립해 있다. 대부분은 주요 도시와 그 주변 집락으로 구성되는 도시국가급의 소국으로, 국가와 국가 사이에는 생사를 걸 만큼 치열한 영토 분쟁이 자주 발생한다. 거의 대부분의 도시는 다종족으로 구성되지만, 휴린, 네바프, 뷔르나에는 단일 민족에 의한 집락도 존재한다.\n\n이들 소국은 세리아나 다이와의 도시들과 비교해도 매우 소박하다. 주민들은 원시적인 수렵채집 생활을 주로 하며, 마술사나 연금술사가 만든 과학적인 물품에는 별로 접한 일이 없다."} />
+      <Prose text={"예부터 폐쇄된 환경의 밀림에 사는 사람들은 이방인에 대한 경계심이 강하고, 멀리서 온 자에게서 기술을 습득하려는 경향이 있다. 또한 내부에서는 독자적인 문화나 언어를 구축하고 있어, 대도시에서도 통상이 확립된 근접 도시들과의 교역 루트가 있어 어느 정도의 무역을 하고 있다."} />
+
+      <SecTitle title="밀림의 역사" />
+      <Prose text={"'수의 시대' 당시, 밀림 지대는 특유의 동식물과 마물들이 우거지는 땅이었다. 인간이 집락을 형성한 기록은 없으며, 오히려 엘다난이 도시를 세우기 시작했다고 볼 수 있을 정도이다.\n\n시간이 지남에 따라 인간이 모여들기 시작하여, 휴린이 도시를 쌓아 나갔다. 그들은 주로 세리아 대제국의 평야부에서 찾아온 탐험대로, 도중에 다양한 동료를 얻어 위험을 헤치며 미지의 땅에 발을 디디게 되었다."} />
+
+      <SecTitle title="밀림의 기후와 풍토" />
+      <Prose text={"밀림 지대는 사막 남쪽, 만년설 산맥의 기슭에서도 가장 짙은 지역이다. 세리아 남쪽의 산지와 그 사이에 펼쳐지는 부분은 인간의 손에 의한 개척이 진행되고 있어, 밀림 지대와 습지 지대가 서로 교차하는 지형이 되어 있다. 에린딜 대륙 중에서도 최대 규모의 열대우림으로, 연중 기온과 강우량이 높다. 숲의 자원은 보고이며, 풍부한 수목과 생태계가 형성되어 있다. 또한 내부에서는 다른 어디에서도 볼 수 없는 동식물이 생식하고 있다."} />
+
+      <SecTitle title="메나므마이 왕국 (メーナームヤイ王国)" />
+      <Prose text={"남부 소국들 중에서 가장 번창한 항구도시를 가진 나라로, 메나므마이가 있다. 에린딜 대륙의 대육상 해안에 위치하는 이 나라는 '대여신'이라 불리는 여성을 위주로 한 나라다. 그 중에서도 해안가에 있는 샨이라 불리는 마을은 외국 선박에 개방된 무역 도시로서 번창하고 있다."} />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 16, marginBottom: 20 }}>
+        {[
+          { label: "국명",      value: "다양 (나라마다 상이)" },
+          { label: "수도",      value: "다양" },
+          { label: "통치 형태", value: "왕정 내지 연립제" },
+          { label: "현 수장",   value: "나라마다 상이" },
+          { label: "인구",      value: "추정 약 200만 명" },
+          { label: "주요 항구", value: "샨 (외국 선박 개방 무역항)" },
+        ].map((s, i) => (
+          <div key={i} style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 8, padding: "12px 14px", borderLeft: `3px solid ${ACCENT}` }}>
+            <div style={{ fontSize: "11px", color: "#999", marginBottom: 3 }}>{s.label}</div>
+            <div style={{ fontSize: "13px", fontWeight: 600, color: "#2a2a2a" }}>{s.value}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 10, padding: "16px 18px", marginBottom: 20 }}>
+        {pops.map((p, i) => (
+          <div key={i} style={{ marginBottom: 6 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", marginBottom: 2 }}>
+              <span style={{ color: "#555" }}>{p.label}</span>
+              <span style={{ color: "#888", fontFamily: "monospace" }}>{p.pct}%</span>
+            </div>
+            <div style={{ background: "#E8E3DA", borderRadius: 4, height: 8 }}>
+              <div style={{ background: p.color, borderRadius: 4, height: "100%", width: `${p.pct}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <Prose text={"무한의 모래사막과 밀림 지대에 끼인 케무르트강 유역에는 비교적 풍요로운 토지가 많이 있다. 이 지역에는 메나므마이 왕국이 성립되어 있으며, 메나므마이 왕국 이북의 평야 지역에는 다양한 소국들이 존재한다. 무한의 사막이 점차 넓어짐에 따라 땅은 줄어들고, 황야에 변해간다. 그리고 케무르트강의 지류가 더 이상 동쪽으로 넓어지는 것을 막는 방벽 역할을 한다."} />
+
+      <SecTitle title="세리아와의 관계" />
+      <Prose text={"메나므마이는 3대 전에 세리아 대제국으로부터 朝貢을 요구하는 정책을 취해, 여러 나라가 조공을 바치러 와서 헌금을 요구하는 정책을 시행하고 있다. 많은 나라들이 조공관에 복종하는 것처럼 보이지만, 밀림 깊은 나라들 중에는 자국의 풍습과 문화에 고집하여 가혹한 자연 속에서 살아남는 것을 자부심으로 여기는 자들도 있다. 특히 밀림 깊은 도시나 집락 중에서는 자신들이 뜨거운 열대에 적합한 생활을 유지하는 것에 자부심을 가진 자도 있어, 세리아풍의 관습을 따르는 도시가 증가하고 있다."} />
+
+      <SecTitle title="다이와와의 관계" />
+      <Prose text={"샨의 항구는, 다이와 군도국의 배가 서방으로 향하는 중간 기착지로서 이용되고 있다. 다이와를 출발하여 서방에 향하는 배는 거의 예외 없이 샨의 항구에 기항하여 물자를 보충한다. 이 항구에서 무역을 행하며, 중에는 이 마을에 정착하는 자도 있어, 마을에는 다이와 민가街가 형성되어 다이와풍의 거리 분위기를 좋아한 사람들이 일상 풍경에 녹아들고 있다.\n\n최근, 새롭게 발견된 교역도(交易島)는 고무 분리를 가능하게 하는 고무나무가 자라는 특산물 산지로, 다이와와의 무역이 확대되어 특별한 거래 계약이 맺어지기도 했다."} />
+    </div>
+  );
+}
+
 export default function EasternWorldPage() {
   const [activeId, setActiveId] = useState("overview");
   const [showNav, setShowNav] = useState(false);
@@ -134,6 +200,7 @@ export default function EasternWorldPage() {
       case "nations":   return <NationsSection />;
       case "culture":   return <CultureSection />;
       case "exchange":  return <ExchangeSection />;
+      case "others":    return <OthersSection />;
       default: return null;
     }
   };
