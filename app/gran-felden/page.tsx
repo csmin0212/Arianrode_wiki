@@ -331,9 +331,12 @@ function ParisSection() {
       <SecTitle title="주요 도시" />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
         {[
-          { name: '"유적의 거리" 라인',  href: "/line",        desc: "라인 왕국의 수도. 파리스 동맹의 지도 도시 중 하나로, 미탐사 유적이 다수 남아 있는 모험자의 거리.", icon: "🏛️" },
-          { name: '"기계의 거리" 카난',  href: "/kanan",       desc: "파리스 동맹 최일의 공업 도시이자 예술 도시. 연금철도가 달리는 기계 문명의 중심.", icon: "⚙️" },
-          { name: "그랑펠덴 왕국",        href: "#gran-felden", desc: "파리스 동맹의 핵심 왕국. 이 페이지의 '그랑펠덴 왕국' 섹션에서 상세 정보를 확인할 수 있다.", icon: "🏰" },
+          { name: '"유적의 거리" 라인',   href: "/line",        desc: "라인 왕국의 수도. 파리스 동맹의 지도 도시 중 하나로, 미탐사 유적이 다수 남아 있는 모험자의 거리.", icon: "🏛️" },
+          { name: '"기계의 거리" 카난',   href: "/kanan",       desc: "파리스 동맹 최일의 공업 도시이자 예술 도시. 연금철도가 달리는 기계 문명의 중심.", icon: "⚙️" },
+          { name: '"물의 거리" 클란=베르', href: "/clan-vel",    desc: "운하와 수문이 얽힌 수상 도시. 몬스터 콜로세움 F리그로 유명하며, 아에마 신앙의 신전이 도시를 다스린다.", icon: "💧" },
+          { name: '"대장간의 거리" 하마르빌', href: "/hammerville", desc: "루디온 산맥 서측에 자리 잡은 단조 도시. 암즈 크리스탈 합성 기술과 십금추 경연으로 알려진 장인들의 거리.", icon: "🔨" },
+          { name: '"모험의 항구" 힐베니아', href: "/hilbenia",   desc: "아레스타 종속 항구 도시. 네바프 고대 유적이 지하에 펼쳐져 있어 탐험 의뢰가 끊이지 않는 모험자의 기항지.", icon: "⚓" },
+          { name: "그랑펠덴 왕국",          href: "#gran-felden", desc: "파리스 동맹의 핵심 왕국. 이 페이지의 '그랑펠덴 왕국' 섹션에서 상세 정보를 확인할 수 있다.", icon: "🏰" },
         ].map((city, i) => (
           <a key={i} href={city.href} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
             <div style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 8, padding: "12px 18px", borderLeft: `4px solid ${ACCENT}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
