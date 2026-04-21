@@ -14,6 +14,7 @@ const navItems: NavItem[] = [
   { id: "facilities",  label: "주요 시설",           icon: "🏛️" },
   { id: "dorms",       label: "6개 기숙사",          icon: "🏠" },
   { id: "life",        label: "학교 생활",           icon: "📅" },
+  { id: "legacy",      label: "패왕의 유산",          icon: "⚔️" },
   { id: "people",      label: "칼리지의 인물들",      icon: "👥" },
 ];
 
@@ -278,6 +279,49 @@ const characters: Character[] = [
   { name: "마텔",                 role: "무기제조학 강사",   race: "휴린",       gender: "여", note: "\"단조의 거리\" 하머빌 출신의 무기제조학 강사. 재능이 있으며 강의 중에 구령을 자주 사용하는 것이 특징이다." },
 ];
 
+function LegacySection() {
+  const weapons = [
+    { name: "팔의 창 알가빌",  type: "창",   status: "금고 보관", note: "파리스 왕국 패왕이 사용했다고 전해지는 신성한 창. 결전의 순간 신의 이름을 빌어 적을 관통했다고 한다." },
+    { name: "검 드라간두",     type: "검",   status: "금고 보관", note: "검신에 고대 문자가 새겨진 장검. 불꽃을 두른 검날로 수많은 마족을 베었다는 전설이 있다." },
+    { name: "도 론그리날",     type: "도",   status: "금고 보관", note: "동방 양식으로 제작된 만곡도. 패왕의 부장 중 한 명이 사용했으며, 이후 패왕 본인에게 헌납되었다고 전해진다." },
+    { name: "검 아르다인",     type: "검",   status: "금고 보관", note: "예리함과 내구성 모두 다른 검을 압도하는 명검. 금고 보관 중이지만 지금도 날이 전혀 무디지 않다." },
+    { name: "검 크레이반",     type: "검",   status: "금고 보관", note: "패왕의 군세를 통솔하는 군기(軍旗)와 함께 전해진 쌍검 중 하나. 나머지 하나의 행방은 불명." },
+    { name: "곤봉 브레위드하르", type: "곤봉", status: "금고 보관", note: "육중한 철 곤봉. 패왕의 완력을 상징하는 무기로, 보통 인간이 한 손으로 다루는 것은 불가능하다." },
+    { name: "단검 워드네",     type: "단검", status: "⚠️ 미회수 (행방불명)", note: "패왕의 유산 7점 중 유일하게 금고에 없는 무기. 언제 어디서 유출되었는지 칼리지는 파악하지 못하고 있다." },
+  ];
+  return (
+    <div>
+      <Prose text={"\"패왕의 유산\"은 파리스 왕국의 영웅적 지도자 \"패왕\"이 사용했다고 전해지는 7점의 전설적 무기들이다. 파리스 왕국 멸망 후 각지에 흩어졌던 이 무기들은, 엘크레스트 칼리지 창립 초기 무렵에 수집·보관되기 시작하여 현재는 칼리지 내 금고에 6점이 안치되어 있다."} />
+      <Prose text={"금고에 보관된 무기들은 일반 학생은 물론 대부분의 교직원도 접근할 수 없다. 이사회의 결의와 학장의 허가를 동시에 받아야만 열람이 가능하다. 단 하나 예외가 있는데, 학장 엘비라·알디리케의 신임을 받는 특별 연구원 카미유라·셰필드가 연구 목적으로 「아인·소프·아울」을 개인 보관하고 있다."} />
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 20 }}>
+        {weapons.map((w, i) => (
+          <div key={i} style={{
+            background: "#fff", border: "1px solid #E8E3DA", borderRadius: 10, padding: "14px 18px",
+            borderLeft: `4px solid ${w.status.startsWith("⚠️") ? "#C0392B" : ACCENT}`,
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+              <span style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: "#2a2a2a" }}>
+                {w.name}
+              </span>
+              <div style={{ display: "flex", gap: 6, flexShrink: 0, marginLeft: 10 }}>
+                <span style={{ fontSize: "11px", background: `${ACCENT}12`, color: ACCENT, padding: "2px 7px", borderRadius: 10 }}>{w.type}</span>
+                <span style={{ fontSize: "11px", background: w.status.startsWith("⚠️") ? "#FDECEA" : "#EFF8F2", color: w.status.startsWith("⚠️") ? "#C0392B" : "#2A7A4A", padding: "2px 7px", borderRadius: 10 }}>{w.status}</span>
+              </div>
+            </div>
+            <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#555" }}>{w.note}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 20, background: "#FFF8E8", border: "1px solid #D4A830", borderRadius: 10, padding: "14px 18px" }}>
+        <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "13px", fontWeight: 700, color: "#7A5A14", marginBottom: 6 }}>🔑 아인·소프·아울</div>
+        <div style={{ fontSize: "13px", lineHeight: 1.8, color: "#5a4a2a" }}>
+          패왕의 유산 외에 별도로 전해지는 특별한 무기. 카미유라·셰필드가 학장의 허가 아래 개인적으로 보관 및 연구하고 있다. 패왕의 유산과 같은 시대의 산물이라고 추정되지만, 그 성격과 능력에 대해서는 아직 밝혀지지 않은 부분이 많다.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function PeopleSection() {
   return (
     <div>
@@ -332,6 +376,7 @@ export default function ElcrestCollegePage() {
       case "facilities": return <FacilitiesSection />;
       case "dorms":      return <DormsSection />;
       case "life":       return <LifeSection />;
+      case "legacy":     return <LegacySection />;
       case "people":     return <PeopleSection />;
       default: return null;
     }

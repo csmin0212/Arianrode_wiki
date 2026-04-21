@@ -39,6 +39,7 @@ interface NotablePlace {
   name: string;
   nickname: string;
   content: string;
+  href?: string;
 }
 
 interface TimelineEvent {
@@ -207,7 +208,7 @@ const notablePlaces: NotablePlace[] = [
   {
     name: "베르베",
     nickname: "마도(魔都)",
-    content: `역병에 싸인 대부해에 떠 있는 트리 섬의 유일한 도시. 이 거리에 가기 위해서는 맞은편 "수호의 거리" 마제스타에 있는 신전의 전송 장치를 사용해야 한다.\n\n일찍이 "땅의 시대"에 마족들의 요새였기 때문에, 현재도 이 땅에 돌아오는 마물이나 마족이 적지 않다. 수년 전에도 큰 싸움이 일어났으며, "수호자"가 항상 주재하여 경계 태세를 유지하고 있다.`,
+    content: `역병에 싸인 대부해에 떠 있는 트리 섬의 유일한 도시. 이 거리에 가기 위해서는 맞은편 "수호의 거리" 마제스타에 있는 신전의 전송 장치를 사용해야 한다.\n\n일찍이 "땅의 시대"에 마족들의 요새였기 때문에, 현재도 이 땅에 돌아오는 마물이나 마족이 적지 않다. 수년 전에도 큰 싸움이 일어났으며, "수호자"가 항상 주재하여 경계 태세를 유지하고 있다. 현재의 감시자는 리토니우스라 불리는 바나 남성(33세)이 맡고 있다.`,
   },
   {
     name: "틴다지엘",
@@ -233,6 +234,30 @@ const notablePlaces: NotablePlace[] = [
     name: "루디온 산맥",
     nickname: "에린딜의 등줄기",
     content: `"안개의 숲"과 "무한의 사막" 사이에 솟아 있는 큰 산맥. 에린딜 북부를 남북으로 종단하고 있어 "에린딜의 등줄기", 혹은 "다난의 등줄기"라고도 불린다.\n\n로다니아 돌의 산지인 "돌의 나라" 로다니아나, 고산 지대에서만 자라는 라피테르 과수원을 가진 "상림의 거리" 폰티엘 등의 소국이 산기슭과 산복에 존재한다. 남방에는 고대 용 "흰" 케테르가 사는 영원의 숲이 있다.`,
+  },
+  {
+    name: "디아스론드",
+    nickname: "성도(聖都)",
+    href: "/diasrond",
+    content: `에를랑 왕국 동쪽, 무한의 사막 남단에 위치하는 독립 도시 국가. 에린딜 서방 7대 신 신앙의 총본산으로, 성벽과 6개의 탑으로 이루어진 육각형 요새 도시이다.\n\n지도자는 제62대 교황 팔·밀리티아스(휴린 여, 23세). 역대 최연소 교황으로 알려져 있다. 신성 기사단과 비밀 집행 기관 "긴 발톱(라봐르다)"을 보유하며, 어떠한 세력도 침범할 수 없는 성역으로 여겨진다.`,
+  },
+  {
+    name: "안개의 숲",
+    nickname: "스피아르 엘다난의 땅",
+    href: "/mist-forest",
+    content: `에린딜 북부, 파리스 동맹 북쪽에 펼쳐지는 광대한 숲. 코나카타 산맥과 힐레디온 산맥 사이에 위치하며, 연중 짙은 안개로 뒤덮여 있다. 스피아르 엘다난이라 불리는 엘다난 씨족의 거주지이다.\n\n숲 유일의 도시 스피아르존에는 90%가 스피아르 엘다난으로 이루어진다. 여왕 에아르핀(엘다난 여, 909세)의 통치 아래 북쪽 마군의 동향을 감시하는 역할을 담당한다. 스피아르존 외곽에는 돌아오지 못한 자들을 기리는 "돌아올 자들의 언덕"이 있다.`,
+  },
+  {
+    name: "네오·다이나스토카발",
+    nickname: "반신전 비밀 결사",
+    href: "/dynastokabal",
+    content: `에린딜 서방에서 활동하는 비밀 결사. 신전 조직의 악폐와 부패를 폭로하고 개혁을 촉구하는 것을 공식 목적으로 내세우고 있다.\n\n대수령(신원 불명)을 정점으로 하는 피라미드형 조직 구조를 지닌다. 연금술로 동식물의 특성을 이식한 인공 인간 "괴인(怪人)"을 보유하며, 신전 비방 팸플릿 배포·정보 공작·인재 모집 등 다양한 수단으로 활동한다.`,
+  },
+  {
+    name: "동방 세계",
+    nickname: "에린딜 대륙 동방",
+    href: "/eastern-world",
+    content: `에린딜 대륙 서방의 동쪽에 광대하게 펼쳐지는 세계. 서방인들은 이 지역을 "동방" 혹은 "동방 세계"라 부른다.\n\n3대 주요 세력: 유목 기마민족 국가 타루타루·한국, 동해 연안의 대국 세리아 대제국, 사무라이·닌자의 발상지 다이와 군도국. 서방과 동방은 "사막의 길"을 통한 육로 교역과 위험한 해로로 연결되어 있다.`,
   },
 ];
 
@@ -584,9 +609,14 @@ function NotableSection({ color }: { color: string }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {notablePlaces.map((p, i) => (
           <Card key={i} accent={color}>
-            <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 8 }}>
-              <span style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color }}>{p.name}</span>
-              <span style={{ fontSize: "12px", color: "#888", fontStyle: "italic" }}>{`"${p.nickname}"`}</span>
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, marginBottom: 8 }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+                <span style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "16px", fontWeight: 700, color }}>{p.name}</span>
+                <span style={{ fontSize: "12px", color: "#888", fontStyle: "italic" }}>{`"${p.nickname}"`}</span>
+              </div>
+              {p.href && (
+                <a href={p.href} style={{ fontSize: "12px", color, textDecoration: "none", whiteSpace: "nowrap", borderBottom: `1px solid ${color}50` }}>자세히 보기 →</a>
+              )}
             </div>
             <Prose text={p.content} />
           </Card>
