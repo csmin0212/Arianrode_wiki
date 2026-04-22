@@ -89,7 +89,7 @@ function OverviewSection() {
 
 function HistorySection() {
   const crystals = [
-    { name: "히노이시 (火石)", type: "火의 용휘석", color: "#CC3300" },
+    { name: "히노이시 (火石)", type: "불의 용휘석", color: "#CC3300" },
     { name: "카나이시 (新石)", type: "단야사(鍛冶師)의 용휘석", color: "#778888" },
     { name: "사토리이시 (知石)", type: "지혜의 용휘석", color: "#4455AA" },
     { name: "오노이시 (雄石)", type: "무용의 용휘석", color: "#884422" },

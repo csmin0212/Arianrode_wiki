@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
 
-const ACCENT = "#6A3A8A"
-const SIDEBAR_BG = "#080410"
+const ACCENT = "#000000"
+const SIDEBAR_BG = "#6A3A8A"
 
 function Prose({ text }: { text: string }) {
   return (
@@ -35,7 +35,7 @@ const navItems = [
 
 function OverviewSection() {
   const stats = [
-    { label: "인구",       value: "540인 (휴린 66%, 엘다나 15%, 네바프 7%, 필볼 6%, 바르나 3%, 도앙 3%)" },
+    { label: "인구",       value: "540인 (휴린 66%, 엘다난 15%, 네바프 7%, 필보르 6%, 버나 3%, 두앙 3%)" },
     { label: "통치형태",   value: "위기관리위원회에 의한 합의제" },
     { label: "현재 수장",  value: "루프트 도벨 (위기관리위원장, 신관장 대행)" },
     { label: "종교",       value: "7대신 신앙" },
