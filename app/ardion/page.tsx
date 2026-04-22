@@ -1471,7 +1471,10 @@ export default function ArdionPage() {
         display: "flex", flexDirection: "column", overflow: "hidden",
         ...(mob ? { position: "fixed", top: 0, left: showNav ? 0 : -260, height: "100vh", zIndex: 999, transition: "left 0.3s ease", boxShadow: showNav ? "4px 0 20px rgba(0,0,0,0.4)" : "none" } : {}),
       }}>
-        <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <a href="/" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ fontSize: "11px", color: "#888" }}>← 아리안로드 위키</div>
+        </a>
+        <div style={{ padding: "20px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#3A1808", marginBottom: 6 }}>대륙 · 서방 너머</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.4 }}>알디온 대륙<br />アルディオン大陸</div>
         </div>
@@ -1490,9 +1493,6 @@ export default function ArdionPage() {
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
-        <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.07)", fontSize: "11px" }}>
-          <a href="/" style={{ color: "#6A5848", textDecoration: "none" }}>← 이상동몽 위키</a>
         </div>
       </nav>
 

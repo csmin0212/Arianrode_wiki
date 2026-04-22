@@ -48,7 +48,7 @@ function OverviewSection() {
       </div>
 
       <SecTitle title="가르파의 비밀" />
-      <Prose text="아발론의 「성배의 인도」 주점 점주 가르파는, 신환자(神喚者)다. 이것은 거의 알려지지 않은 비밀이다." />
+      <Prose text="아발론의 「성배의 인도」 주점 점주 가르파는, 신환자다. 이것은 거의 알려지지 않은 비밀이다." />
       <div style={{ background: "#0E0A06", border: `1px solid ${ACCENT}`, borderRadius: 8, padding: 14, marginBottom: 16 }}>
         <p style={{ color: "#D8CCA8", fontSize: 13, lineHeight: 1.7, margin: "0 0 8px" }}>
           그가 습득한 신환자의 능력 중 하나는, <strong style={{ color: ACCENT }}>자신의 분신을 복수로 출현시키고, 나아가 각각이 얻은 정보를 공유할 수 있다</strong>는 것이다. 다시 말해 「가르파」는 전원이 분신 자기 자신인 것이다.
@@ -68,7 +68,7 @@ function OverviewSection() {
 function InvadersSection() {
   return (
     <section>
-      <SecTitle title="래구저(来寇者)의 정체" />
+      <SecTitle title="래구저의 정체" />
       <Prose text="사신과 마족은 「정령의 폐청」에 의해 에린에서 마계로 추방되었다. 에린은 지금 「바람의 폐청」을 완수하고자 하고 있으며, 에린은 「바람의 폐청」의 세례를 마쳐 이제 완전히 다른 세계와 이어지지 않게 되었다." />
       <Prose text="하지만 완전히 다른 세계와의 연결이 끊어진 것은 아니다. 사신의 힘을 가진 것들이 에린에 오면 불가능한 것이 되지 않는다. 그리고 다른 세계의 인간에 가까운 마족도 있어, 그들 중에는 신들을 찾아 에린에 오려는 자들이 있다." />
 
@@ -163,7 +163,7 @@ function OverlordSection() {
       <SecTitle title="아론다이트와 에르다의 후예" />
       <Prose text="「고대 민족」 에르다의 생존자로서, 역사에 영향을 미치고자 활약하는 조직의 일원이면서도, 인간을 위해 싸우는 존재가 있다. 그 이름은 아론다이트." />
       <div style={{ background: "#0A0A0A", border: "1px solid #5A5A18", borderRadius: 8, padding: 14 }}>
-        <div style={{ fontWeight: 700, color: "#E8D870", fontSize: 14, marginBottom: 6 }}>아론다이트 (アロンダイト)</div>
+        <div style={{ fontWeight: 700, color: "#E8D870", fontSize: 14, marginBottom: 6 }}>아론다이트</div>
         <p style={{ color: "#D8CCA8", fontSize: 13, lineHeight: 1.7, margin: "0 0 8px" }}>
           에르다의 수장 — 「신성왕」 아르토리우스의 충실한 기사였다. 그의 부친이 에르다이며, 어머니는 현재의 방새 도시 티르·나·노그(현 방새 도시)의 대지의 요정이었다고 한다.
         </p>
@@ -181,7 +181,7 @@ function BalmunkSection() {
       name: "베리알", nameJp: "ベリアル",
       title: "「검의 왕 (노트룽)」",
       hair: "—", eyes: "—", skin: "—",
-      desc: "과거/현재/미래를 나타내는 3×12매의 날개를 가진 마족. 인간에게는 코우모리와 비슷한 날개를 가진 남성 모습으로 접근한다. 강한 자를 굴복시켜 따르게 하는 것을 좋아한다. 세계 구제 계획의 신구 나추라르파를 불러내려 했으나, 그 당시 소멸했다. 帝紀812년 12월, 부활하여 마수군 「황금의 늑대」에 의해 「완전한 죽음」을 받았다.",
+      desc: "과거/현재/미래를 나타내는 3×12매의 날개를 가진 마족. 인간에게는 코우모리와 비슷한 날개를 가진 남성 모습으로 접근한다. 강한 자를 굴복시켜 따르게 하는 것을 좋아한다. 세계 구제 계획의 신구 나추라르파를 불러내려 했으나, 그 당시 소멸했다. 제기 812년 12월, 부활하여 마수군 「황금의 늑대」에 의해 「완전한 죽음」을 받았다.",
     },
     {
       name: "아자젤", nameJp: "アザゼル",
@@ -193,10 +193,10 @@ function BalmunkSection() {
       name: "마린", nameJp: "マーリン",
       title: "「혈의 고리사슬 (다인슬레이브)」",
       hair: "흑색 (소년 아바타)", eyes: "—", skin: "—",
-      desc: "붉은빛이 도는 오라를 두른 이름 붙이기 어려운 거인의 모습을 한 마족. 평소에는 본체인 거인을 숨기고, 칠흑의 뿔과 코우모리와 비슷한 날개를 가진 소년의 아바타를 사용한다. 유언비어를 퍼뜨려 인간들이 혼란·자멸하는 모습을 바라보는 것을 즐긴다. 사람 앞에 나타날 때는 예언자를 자처하며 불길한 예언을 전한다. 帝紀816년의 4인의 「영웅들」과 「深紅竜」 아인·조우에 의해 약화되었다.",
+      desc: "붉은빛이 도는 오라를 두른 이름 붙이기 어려운 거인의 모습을 한 마족. 평소에는 본체인 거인을 숨기고, 칠흑의 뿔과 코우모리와 비슷한 날개를 가진 소년의 아바타를 사용한다. 유언비어를 퍼뜨려 인간들이 혼란·자멸하는 모습을 바라보는 것을 즐긴다. 사람 앞에 나타날 때는 예언자를 자처하며 불길한 예언을 전한다. 제기 816년의 4인의 「영웅들」과 「심홍룡」 아인·조우에 의해 약화되었다.",
     },
     {
-      name: "四人目의 시조",
+      name: "네 번째 시조",
       nameJp: "四人目の始祖",
       title: "이름 불명 / 정체 불명",
       hair: "?", eyes: "?", skin: "?",
@@ -206,8 +206,8 @@ function BalmunkSection() {
 
   return (
     <section>
-      <SecTitle title="발뭉크 (バルムンク)" />
-      <Prose text="긴 전쟁이 이어진 아르디온 대륙 동방에서, 인류 총화(帝紀816년)를 계기로 일정의 평화가 찾아왔다. 그 전쟁의 이면에는, 발뭉크라 불리는 비밀 결사가 있었다고 한다." />
+      <SecTitle title="발뭉크" />
+      <Prose text="긴 전쟁이 이어진 아르디온 대륙 동방에서, 인류 총화(제기 816년)를 계기로 일정의 평화가 찾아왔다. 그 전쟁의 이면에는, 발뭉크라 불리는 비밀 결사가 있었다고 한다." />
 
       <div style={{ background: "#0C0808", border: "1px solid #8A1A1A", borderRadius: 8, padding: 14, marginBottom: 16 }}>
         <div style={{ color: "#FF6666", fontWeight: 700, marginBottom: 8, fontSize: 13 }}>💀 발뭉크의 목적</div>
@@ -220,15 +220,14 @@ function BalmunkSection() {
         </p>
       </div>
 
-      <SecTitle title="시조의 4인 (始祖の四人)" />
+      <SecTitle title="시조의 4인" />
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {founders.map(f => (
           <div key={f.name} style={{ background: "#100606", border: "1px solid #6A1A1A", borderRadius: 8, padding: 14 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 }}>
               <div>
                 <span style={{ fontWeight: 700, color: "#F0B8B8", fontSize: 15 }}>{f.name}</span>
-                <span style={{ color: "#8A5050", fontSize: 11, marginLeft: 8 }}>{f.nameJp}</span>
-              </div>
+                </div>
               <span style={{ color: "#FF8888", fontSize: 12, fontStyle: "italic" }}>{f.title}</span>
             </div>
             {f.hair !== "—" && f.hair !== "?" && (
@@ -243,10 +242,10 @@ function BalmunkSection() {
         ))}
       </div>
 
-      <SecTitle title="十三神将 (아스란 관련)" />
+      <SecTitle title="십삼신장 (아스란 관련)" />
       <div style={{ background: "#0A0808", border: "1px solid #5A3A18", borderRadius: 8, padding: 14 }}>
         <p style={{ color: "#D8CCA8", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-          글로비스 직속의 영광의 13명의 용사들. 사람들의 존경을 모으며, 전장을 비롯한 다양한 장면에서 의지가 되는 존재다. 용사 중 가장 유력한 자가 신장필두(神将筆頭)로 선발된다. PC가 十三神将 혹은 그 제자가 되어 활약하기 위한 데이터이기도 하다.
+          글로비스 직속의 영광의 13명의 용사들. 사람들의 존경을 모으며, 전장을 비롯한 다양한 장면에서 의지가 되는 존재다. 용사 중 가장 유력한 자가 신장필두로 선발된다. PC가 십삼신장 혹은 그 제자가 되어 활약하기 위한 데이터이기도 하다.
           <br /><br />
           <span style={{ color: "#A87A30", fontSize: 12 }}>에리어: 아르디온 대륙 서방 지역 아스란</span>
         </p>
@@ -258,7 +257,7 @@ function BalmunkSection() {
 function SalvationSection() {
   return (
     <section>
-      <SecTitle title="세계 구제 계획 (世界救済計画)" />
+      <SecTitle title="세계 구제 계획" />
       <Prose text="세계 구제 계획은 레이워르 왕국의 히우이트 왕자가 주도해 진행하고 있었던 계획이다." />
 
       <div style={{ background: "#080C10", border: "1px solid #1A4A8A", borderRadius: 8, padding: 14, marginBottom: 16 }}>
@@ -279,10 +278,10 @@ function SalvationSection() {
       <SecTitle title="관련 이벤트 연표" />
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {[
-          { year: "帝紀812년 12월", event: "마수군 「황금의 늑대」, 베리알에게 「완전한 죽음」을 부여. 베리알 소멸." },
-          { year: "帝紀816년", event: "아르디온 대륙 동방에서의 인류 총화. 긴 전쟁이 끝나 일정한 평화가 찾아온다." },
-          { year: "帝紀816년 이후", event: "세계 구제 계획 관련 의식과 흔적들이 에린 각지에서 발견되고 있다." },
-          { year: "현재 (聖暦1013年 기준)", event: "세계 구제 계획은 히우이트 왕자가 사라진 후에도 어떤 형태로 계속 실행되고 있다고 여겨진다." },
+          { year: "제기 812년 12월", event: "마수군 「황금의 늑대」, 베리알에게 「완전한 죽음」을 부여. 베리알 소멸." },
+          { year: "제기 816년", event: "아르디온 대륙 동방에서의 인류 총화. 긴 전쟁이 끝나 일정한 평화가 찾아온다." },
+          { year: "제기 816년 이후", event: "세계 구제 계획 관련 의식과 흔적들이 에린 각지에서 발견되고 있다." },
+          { year: "현재 (성력 1013년 기준)", event: "세계 구제 계획은 히우이트 왕자가 사라진 후에도 어떤 형태로 계속 실행되고 있다고 여겨진다." },
         ].map(e => (
           <div key={e.year} style={{ display: "flex", gap: 12, background: "#080C10", border: "1px solid #1A3A5A", borderRadius: 6, padding: "10px 14px", fontSize: 13 }}>
             <span style={{ color: "#5599CC", fontWeight: 700, minWidth: 120, flexShrink: 0 }}>{e.year}</span>
@@ -305,7 +304,6 @@ function SalvationSection() {
         ].map(p => (
           <div key={p.name} style={{ background: "#080C10", border: "1px solid #1A3A5A", borderRadius: 8, padding: 12 }}>
             <div style={{ fontWeight: 700, color: "#A8C8E8", fontSize: 13, marginBottom: 2 }}>{p.name}</div>
-            <div style={{ color: "#5A7A8A", fontSize: 11, marginBottom: 6 }}>{p.nameJp}</div>
             <p style={{ color: "#D8CCA8", fontSize: 12, lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
           </div>
         ))}
@@ -337,12 +335,15 @@ export default function SecretsPage() {
       <div style={{ display: "flex", minHeight: "100vh", fontFamily: "'Noto Sans KR', sans-serif", background: "#F7F4EE" }}>
         {/* Sidebar */}
         <aside style={{ width: 220, background: SIDEBAR_BG, color: "#D8CCA8", display: "flex", flexDirection: "column", padding: "24px 0", position: "sticky", top: 0, height: "100vh", overflowY: "auto" }}>
-          <div style={{ padding: "0 20px 20px", borderBottom: "1px solid #2A2208" }}>
+          <a href="/" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+            <div style={{ fontSize: "11px", color: "#888" }}>← 아리안로드 위키</div>
+          </a>
+          <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid #2A2208" }}>
             <div style={{ fontSize: 11, color: "#7A6820", letterSpacing: 2, marginBottom: 4 }}>ARIANROD 2E — GM ONLY</div>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#E8D870", lineHeight: 1.3 }}>
               세계의 비밀
             </div>
-            <div style={{ fontSize: 11, color: "#7A6820", marginTop: 4 }}>秘匿情報</div>
+            <div style={{ fontSize: 11, color: "#7A6820", marginTop: 4 }}>비밀 정보</div>
           </div>
           <nav style={{ padding: "12px 0", flex: 1 }}>
             {navItems.map(item => (
@@ -362,9 +363,6 @@ export default function SecretsPage() {
               </button>
             ))}
           </nav>
-          <div style={{ padding: "16px 20px", borderTop: "1px solid #2A2208" }}>
-            <a href="/" style={{ color: "#7A6820", fontSize: 12, textDecoration: "none" }}>← 메인으로</a>
-          </div>
         </aside>
 
         {/* Main */}
@@ -374,7 +372,7 @@ export default function SecretsPage() {
             <h1 style={{ fontSize: 32, fontWeight: 700, color: "#1A1408", fontFamily: "'Noto Serif KR', serif", margin: "0 0 4px" }}>
               세계의 비밀
             </h1>
-            <div style={{ fontSize: 14, color: "#6A5820" }}>秘匿情報 — 이상동몽 세계의 숨겨진 진실</div>
+            <div style={{ fontSize: 14, color: "#6A5820" }}>비밀 정보 — 이상동몽 세계의 숨겨진 진실</div>
             <div style={{ width: 60, height: 3, background: ACCENT, marginTop: 12, borderRadius: 2 }} />
           </header>
           {renderContent()}

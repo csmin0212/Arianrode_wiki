@@ -263,7 +263,7 @@ export default function KakkarPage() {
       {(!mob || showNav) && (
         <nav style={{ width: mob ? "100vw" : 220, flexShrink: 0, background: SIDEBAR_BG, display: "flex", flexDirection: "column", padding: "24px 0", overflowY: "auto", position: mob ? "fixed" : "relative", top: 0, left: 0, height: "100vh", zIndex: 999 }}>
           <a href="/" style={{ display: "block", padding: "0 20px 20px", textDecoration: "none" }}>
-            <div style={{ fontSize: "10px", color: "#888", letterSpacing: "0.12em", marginBottom: 4 }}>← 이상동몽 위키</div>
+            <div style={{ fontSize: "10px", color: "#888", letterSpacing: "0.12em", marginBottom: 4 }}>← 아리안로드 위키</div>
             <div style={{ fontSize: "15px", fontWeight: 700, color: "#fff", fontFamily: "'Noto Serif KR', serif" }}>캇카르</div>
             <div style={{ fontSize: "10px", color: "#aaa", marginTop: 2 }}>カッカル — 해저 도시</div>
           </a>

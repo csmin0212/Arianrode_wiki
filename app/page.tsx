@@ -778,8 +778,8 @@ export default function ArianrodWiki() {
             <span>🔐</span>
             <span style={{ fontWeight: 500 }}>GM 비밀 정보</span>
           </a>
-          <div style={{ fontSize: "10px", color: "#5a5040", lineHeight: 1.6 }}>
-            異床同夢 · 이상동몽<br />아리안로드 2E 캠페인
+          <div style={{ fontSize: "12px", color: "#7a6040", fontWeight: 500 }}>
+            아리안로드 위키
           </div>
         </div>
       </nav>

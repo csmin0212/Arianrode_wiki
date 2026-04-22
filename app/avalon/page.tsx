@@ -604,7 +604,10 @@ export default function AvalonPage() {
       <div style={{ display: "flex", minHeight: "100vh", fontFamily: "'Noto Sans KR', sans-serif", background: "#F7F4EE" }}>
         {/* Sidebar */}
         <aside style={{ width: 220, background: SIDEBAR_BG, color: "#E0D8B0", display: "flex", flexDirection: "column", padding: "24px 0", position: "sticky", top: 0, height: "100vh", overflowY: "auto" }}>
-          <div style={{ padding: "0 20px 20px", borderBottom: "1px solid #2A2808" }}>
+          <a href="/" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+            <div style={{ fontSize: "11px", color: "#888" }}>← 아리안로드 위키</div>
+          </a>
+          <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid #2A2808" }}>
             <div style={{ fontSize: 11, color: "#8A7830", letterSpacing: 2, marginBottom: 4 }}>ARIANROD 2E</div>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#F0E090", lineHeight: 1.3 }}>
               「영원의 거리」<br />아발론
@@ -629,9 +632,6 @@ export default function AvalonPage() {
               </button>
             ))}
           </nav>
-          <div style={{ padding: "16px 20px", borderTop: "1px solid #2A2808" }}>
-            <a href="/" style={{ color: "#8A7830", fontSize: 12, textDecoration: "none" }}>← 메인으로</a>
-          </div>
         </aside>
 
         {/* Main */}

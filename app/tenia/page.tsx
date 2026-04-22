@@ -373,7 +373,10 @@ export default function TeniaPage() {
       <div style={{ display: "flex", minHeight: "100vh", fontFamily: "'Noto Sans KR', sans-serif", background: "#F7F4EE" }}>
         {/* Sidebar */}
         <aside style={{ width: 220, background: SIDEBAR_BG, color: "#E0D8F0", display: "flex", flexDirection: "column", padding: "24px 0", position: "sticky", top: 0, height: "100vh", overflowY: "auto" }}>
-          <div style={{ padding: "0 20px 20px", borderBottom: "1px solid #2A1A3A" }}>
+          <a href="/" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+            <div style={{ fontSize: "11px", color: "#888" }}>← 아리안로드 위키</div>
+          </a>
+          <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid #2A1A3A" }}>
             <div style={{ fontSize: 11, color: "#6A4A8A", letterSpacing: 2, marginBottom: 4 }}>ARIANROD 2E</div>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#E8D8FF", lineHeight: 1.3 }}>
               「실락원」<br />테니아
@@ -398,9 +401,6 @@ export default function TeniaPage() {
               </button>
             ))}
           </nav>
-          <div style={{ padding: "16px 20px", borderTop: "1px solid #2A1A3A" }}>
-            <a href="/" style={{ color: "#6A4A8A", fontSize: 12, textDecoration: "none" }}>← 메인으로</a>
-          </div>
         </aside>
 
         {/* Main */}

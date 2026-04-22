@@ -599,7 +599,7 @@ export default function MajelanicaPage() {
       {(!mob || showNav) && (
         <nav style={{ width: mob ? "100vw" : 220, flexShrink: 0, background: SIDEBAR_BG, display: "flex", flexDirection: "column", padding: "24px 0", overflowY: "auto", position: mob ? "fixed" : "relative", top: 0, left: 0, height: "100vh", zIndex: 999, boxShadow: mob ? "2px 0 16px rgba(0,0,0,0.3)" : "none" }}>
           <a href="/" style={{ display: "block", padding: "0 20px 20px", textDecoration: "none" }}>
-            <div style={{ fontSize: "10px", color: "#888", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>← 이상동몽 위키</div>
+            <div style={{ fontSize: "10px", color: "#888", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>← 아리안로드 위키</div>
             <div style={{ fontSize: "15px", fontWeight: 700, color: "#fff", fontFamily: "'Noto Serif KR', serif" }}>마쥬라니카</div>
             <div style={{ fontSize: "10px", color: "#aaa", marginTop: 2 }}>マジェラニカ — 魔獣の大陸</div>
           </a>
@@ -611,7 +611,8 @@ export default function MajelanicaPage() {
           ))}
         </nav>
       )}
-      <main ref={mainRef} style={{ flex: 1, overflowY: "auto", padding: mob ? "60px 16px 40px" : "40px 48px", maxWidth: 860 }}>
+      <main ref={mainRef} style={{ flex: 1, overflowY: "auto", padding: mob ? "60px 16px 40px" : "40px 48px" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
         <div style={{ marginBottom: 28 }}>
           <div style={{ fontSize: "11px", color: "#aaa", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>{activeNav.icon} {activeNav.label}</div>
           <h1 style={{ fontFamily: "'Noto Serif KR', serif", fontSize: mob ? "22px" : "26px", fontWeight: 700, color: "#1a1a1a", margin: 0, lineHeight: 1.3 }}>마쥬라니카</h1>
@@ -619,6 +620,7 @@ export default function MajelanicaPage() {
           <div style={{ height: 2, background: `linear-gradient(90deg, ${ACCENT}, transparent)`, marginTop: 16, borderRadius: 1 }} />
         </div>
         {renderContent()}
+        </div>
       </main>
     </div>
   );
