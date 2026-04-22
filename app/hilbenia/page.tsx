@@ -29,7 +29,7 @@ const hilbeniaStats = {
     { race: "네바프",   pct: 8,  color: "#8B6914" },
     { race: "엘다난", pct: 7,  color: "#1A6B4A" },
     { race: "필보르",   pct: 3,  color: "#4A7A2E" },
-    { race: "바나",     pct: 1,  color: "#B85C2A" },
+    { race: "버나",     pct: 1,  color: "#B85C2A" },
     { race: "두앙",     pct: 1,  color: "#8B2D2D" },
   ],
   stats: [
@@ -372,7 +372,10 @@ export default function HilbeniaPage() {
         display: "flex", flexDirection: "column", overflow: "hidden",
         ...(mob ? { position: "fixed", top: 0, left: showNav ? 0 : -260, height: "100vh", zIndex: 999, transition: "left 0.3s ease", boxShadow: showNav ? "4px 0 20px rgba(0,0,0,0.4)" : "none" } : {}),
       }}>
-        <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <a href="/gran-felden" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ fontSize: "11px", color: "#888" }}>← 파리스 동맹으로</div>
+        </a>
+        <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#285848", marginBottom: 6 }}>PARIS ALLIANCE · HILBENIA</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>
             "모험의 항구"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>힐베니아</span>
@@ -393,10 +396,6 @@ export default function HilbeniaPage() {
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
-        <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#1A3830", lineHeight: 1.6 }}>
-          <a href="/gran-felden" style={{ color: "#285848", textDecoration: "none", fontSize: "11px" }}>← 파리스 동맹으로</a>
-          <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
 

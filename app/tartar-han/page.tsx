@@ -65,8 +65,8 @@ function OverviewSection() {
     { label: "휴린",   pct: 50, color: "#8B6914" },
     { label: "엘다난", pct: 14, color: "#2A6B5A" },
     { label: "네바프", pct:  7, color: "#7A5A2A" },
-    { label: "빌볼",   pct:  9, color: "#5A3A7A" },
-    { label: "바나",   pct: 10, color: "#7A2A4A" },
+    { label: "필보르", pct:  9, color: "#5A3A7A" },
+    { label: "버나",   pct: 10, color: "#7A2A4A" },
     { label: "두앙",   pct: 10, color: "#3A5A7A" },
   ];
   return (
@@ -364,7 +364,7 @@ function PeopleSection() {
     {
       name: "오루크나",
       role: "대한의 제1부인",
-      race: "바나 (여우)",
+      race: "버나 (여우)",
       gender: "여",
       age: "43세",
       hair: "다갈색",

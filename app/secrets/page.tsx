@@ -39,7 +39,7 @@ function OverviewSection() {
       <div style={{ background: "#1A0808", border: "2px solid #AA3333", borderRadius: 8, padding: 16, marginBottom: 24 }}>
         <div style={{ color: "#FF5555", fontWeight: 700, fontSize: 16, marginBottom: 8 }}>⛔ GM 전용 — 플레이어 열람 금지</div>
         <p style={{ color: "#D8CCA8", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-          이 페이지에는 이상동몽 세계의 핵심 비밀이 기록되어 있다.
+          이 페이지에는 에린 세계의 핵심 비밀이 기록되어 있다.
           일반적으로는 알려지지 않은 정보로, GM이 시나리오를 구성할 때 참조하기 위한 것이다.
           플레이어는 GM의 허가 없이 이 내용을 열람하지 않도록 한다.
           또한 당신이 GM으로서 「AR2E」를 즐기는 경우라면, 여기서부터는 읽어도 문제없다.
@@ -372,7 +372,7 @@ export default function SecretsPage() {
             <h1 style={{ fontSize: 32, fontWeight: 700, color: "#1A1408", fontFamily: "'Noto Serif KR', serif", margin: "0 0 4px" }}>
               세계의 비밀
             </h1>
-            <div style={{ fontSize: 14, color: "#6A5820" }}>비밀 정보 — 이상동몽 세계의 숨겨진 진실</div>
+            <div style={{ fontSize: 14, color: "#6A5820" }}>비밀 정보 — 에린 세계의 숨겨진 진실</div>
             <div style={{ width: 60, height: 3, background: ACCENT, marginTop: 12, borderRadius: 2 }} />
           </header>
           {renderContent()}

@@ -52,7 +52,7 @@ const capitalData = {
     { race: "엘다난", pct: 24, color: "#1A6B4A" },
     { race: "네바프", pct: 12, color: "#8B6914" },
     { race: "필보르", pct: 6,  color: "#4A7A2E" },
-    { race: "바나",   pct: 5,  color: "#B85C2A" },
+    { race: "버나",   pct: 5,  color: "#B85C2A" },
     { race: "두앙",   pct: 3,  color: "#8B2D2D" },
   ],
   stats: [
@@ -244,7 +244,7 @@ const characters: Character[] = [
     name: "エリク・バドエル",
     nameKo: "에리크·바도에르",
     quote: "이 거리에서의 승리는 허락하지 않겠어",
-    race: "바나 (묘족)", gender: "남", age: 30,
+    race: "버나 (묘족)", gender: "남", age: 30,
     hairColor: "붉은", eyeColor: "파란", skinColor: "황",
     title: '"뱀의 눈" 간부',
     content: `파리스 동맹을 중심으로 활동하는 도적 길드 "뱀의 눈"의 간부. 이면 사회의 연줄도 갖고 있으며, 이면 사회를 배반하는 사람이 있다면 중재가 필수다. 냉정하고 피를 흘리는 것도 마다하지 않는다. 하지만 불필요한 폭력은 하지 않는다. 현재는 국가 내 범죄 활동의 방어를 목적으로 활동하고 있다.`,

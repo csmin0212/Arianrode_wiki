@@ -269,7 +269,7 @@ const characters: Character[] = [
   { name: "그라함·스타일",        role: "수학자",            race: "휴린",       gender: "남", note: "냉담한 성격. 쌍둥이 교사에게 호감이 있는 것 같다. 취미 음료는 홍차." },
   { name: "테오도라·다이아나",    role: "신학 교수",         race: "휴린",       gender: "여", note: "온화하고 인정 깊은 오빠 같은 분위기. 실험 장소인 던전의 관리도 맡고 있다." },
   { name: "루서·해밀턴",          role: "감정사·강사",       race: "휴린",       gender: "남", note: "쌍둥이 교사의 오빠. 칼리지 내 수집 활동을 좋아하는 것으로 알려져 있다. 하우리를 모으는 것을 좋아한다." },
-  { name: "고돈",                 role: "학내 골렘 정비사",  race: "바나",         gender: "남", note: "직인 기질의 바나. 학교의 골렘을 자식처럼 소중히 한다." },
+  { name: "고돈",                 role: "학내 골렘 정비사",  race: "버나",         gender: "남", note: "직인 기질의 버나. 학교의 골렘을 자식처럼 소중히 한다." },
   { name: "미아·에이린",          role: "공동판매소 담당",   race: "휴린",       gender: "여", note: "쌍둥이 여동생. 입이 험한 편. 자체 건강 음료를 좋아한다. 취미는 요리." },
   { name: "로지",                 role: "도서관 관장 대리",  race: "휴린(추정)", gender: "여", note: "도서관에 사는 작은 키의 소녀. 고풍스럽게 「~이오」 식의 말투로 말한다." },
   { name: "라그루",               role: "개방적 교사",       race: "두앙(추정)",   gender: "남", note: "개방적인 성격의 교사. 학생들과 격의 없이 지내며 오랜 경험을 가지고 있다." },
@@ -395,7 +395,10 @@ export default function ElcrestCollegePage() {
         display: "flex", flexDirection: "column", overflow: "hidden",
         ...(mob ? { position: "fixed", top: 0, left: showNav ? 0 : -260, height: "100vh", zIndex: 999, transition: "left 0.3s ease", boxShadow: showNav ? "4px 0 20px rgba(0,0,0,0.4)" : "none" } : {}),
       }}>
-        <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <a href="/elcrest" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ fontSize: "11px", color: "#888" }}>← 엘크레스트로</div>
+        </a>
+        <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#3A2A10", marginBottom: 6 }}>엘크레스트 · 전기제 대학</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.4 }}>엘크레스트<br />칼리지</div>
         </div>
@@ -414,10 +417,6 @@ export default function ElcrestCollegePage() {
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
-        <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#3A2A10", lineHeight: 1.6 }}>
-          <a href="/elcrest" style={{ color: "#7A5A2A", textDecoration: "none", fontSize: "11px" }}>← 엘크레스트로</a>
-          <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
       <main ref={mainRef} style={{ flex: 1, overflowY: "auto" }}>

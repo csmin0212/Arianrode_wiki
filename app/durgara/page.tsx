@@ -409,7 +409,10 @@ export default function DurgaPage() {
         display: "flex", flexDirection: "column", overflow: "hidden",
         ...(mob ? { position: "fixed", top: 0, left: showNav ? 0 : -260, height: "100vh", zIndex: 999, transition: "left 0.3s ease", boxShadow: showNav ? "4px 0 20px rgba(0,0,0,0.4)" : "none" } : {}),
       }}>
-        <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <a href="/vanstar" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ fontSize: "11px", color: "#888" }}>← 신성 번스터 제국으로</div>
+        </a>
+        <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#405870", marginBottom: 6 }}>HOLY VANSTAR EMPIRE · DURGARA</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>
             "고도의 거리"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>두르가라</span>
@@ -430,10 +433,6 @@ export default function DurgaPage() {
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
-        <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#283848", lineHeight: 1.6 }}>
-          <a href="/vanstar" style={{ color: "#405870", textDecoration: "none", fontSize: "11px" }}>← 신성 번스터 제국으로</a>
-          <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
 

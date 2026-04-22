@@ -29,7 +29,7 @@ const lineStats = {
     { race: "엘다난", pct: 20, color: "#1A6B4A" },
     { race: "네바프",   pct: 16, color: "#8B6914" },
     { race: "필보르",   pct: 10, color: "#4A7A2E" },
-    { race: "바나",     pct: 10, color: "#B85C2A" },
+    { race: "버나",     pct: 10, color: "#B85C2A" },
     { race: "두앙",     pct: 6,  color: "#8B2D2D" },
   ],
   stats: [
@@ -171,7 +171,7 @@ const lineCharacters: Character[] = [
     name: "フィリス",
     nameKo: "필리스",
     quote: "여러분에게 딱 좋은 의뢰가 있습니다",
-    race: "바나 (묘족)", gender: "여", age: "25",
+    race: "버나 (묘족)", gender: "여", age: "25",
     hairColor: "갈색", eyeColor: "갈색", skinColor: "흰",
     title: "라인 신전 의뢰소 접수원",
     content: "라인 신전 의뢰소의 접수원 중 하나. 붙임성이 좋고 말이 잘 통하지만, 한 번 본 사람의 얼굴과 이름을 잊지 않는 뛰어난 기억력의 소유자로 알려져 있다. 신전에 들어온 사람을 반드시 기억해 두는 정보 역할이기도 하다.",
@@ -399,7 +399,10 @@ export default function LinePage() {
         display: "flex", flexDirection: "column", overflow: "hidden",
         ...(mob ? { position: "fixed", top: 0, left: showNav ? 0 : -260, height: "100vh", zIndex: 999, transition: "left 0.3s ease", boxShadow: showNav ? "4px 0 20px rgba(0,0,0,0.4)" : "none" } : {}),
       }}>
-        <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <a href="/gran-felden" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ fontSize: "11px", color: "#888" }}>← 파리스 동맹으로</div>
+        </a>
+        <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#7a6850", marginBottom: 6 }}>PARIS ALLIANCE · LINE KINGDOM</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.5 }}>
             "유적의 거리"<br /><span style={{ fontSize: "13px", opacity: 0.8 }}>라인</span>
@@ -420,10 +423,6 @@ export default function LinePage() {
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
-        <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#4a3820", lineHeight: 1.6 }}>
-          <a href="/gran-felden" style={{ color: "#7a6850", textDecoration: "none", fontSize: "11px" }}>← 파리스 동맹으로</a>
-          <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
 

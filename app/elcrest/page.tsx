@@ -23,7 +23,7 @@ const stats = [
   { label: "네바프",    value: "11%" },
   { label: "필보르",    value: "8%" },
   { label: "두앙",      value: "6%" },
-  { label: "바나",      value: "4%" },
+  { label: "버나",      value: "4%" },
   { label: "정치형태",  value: "평의회에 의한 합의제" },
   { label: "현재 수장", value: "알프레드·요크 (대행)" },
   { label: "신앙",      value: "브리간티아 신앙" },
@@ -136,14 +136,14 @@ function OverviewSection() {
     { label: "네바프",   pct: 11 },
     { label: "필보르",   pct: 8 },
     { label: "두앙",     pct: 6 },
-    { label: "바나",     pct: 4 },
+    { label: "버나",     pct: 4 },
   ];
   return (
     <div>
       <div style={{ background: "#fff", border: `2px solid ${ACCENT}30`, borderRadius: 10, padding: "20px 24px", marginBottom: 24 }}>
         <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "14px", fontWeight: 700, color: ACCENT, marginBottom: 14 }}>엘크레스트 기본 데이터</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 20px" }}>
-          {stats.filter(s => !["휴린","엘다난","네바프","필보르","두앙","바나"].includes(s.label)).map((s, i) => (
+          {stats.filter(s => !["휴린","엘다난","네바프","필보르","두앙","버나"].includes(s.label)).map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, fontSize: "13px", borderBottom: "1px solid #F0ECE5", paddingBottom: 6, gridColumn: ["수입품","수출품"].includes(s.label) ? "1 / -1" : undefined }}>
               <span style={{ color: "#888", flexShrink: 0, minWidth: 80 }}>{s.label}</span>
               <span style={{ color: "#2a2a2a", fontWeight: 500 }}>{s.value}</span>
@@ -335,7 +335,10 @@ export default function ElcrestPage() {
         display: "flex", flexDirection: "column", overflow: "hidden",
         ...(mob ? { position: "fixed", top: 0, left: showNav ? 0 : -260, height: "100vh", zIndex: 999, transition: "left 0.3s ease", boxShadow: showNav ? "4px 0 20px rgba(0,0,0,0.4)" : "none" } : {}),
       }}>
-        <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <a href="/erindil-west" style={{ display: "block", padding: "12px 20px", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ fontSize: "11px", color: "#888" }}>← 에린딜 서방으로</div>
+        </a>
+        <div style={{ padding: "16px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "10px", letterSpacing: "0.2em", color: "#1A4028", marginBottom: 6 }}>독립 도시 국가 · 에린딜 서방</div>
           <div style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "15px", fontWeight: 700, color: "#E8E2D4", letterSpacing: "0.03em", lineHeight: 1.4 }}>"현자의 거리"<br />엘크레스트</div>
         </div>
@@ -354,10 +357,6 @@ export default function ElcrestPage() {
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
-        <div style={{ padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "#1A4028", lineHeight: 1.6 }}>
-          <a href="/erindil-west" style={{ color: "#3A6B48", textDecoration: "none", fontSize: "11px" }}>← 에린딜 서방으로</a>
-          <div style={{ marginTop: 6 }}>異床同夢 · 이상동몽<br />아리안로드 2E 캠페인</div>
         </div>
       </nav>
       <main ref={mainRef} style={{ flex: 1, overflowY: "auto" }}>
