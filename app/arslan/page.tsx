@@ -51,7 +51,7 @@ function OverviewSection() {
         </div>
       </div>
       <SecTitle title="아스란의 종족" />
-      <Prose text={"아스란은 에린딜이나 알디온에 비해 휴린과 엘다난의 비율이 적고, 바르나·도앙·네바프·필볼의 수가 많다. 또한 글로비스에게 의지하는 정령수, 글로비스 영역의 정령이나 용 등의 생물이 인간 사회와 섞여 살고 있다는 것이 도시에서도 특징적이다."} />
+      <Prose text={"아스란은 에린딜이나 알디온에 비해 휴린과 엘다난의 비율이 적고, 버나·두앙·네바프·필보르의 수가 많다. 또한 글로비스에게 의지하는 정령수, 글로비스 영역의 정령이나 용 등의 생물이 인간 사회와 섞여 살고 있다는 것이 도시에서도 특징적이다."} />
     </div>
   );
 }
@@ -96,7 +96,7 @@ function CurrentSection() {
       <SecTitle title="아스란의 현재" />
       <Prose text={"아스란에서는 현재도 여신과 사신의 전쟁이 이어지고 있다. 두 신은 「바람의 시대」부터 이 아스란에서 싸워왔으며, 그 국경선은 지금도 변함없다. 각각의 영주에게는, 배하가 되는 인간이나 혹은 마물의 도시나 요새가 존재한다. 아스란의 거주자 대부분은, 글로비스 또는 세르노그에게 이끌리거나, 다른 세계에서 이끌려 온 자의 자손이다."} />
       <SecTitle title="글로비스 령" />
-      <Prose text={"아스란의 남반부를 차지하는 글로비스 령은, 「검의 여신」이라 불리는 글로비스의 영향으로, 평원이나 구릉, 호수와 숲이 형성되는 생기 있는 대지다. 「바람의 시대」 이전부터 이 땅에 오던 여러 종족이 아직도 많이 생존하고 있다. 그 때문에 에린딜이나 알디온에 비해 휴린과 엘다난의 비율은 적고, 바르나·도앙·네바프·필볼의 수가 많다. 또한 글로비스에게 의지하는 정령수나 정령, 용 등의 생물이 인간 사회에 섞여 살고 있는 것이 도시에서 특징적이다."} />
+      <Prose text={"아스란의 남반부를 차지하는 글로비스 령은, 「검의 여신」이라 불리는 글로비스의 영향으로, 평원이나 구릉, 호수와 숲이 형성되는 생기 있는 대지다. 「바람의 시대」 이전부터 이 땅에 오던 여러 종족이 아직도 많이 생존하고 있다. 그 때문에 에린딜이나 알디온에 비해 휴린과 엘다난의 비율은 적고, 버나·두앙·네바프·필보르의 수가 많다. 또한 글로비스에게 의지하는 정령수나 정령, 용 등의 생물이 인간 사회에 섞여 살고 있는 것이 도시에서 특징적이다."} />
       <SecTitle title="글로비스의 전력" />
       <Prose text={"아스란에 초대받은 인간은, 기본적으로 마대 세력과 싸우는 전사다. 그중에서도 특수한 것은 사로게트라 불리는 전사들로, 글로비스의 신성한 무기를 사용하는 자들이다. 루이네이터라 불리는 사악화에서 돌아온 자들도 포함되며, 이를 제외한 다른 종족, 워리어나 마이즈나 메이지 등이 없는 것은 아니다. 오히려 아스란에서는 그 과반수를 인간이 차지하고, 인간 사회가 크게 늘어나 있다. 도시를 형성하는 일반 시민들은, 상업에 관계하는 인간들보다는 의식이나 식료품의 생산에 관계하는 자들이 많이 모여 있어, 전원 다수가 생활 기반을 유지하기 위한 비전투원의 비율이 늘어나고 있다."} />
       <SecTitle title="글로비스의 도" />
@@ -146,8 +146,25 @@ function ElcaradorSection() {
           </div>
         ))}
       </div>
-      <div style={{ background: `${ACCENT}10`, border: `1px solid ${ACCENT}30`, borderRadius: 8, padding: "12px 16px", marginBottom: 16, fontSize: "13px", lineHeight: 1.8, color: "#555" }}>
-        <strong style={{ color: ACCENT }}>종족 구성:</strong> 휴린 14% / 엘다난 9% / 네바프 18% / 필볼 16% / 바르나 18% / 도앙 20% / 기타 5%
+      <div style={{ background: `${ACCENT}10`, border: `1px solid ${ACCENT}30`, borderRadius: 8, padding: "12px 16px", marginBottom: 16 }}>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: ACCENT, marginBottom: 8 }}>종족 구성</div>
+        {[
+          { race: "두앙",   pct: 20, color: "#4A3A8A" },
+          { race: "네바프", pct: 18, color: "#4A8A3A" },
+          { race: "버나",   pct: 18, color: "#8A3A4A" },
+          { race: "필보르", pct: 16, color: "#6A8A2A" },
+          { race: "휴린",   pct: 14, color: "#8A4A2A" },
+          { race: "엘다난", pct: 9,  color: "#2A6A8A" },
+          { race: "기타",   pct: 5,  color: "#888" },
+        ].map(item => (
+          <div key={item.race} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
+            <div style={{ width: 52, fontSize: 12, color: "#555", textAlign: "right", flexShrink: 0 }}>{item.race}</div>
+            <div style={{ flex: 1, background: "#E8E3DA", borderRadius: 3, height: 13, overflow: "hidden" }}>
+              <div style={{ width: `${item.pct}%`, background: item.color, height: "100%", borderRadius: 3 }} />
+            </div>
+            <div style={{ width: 34, fontSize: 12, color: "#888", flexShrink: 0 }}>{item.pct}%</div>
+          </div>
+        ))}
       </div>
       <SecTitle title="도시 구역" />
       <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 8, marginBottom: 20 }}>
@@ -163,7 +180,7 @@ function ElcaradorSection() {
         {[
           { name: "클라나프라냐", jp: "クラナプラーニャ", desc: "엘카라도르의 상징이자 신의 신전. 홍련신전이라 불린다. 아스란이 만들어진 때 글로비스가 최초에 위치를 정한 성지로, 그 현재는 종교적 성지인 동시에 지배자의 자리가 되는 신전이기도 하다. 세계와 아스란을 이어주는 관문도 신전 내에 있어, 아스란에 초대된 인간들은 이 곳에 도착하게 된다." },
           { name: "시발바르", jp: "シバルバー", desc: "트레이치 층구에 건설된 두꺼운 건축물. 지상 10층, 지하 9층의 주변이 위험한 인물들을 가두는 감옥으로, 마법의 봉인이 깔려있어 탈출은 거의 불가능. 세르노그의 기운을 받아 사악화한 인간이나 마물을 봉인해 두는 지하층 입구를 마라야가 관리하고 있다." },
-          { name: "선술집 피야트니짜", jp: "居酒屋ピャートニッツァ", desc: "피에르비 층구에서 영업하는 선술집. 7명의 필볼 형제들이 공동으로 운영하고 있으며, 많은 모험자들이 단골이다. 가게는 다층 구조로 이루어져 있어, 3차원적인 진로의 ᄒᆞ은하한 내부에 놀라운 기괴한 의상을 하고 있다. 정보 교환이나 의뢰 수주의 장소로도 이용된다." },
+          { name: "선술집 피야트니짜", jp: "居酒屋ピャートニッツァ", desc: "피에르비 층구에서 영업하는 선술집. 7명의 필보르 형제들이 공동으로 운영하고 있으며, 많은 모험자들이 단골이다. 가게는 다층 구조로 이루어져 있어, 3차원적인 진로의 ᄒᆞ은하한 내부에 놀라운 기괴한 의상을 하고 있다. 정보 교환이나 의뢰 수주의 장소로도 이용된다." },
           { name: "천마의 샘", jp: "天馬の泉", desc: "엘카라도르의 구릉 아래 깊은 숲 안에 있는 샘. 정령들 사이에서 화제가 되고 있는 다양한 정보들이 오가는 곳. 인간들이 접근하는 것은 금지되어 있지 않지만, 엘카라도르 거주자들 사이에서는 영감과 신탁을 받을 수 있는 장소로 경외심을 품고 있다. 정령들이 모여드는 집합 장소로도 기능한다." },
         ].map((f, i) => (
           <div key={i} style={{ background: "#fff", border: "1px solid #E8E3DA", borderRadius: 10, padding: "14px 16px" }}>
@@ -276,7 +293,7 @@ function PeopleSection() {
       name: "「회안의」 브라드렌",
       nameJp: "「灰眼の」ヴラドレン",
       role: "클라나프라냐 원로원 의장",
-      race: "도앙 (아귀족)",
+      race: "두앙 (아귀족)",
       gender: "남",
       age: "67세",
       hair: "백발",
@@ -289,7 +306,7 @@ function PeopleSection() {
       name: "「사를 바라보는 자」 마라야",
       nameJp: "「邪を見つめる者」マラヤ",
       role: "시발바르 감옥 수문장",
-      race: "도앙 (천부족)",
+      race: "두앙 (천부족)",
       gender: "남",
       age: "34세",
       hair: "차색",

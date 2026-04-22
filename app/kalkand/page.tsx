@@ -23,7 +23,7 @@ const stats = [
   { label: "인구",      value: "2만명" },
   { label: "통치형태", value: "장로·라세트 족장·상인에 의한 합의제" },
   { label: "현재 수장", value: "산자니" },
-  { label: "종교",      value: "칠대신 신앙 (그란아인 주봉)" },
+  { label: "종교",      value: "칠대신 신앙 (그랑아인 주봉)" },
   { label: "언어",      value: "공통어, 고두앙어" },
   { label: "기후",      value: "아한랭 기후" },
   { label: "수입품",   value: "곡물, 식료품, 섬유물, 목재, 귀금속, 광석 등" },

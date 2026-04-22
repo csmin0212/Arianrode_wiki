@@ -128,8 +128,8 @@ function SocietySection() {
 
 function CultureSection() {
   const gods = [
-    { west: "아르켄라브",   east: "아데테루",   faith: "태양신",          gender: "남성" },
-    { west: "리아르",       east: "스사노오",   faith: "바다의 신, 폭풍의 신", gender: "남성" },
+    { west: "아켄라브",   east: "아데테루",   faith: "태양신",          gender: "남성" },
+    { west: "리알",       east: "스사노오",   faith: "바다의 신, 폭풍의 신", gender: "남성" },
     { west: "그라신아인",   east: "타카후츠",   faith: "뇌신, 검의 신",   gender: "남성" },
     { west: "고바조논",     east: "카구츠치",   faith: "불의 신, 대장장이의 신", gender: "남성" },
     { west: "다단",         east: "이자나미",   faith: "신의 어머니",     gender: "여성" },
@@ -179,7 +179,7 @@ function OodoSection() {
     { label: "엘다난", pct: 10, color: "#2A6B5A" },
     { label: "네바프", pct:  8, color: "#4A6A8A" },
     { label: "뷔르나", pct:  6, color: "#7A6A4A" },
-    { label: "필볼",   pct:  5, color: "#6A4A8A" },
+    { label: "필보르",   pct:  5, color: "#6A4A8A" },
     { label: "도안",   pct:  4, color: "#7A7A8A" },
   ];
   const districts = [
@@ -393,7 +393,7 @@ function PeopleSection() {
       name: "파우스타 교수",
       nameJp: "ファウスタ教授",
       role: "네오·다이나스토카발 극동지부장",
-      race: "필볼",
+      race: "필보르",
       gender: "여",
       age: "19세",
       hair: "청흑발",

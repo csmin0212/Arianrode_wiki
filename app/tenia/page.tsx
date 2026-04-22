@@ -1,12 +1,29 @@
 'use client'
 import { useState } from 'react'
 
-const ACCENT = "#000000"
-const SIDEBAR_BG = "#6A3A8A"
+const ACCENT = "#6A3A8A"
+const SIDEBAR_BG = "#141414"
+
+function RaceBar({ items }: { items: { race: string; pct: number; color: string }[] }) {
+  return (
+    <div style={{ background: "#120620", border: `1px solid ${ACCENT}`, borderRadius: 8, padding: "12px 16px", marginBottom: 20 }}>
+      <div style={{ fontSize: 12, fontWeight: 700, color: ACCENT, marginBottom: 8 }}>종족 구성</div>
+      {items.map(item => (
+        <div key={item.race} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
+          <div style={{ width: 56, fontSize: 12, color: "#CFC4E0", textAlign: "right", flexShrink: 0 }}>{item.race}</div>
+          <div style={{ flex: 1, background: "#2A1040", borderRadius: 3, height: 13, overflow: "hidden" }}>
+            <div style={{ width: `${item.pct}%`, background: item.color, height: "100%", borderRadius: 3 }} />
+          </div>
+          <div style={{ width: 34, fontSize: 12, color: "#9A8ABB", flexShrink: 0 }}>{item.pct}%</div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function Prose({ text }: { text: string }) {
   return (
-    <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#CFC4E0" }}>
+    <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#444" }}>
       {text}
     </p>
   )
@@ -35,7 +52,7 @@ const navItems = [
 
 function OverviewSection() {
   const stats = [
-    { label: "인구",       value: "540인 (휴린 66%, 엘다난 15%, 네바프 7%, 필보르 6%, 버나 3%, 두앙 3%)" },
+    { label: "인구",       value: "540인" },
     { label: "통치형태",   value: "위기관리위원회에 의한 합의제" },
     { label: "현재 수장",  value: "루프트 도벨 (위기관리위원장, 신관장 대행)" },
     { label: "종교",       value: "7대신 신앙" },
@@ -57,6 +74,14 @@ function OverviewSection() {
           ))}
         </div>
       </div>
+      <RaceBar items={[
+        { race: "휴린",   pct: 66, color: "#6A3A8A" },
+        { race: "엘다난", pct: 15, color: "#3A6A8A" },
+        { race: "네바프", pct: 7,  color: "#4A8A3A" },
+        { race: "필보르", pct: 6,  color: "#8A6A2A" },
+        { race: "버나",   pct: 3,  color: "#8A3A4A" },
+        { race: "두앙",   pct: 3,  color: "#4A3A8A" },
+      ]} />
       <div style={{ background: "#200818", border: "1px solid #8A2A4A", borderRadius: 8, padding: 14, marginBottom: 20 }}>
         <div style={{ color: "#FF7777", fontWeight: 700, marginBottom: 6, fontSize: 14 }}>⚠️ 현재 상황: 마계 표류 중</div>
         <p style={{ color: "#CFC4E0", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
@@ -66,7 +91,7 @@ function OverviewSection() {
       </div>
       <SecTitle title="도시 개요" />
       <Prose text="테니아는 중앙섬을 중심으로 4개의 부속 섬이 전송기로 연결된 공중 정원 도시다. 각지에는 농장과 목장이 있어 어느 정도의 식량 자급이 가능하다. 추락 전에는 신전이 일반적인 텔레포트 거점 역할을 했으나, 지금은 각 신전에 설치된 특수 마법진을 통한 전송만 가능하다." />
-      <Prose text="추락 이후에도 테니아의 방어 기제는 일부 작동하고 있다. 바람 장벽은 물리적인 것이어서 조류·도앙족 같은 날개를 가진 종족이 테니아에 접근하기 어렵다. 마계의 결계 또한 통상적인 텔레포트를 방해하고 있다. 그러나 지면 아래 방향의 바람 장벽은 소멸하여, 현재는 마계와 테니아를 직접 오갈 수 있는 봉쇄 지역이 생겨났다." />
+      <Prose text="추락 이후에도 테니아의 방어 기제는 일부 작동하고 있다. 바람 장벽은 물리적인 것이어서 조류·두앙족 같은 날개를 가진 종족이 테니아에 접근하기 어렵다. 마계의 결계 또한 통상적인 텔레포트를 방해하고 있다. 그러나 지면 아래 방향의 바람 장벽은 소멸하여, 현재는 마계와 테니아를 직접 오갈 수 있는 봉쇄 지역이 생겨났다." />
     </section>
   )
 }
@@ -237,7 +262,7 @@ function PeopleSection() {
     {
       name: "볼 보리야", nameJp: "ボル·ボリーヤ",
       role: "보리야 상회 점주",
-      race: "필볼", gender: "남", age: "72",
+      race: "필보르", gender: "남", age: "72",
       hair: "연한 금색", eyes: "녹색", skin: "백색",
       quote: "마계의 물건은 희귀하니 지상에 돌아간 후엔 비싸게 팔 수 있지",
       note: "보리야 상회의 점주. 테니아가 마계에 추락한 후에도 약삭빠른 장사를 계속하며 모험가들이 던전에서 가져온 마계 물품을 사들인다. 마음에 드는 희귀 상품은 직접 마계 던전에서 구해 오기도 한다. 서민들 사이의 평판은 그다지 좋지 않다.",

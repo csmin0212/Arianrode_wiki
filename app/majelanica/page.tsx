@@ -67,7 +67,7 @@ function HistorySection() {
       <SecTitle title="「불의 시대」의 시작" />
       <Prose text={"휴린을 중심으로 한 「불의 시대」의 「신의 자녀」가 마쥬라니카 대륙에 닿은 것은, 성력 128년경이라 추측된다. 예년에 에린을 향한 탐험대가 마쥬라니카에 표류하는 일이 이어졌으며, 이 탐험대가 마쥬라니카에 집락을 만든 것으로 여겨진다. 그들은 마쥬라니카 대륙의 북방 북쪽 해안에 자리를 잡아, 이곳에 거주했다."} />
       <SecTitle title="영웅 나레슈의 탄생" />
-      <Prose text={"마쥬라니카 대륙에 최초로 출현한 인간 영웅은 나레슈라는 이름의 휴린이다. 성력 180년경의 생이라 추측된다. 나레슈는 14세의 당시 인간들의 거처를 위협하고 있었던 밀림의 마수를 벌하고, 마수들의 왕인 「마룡」 브리트라의 복수를 사고 말았다. 나레슈는 「마룡」의 복수를 받아, 대해에 수몰됐다. 그러나 그 곳에서 「바다의 아리아르」에 도움을 받아, 요정의 나라에 도달하게 된다."} />
+      <Prose text={"마쥬라니카 대륙에 최초로 출현한 인간 영웅은 나레슈라는 이름의 휴린이다. 성력 180년경의 생이라 추측된다. 나레슈는 14세의 당시 인간들의 거처를 위협하고 있었던 밀림의 마수를 벌하고, 마수들의 왕인 「마룡」 브리트라의 복수를 사고 말았다. 나레슈는 「마룡」의 복수를 받아, 대해에 수몰됐다. 그러나 그 곳에서 「바다의 아리알」에 도움을 받아, 요정의 나라에 도달하게 된다."} />
       <Prose text={"나레슈는 요정들의 나라에서 불사의 과실을 입에 넣어 목숨을 불어넣었다. 이 때 먹은 과실의 영향으로, 나레슈는 육체적으로 늙지 않는 특성을 얻게 됐다. 마쥬라니카에 돌아온 나레슈는, 「마룡」 브리트라를 격퇴하고 대륙 중앙부의 메루 산에 자리를 잡아, 一大를 지배하게 됐다. 그 후 10년 남짓한 세월을 거쳐, 미지의 땅을 모험하고, 이윽고 「마룡」을 쓰러뜨린다. 그리고 그 공적을 신들에게 인정받아, 나레슈는 신계에 오르고, 신이 됐다고 일컬어진다."} />
       <SecTitle title="6인의 용사" />
       <Prose text={"나레슈가 자리를 잡은 뒤, 인간을 이끈 것은 나레슈와 고생을 함께한 6인의 용사라 한다. 6인의 용사란 엘다난의 여성 교사「눈의」 니도라, 네바프의 성자「성자」 마우네야, 필보르의 시인「박식한」 나키라르, 버나 족「신의 딸」 사비야사르치, 두앙 족의 전사「한쪽 날개의」 드로나 등의 자손이라 한다. 그 후도 마쥬라니카를 모험했다고 한다."} />
@@ -208,7 +208,7 @@ function EventsSection() {
 
 function VarunaSection() {
   const districts = [
-    { name: "에캄 항구구", desc: "해안 어업과 그 주변의 구역. 오래되고 소박한 민가로 구성되어 있으며, 거리 끝쪽에는 「해신」 리아르를 모시는 작은 신사가 있다." },
+    { name: "에캄 항구구", desc: "해안 어업과 그 주변의 구역. 오래되고 소박한 민가로 구성되어 있으며, 거리 끝쪽에는 「해신」 리알를 모시는 작은 신사가 있다." },
     { name: "두베 항구구", desc: "근해 어업 항구와 그 주변의 구역. 항구 근처에 도시가 형성되어, 그 주변 거리가 넓어진다. 네바프 거리를 포함하는 공업 지구이기도 하다." },
     { name: "트리니 항구구", desc: "거리를 흐르는 아르나다 하의 하안에 있다. 에린딜 동방과의 무역 항로로 사용되는 항구로, 그 주변에 환락가·상업 지역이 포함된다. 대륙 내부로 이어지는 도시 문까지 이 구역에 포함된다." },
     { name: "차트바리 항구구", desc: "트리니 항구구에서 강을 사이에 두고 맞은편 일대를 차지하는 구역. 원거리를 오가며 상품을 실어 나르는 선박이 정박하는 항구로, 현지의 선원들이 거주하는 주택가로 이루어진다." },
@@ -231,7 +231,7 @@ function VarunaSection() {
           { label: "인구", value: "2만인" },
           { label: "통치 형태", value: "번왕에 의한 통치" },
           { label: "현 수장", value: "라-4세 (番王)" },
-          { label: "종교", value: "나레슈·리아르·칠대신 신앙" },
+          { label: "종교", value: "나레슈·리알·칠대신 신앙" },
           { label: "기후", value: "아열대 기후" },
           { label: "수출", value: "어류·해산물·향신료·귀금속" },
         ].map((s, i) => (
@@ -241,8 +241,24 @@ function VarunaSection() {
           </div>
         ))}
       </div>
-      <div style={{ background: `${ACCENT}10`, border: `1px solid ${ACCENT}30`, borderRadius: 8, padding: "12px 16px", marginBottom: 16, fontSize: "13px", lineHeight: 1.8, color: "#555" }}>
-        <strong style={{ color: ACCENT }}>종족 구성:</strong> 휴린 73% / 엘다난 6% / 네바프 10% / 필보르 6% / 버나 3% / 두앙 2%
+      <div style={{ background: `${ACCENT}10`, border: `1px solid ${ACCENT}30`, borderRadius: 8, padding: "12px 16px", marginBottom: 16 }}>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: ACCENT, marginBottom: 8 }}>종족 구성</div>
+        {[
+          { race: "휴린",   pct: 73, color: "#6A3A1A" },
+          { race: "네바프", pct: 10, color: "#4A8A3A" },
+          { race: "엘다난", pct: 6,  color: "#2A6A8A" },
+          { race: "필보르", pct: 6,  color: "#6A8A2A" },
+          { race: "버나",   pct: 3,  color: "#8A3A4A" },
+          { race: "두앙",   pct: 2,  color: "#4A3A8A" },
+        ].map(item => (
+          <div key={item.race} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
+            <div style={{ width: 52, fontSize: 12, color: "#555", textAlign: "right", flexShrink: 0 }}>{item.race}</div>
+            <div style={{ flex: 1, background: "#E8E3DA", borderRadius: 3, height: 13, overflow: "hidden" }}>
+              <div style={{ width: `${item.pct}%`, background: item.color, height: "100%", borderRadius: 3 }} />
+            </div>
+            <div style={{ width: 34, fontSize: 12, color: "#888", flexShrink: 0 }}>{item.pct}%</div>
+          </div>
+        ))}
       </div>
       <SecTitle title="6개 항구 구역" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12, marginTop: 8, marginBottom: 20 }}>
@@ -311,8 +327,24 @@ function KailashaSection() {
           </div>
         ))}
       </div>
-      <div style={{ background: `${ACCENT}10`, border: `1px solid ${ACCENT}30`, borderRadius: 8, padding: "12px 16px", marginBottom: 16, fontSize: "13px", lineHeight: 1.8, color: "#555" }}>
-        <strong style={{ color: ACCENT }}>종족 구성:</strong> 휴린 37% / 엘다난 48% / 네바프 8% / 필보르 2% / 두앙 3% / 버나 2%
+      <div style={{ background: `${ACCENT}10`, border: `1px solid ${ACCENT}30`, borderRadius: 8, padding: "12px 16px", marginBottom: 16 }}>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: ACCENT, marginBottom: 8 }}>종족 구성</div>
+        {[
+          { race: "엘다난", pct: 48, color: "#2A6A8A" },
+          { race: "휴린",   pct: 37, color: "#6A3A1A" },
+          { race: "네바프", pct: 8,  color: "#4A8A3A" },
+          { race: "두앙",   pct: 3,  color: "#4A3A8A" },
+          { race: "필보르", pct: 2,  color: "#6A8A2A" },
+          { race: "버나",   pct: 2,  color: "#8A3A4A" },
+        ].map(item => (
+          <div key={item.race} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
+            <div style={{ width: 52, fontSize: 12, color: "#555", textAlign: "right", flexShrink: 0 }}>{item.race}</div>
+            <div style={{ flex: 1, background: "#E8E3DA", borderRadius: 3, height: 13, overflow: "hidden" }}>
+              <div style={{ width: `${item.pct}%`, background: item.color, height: "100%", borderRadius: 3 }} />
+            </div>
+            <div style={{ width: 34, fontSize: 12, color: "#888", flexShrink: 0 }}>{item.pct}%</div>
+          </div>
+        ))}
       </div>
       <SecTitle title="시가지 구조" />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 8, marginBottom: 20 }}>

@@ -6,7 +6,7 @@ const SIDEBAR_BG = "#06080E"
 
 function Prose({ text }: { text: string }) {
   return (
-    <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#D8CCA8" }}>
+    <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#444" }}>
       {text}
     </p>
   )
@@ -497,7 +497,7 @@ function PeopleSection() {
     {
       name: "베넷", nameJp: "ベネット",
       role: "삼하 여신 (에린의 안전을 지키는 여신)",
-      race: "바르나 (늑대족)", gender: "여", age: "?",
+      race: "버나 (늑대족)", gender: "여", age: "?",
       hair: "녹색", eyes: "녹색", skin: "백색",
       accent: "#2A7A8A",
       quote: "삼하 여신이란 바로 나 말이야 그랬어요!!",

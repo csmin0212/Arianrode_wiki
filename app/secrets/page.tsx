@@ -1,12 +1,12 @@
 'use client'
 import { useState } from 'react'
 
-const ACCENT = "#000000"
-const SIDEBAR_BG = "#9A7A18"
+const ACCENT = "#8A6818"
+const SIDEBAR_BG = "#141414"
 
 function Prose({ text }: { text: string }) {
   return (
-    <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#D8CCA8" }}>
+    <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#444" }}>
       {text}
     </p>
   )
