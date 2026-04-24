@@ -43,23 +43,24 @@ interface Skill {
 
 function SkillCard({ skill, accent }: { skill: Skill; accent: string }) {
   const row = (label: string, value: string) => (
-    <div style={{ display: "flex", gap: 6, fontSize: 12, marginBottom: 3 }}>
-      <span style={{ color: accent, fontWeight: 700, minWidth: 52, flexShrink: 0 }}>{label}</span>
+    <div style={{ display: "flex", gap: 8, fontSize: 12, marginBottom: 4 }}>
+      <span style={{ color: accent, fontWeight: 700, minWidth: 56, flexShrink: 0 }}>{label}</span>
       <span style={{ color: "#D8CCA8" }}>{value}</span>
     </div>
   )
   return (
     <div style={{
       background: "#0C0A06", border: `1px solid ${accent}`,
-      borderRadius: 8, padding: "12px 14px", flex: "1 1 220px"
+      borderRadius: 10, padding: "16px 18px",
+      display: "flex", flexDirection: "column", gap: 10
     }}>
-      <div style={{ marginBottom: 8 }}>
-        <span style={{ fontWeight: 700, color: "#F0E090", fontSize: 14 }}>{skill.name}</span>
+      <div>
+        <div style={{ fontWeight: 700, color: "#F0E090", fontSize: 15, marginBottom: 2 }}>{skill.name}</div>
         {skill.nameJp && (
-          <span style={{ color: "#8A7830", fontSize: 11, marginLeft: 6 }}>{skill.nameJp}</span>
+          <div style={{ color: "#8A7830", fontSize: 11 }}>{skill.nameJp}</div>
         )}
       </div>
-      <div style={{ background: "#161208", borderRadius: 6, padding: "8px 10px", marginBottom: 8 }}>
+      <div style={{ background: "#161208", borderRadius: 7, padding: "10px 12px" }}>
         {row("타이밍", skill.timing)}
         {row("판정", skill.judge)}
         {row("대상", skill.target)}
@@ -68,7 +69,7 @@ function SkillCard({ skill, accent }: { skill: Skill; accent: string }) {
         {row("SL상한", skill.slMax)}
         {skill.condition && row("사용조건", skill.condition)}
       </div>
-      <p style={{ color: "#C8B870", fontSize: 12, lineHeight: 1.65, margin: 0 }}>{skill.effect}</p>
+      <p style={{ color: "#C8B870", fontSize: 13, lineHeight: 1.7, margin: 0 }}>{skill.effect}</p>
     </div>
   )
 }
@@ -78,29 +79,31 @@ function SkillCard({ skill, accent }: { skill: Skill; accent: string }) {
 function GodImage({ id, name, accent }: { id: string; name: string; accent: string }) {
   return (
     <div style={{
-      width: 220, flexShrink: 0,
+      width: 300, flexShrink: 0,
       border: `2px solid ${accent}`, borderRadius: 10, overflow: "hidden",
-      background: "#0C0A06"
+      background: "#0C0A06", alignSelf: "flex-start"
     }}>
       <img
         src={`/gods/${id}.jpg`}
         alt={name}
         style={{ width: "100%", display: "block" }}
         onError={(e) => {
-          const target = e.currentTarget as HTMLImageElement
-          target.style.display = "none"
-          const ph = target.nextElementSibling as HTMLElement | null
-          if (ph) ph.style.display = "flex"
+          const img = e.currentTarget as HTMLImageElement
+          img.style.display = "none"
+          const wrapper = img.parentElement
+          if (wrapper) {
+            wrapper.style.display = "flex"
+            wrapper.style.flexDirection = "column"
+            wrapper.style.alignItems = "center"
+            wrapper.style.justifyContent = "center"
+            wrapper.style.height = "360px"
+            wrapper.style.color = accent
+            wrapper.style.gap = "8px"
+            wrapper.style.fontSize = "13px"
+            wrapper.innerHTML = `<span style="font-size:40px">🖼</span><span>${name}</span><span style="color:#5A5030;font-size:11px">/gods/${id}.jpg</span>`
+          }
         }}
       />
-      <div style={{
-        display: "none", flexDirection: "column", alignItems: "center",
-        justifyContent: "center", height: 220, color: accent, gap: 8, fontSize: 13
-      }}>
-        <span style={{ fontSize: 40 }}>🖼</span>
-        <span>{name}</span>
-        <span style={{ color: "#5A5030", fontSize: 11 }}>/gods/{id}.jpg</span>
-      </div>
     </div>
   )
 }
@@ -434,7 +437,7 @@ function OverviewSection() {
       </div>
 
       <SecTitle title="칠대신 일람" />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 10, marginBottom: 24 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12, marginBottom: 28 }}>
         {gods.map(g => (
           <div key={g.id} style={{
             background: "#0C0A06", border: `1px solid ${g.accent}`,
@@ -497,7 +500,7 @@ function CreationMythSection() {
   return (
     <section>
       <Prose text="에린에 전해지는 창세 신화는 크게 5개의 시대로 나뉜다. 각 시대는 신들의 의지로 이루어진 「서청(書淸)」이라 불리는 정화 사건을 통해 구분된다." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 20 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 18, marginTop: 20 }}>
         {ages.map((age) => (
           <div key={age.name} style={{
             background: "#0C0A06", border: `1px solid ${age.color}`,
@@ -567,32 +570,32 @@ function GodsOverviewSection() {
 function GodSection({ god }: { god: typeof gods[0] }) {
   return (
     <section>
-      {/* 헤더 */}
+      {/* 헤더 배너 */}
       <div style={{
-        background: god.accent + "18",
+        background: `linear-gradient(135deg, ${god.accent}22 0%, ${god.accent}08 100%)`,
         border: `1px solid ${god.accent}`,
-        borderRadius: 10, padding: "16px 20px", marginBottom: 24
+        borderRadius: 12, padding: "20px 28px", marginBottom: 32
       }}>
-        <div style={{ fontSize: 11, color: god.accent, letterSpacing: 2, marginBottom: 4 }}>
+        <div style={{ fontSize: 11, color: god.accent, letterSpacing: 3, marginBottom: 6, textTransform: "uppercase" }}>
           칠대신 · {god.race}
         </div>
-        <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
           <h2 style={{
-            fontSize: 28, fontWeight: 700, color: god.accent,
-            fontFamily: "'Noto Serif KR', serif", margin: 0
+            fontSize: 36, fontWeight: 700, color: god.accent,
+            fontFamily: "'Noto Serif KR', serif", margin: 0, letterSpacing: "-0.5px"
           }}>{god.name}</h2>
-          <span style={{ color: "#8A7830", fontSize: 14 }}>{god.nameJp}</span>
-          <span style={{ color: "#C8B870", fontSize: 14 }}>— {god.title}</span>
+          <span style={{ color: "#8A7830", fontSize: 15 }}>{god.nameJp}</span>
+          <span style={{ color: "#C8B870", fontSize: 15 }}>— {god.title}</span>
         </div>
-        <div style={{ width: 50, height: 3, background: god.accent, marginTop: 10, borderRadius: 2 }} />
+        <div style={{ width: 60, height: 3, background: god.accent, marginTop: 14, borderRadius: 2 }} />
       </div>
 
       {/* 이미지 + 본문 */}
-      <div style={{ display: "flex", gap: 20, marginBottom: 24, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: 32, marginBottom: 36, alignItems: "flex-start" }}>
         <GodImage id={god.id} name={god.name} accent={god.accent} />
-        <div style={{ flex: 1, minWidth: 260 }}>
+        <div style={{ flex: 1 }}>
           {god.lore.map((section, i) => (
-            <div key={i}>
+            <div key={i} style={{ marginBottom: 8 }}>
               <SecTitle title={section.heading} color={god.accent} />
               <Prose text={section.text} />
             </div>
@@ -602,14 +605,15 @@ function GodSection({ god }: { god: typeof gods[0] }) {
 
       {/* 천혜 스킬 */}
       <div style={{
-        background: "#0E0C06", borderLeft: `4px solid ${god.accent}`,
-        padding: "8px 14px", marginBottom: 14, borderRadius: "0 6px 6px 0"
+        background: god.accent + "18",
+        borderLeft: `4px solid ${god.accent}`,
+        padding: "10px 16px", marginBottom: 16, borderRadius: "0 8px 8px 0"
       }}>
-        <span style={{ color: god.accent, fontWeight: 700, fontSize: 13 }}>
+        <span style={{ color: god.accent, fontWeight: 700, fontSize: 14 }}>
           ✨ 천혜 스킬 (天惠スキル)
         </span>
       </div>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
         {god.skills.map(skill => (
           <SkillCard key={skill.name} skill={skill} accent={god.accent} />
         ))}
@@ -708,7 +712,7 @@ export default function MythologyPage() {
         </aside>
 
         {/* Main */}
-        <main style={{ flex: 1, padding: "40px 48px", maxWidth: 860, overflowY: "auto" }}>
+        <main style={{ flex: 1, padding: "40px 60px", overflowY: "auto" }}>
           <header style={{ marginBottom: 32 }}>
             <div style={{ fontSize: 12, color: "#8A7830", marginBottom: 4 }}>아리안로드 미솔로지 가이드</div>
             <h1 style={{
