@@ -768,6 +768,16 @@ export default function ArianrodWiki() {
           ))}
         </div>
         <div style={{ padding: "14px 20px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <a href="/mythology" style={{
+            display: "flex", alignItems: "center", gap: 8,
+            fontSize: "12px", color: "#9A7A18", textDecoration: "none",
+            background: "rgba(154,122,24,0.08)", borderRadius: 6,
+            padding: "7px 10px", marginBottom: 6,
+            border: "1px solid rgba(154,122,24,0.2)",
+          }}>
+            <span>✨</span>
+            <span style={{ fontWeight: 500 }}>신화 가이드</span>
+          </a>
           <a href="/secrets" style={{
             display: "flex", alignItems: "center", gap: 8,
             fontSize: "12px", color: "#9A7A18", textDecoration: "none",
