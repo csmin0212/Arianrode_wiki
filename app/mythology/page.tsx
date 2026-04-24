@@ -414,6 +414,446 @@ const gods = [
   },
 ]
 
+// ── 소신 데이터 ───────────────────────────────────────────────────────────────
+
+const minorGods = [
+  {
+    id: "glovis",
+    name: "글로비스",
+    nameJp: "グローヴィス",
+    title: "검의 여신",
+    parentage: "고바논의 딸",
+    accent: "#D4863A",
+    lore: [
+      {
+        heading: "여신의 축제",
+        text: "전투의 날을 기념하는 여신 글로비스. 아스란에서도 제사가 행해졌으나, 처음에는 여신을 얕보는 자들도 있었다. 그러나 이 행동을 통해 사람들이 단결하는 힘을 깊이 인식하게 되어, 이 양식이 정착하기 시작했다는 이야기가 전해진다."
+      },
+      {
+        heading: "고바논의 딸",
+        text: "단야신 고바논의 딸로, 검과 방패를 든 불꽃의 여신. 붉은 빛의 긴 머리카락을 가진 20대 여성의 모습으로 현현하며, 성격은 진지하고 과묵하다. 신들이 천계로 떠난 후에도 글로비스는 에린에 머물며, 숙적 「패의 신」 셀노그를 쫓는 역할을 떠맡아 끊임없는 싸움을 계속하고 있다."
+      },
+      {
+        heading: "신봉자들",
+        text: "글로비스를 신봉하는 자는 여신의 군세에 몸을 던지고, 셀노그와의 싸움에 목숨을 거는 자들이다. 여신의 자질이 있다고 인정받은 자에게 여신의 사자가 찾아온다. 이들은 아스란 방면 너머, 신들의 전장 아스란에서 날마다 사신의 군세와 싸우고 있다."
+      },
+    ],
+    skills: [
+      {
+        name: "방패의 기원", nameJp: "盾の願い",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        condition: "방패 장비",
+        effect: "【물리방어력】과 【마법방어력】을 +[SL×2]한다. 글로비스의 이름 아래 방패에 기원을 맡겨 방어 능력을 높이는 천혜 스킬."
+      },
+      {
+        name: "불의 검", nameJp: "火の剣",
+        timing: "마이너액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "1",
+        effect: "대상이 행하는 무기 공격 데미지를 〈화〉 속성의 마법 데미지로 변경한다. 이 효과는 메인프로세스 종료까지 지속된다. 손에 든 무기에 불꽃을 깃드는 천혜 스킬."
+      },
+      {
+        name: "검의 서약", nameJp: "剣の誓い",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "무기 공격의 데미지에 +1D한다. 글로비스의 이름 아래 검에 서약을 세워, 그 성능을 높이는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "lial",
+    name: "리알",
+    nameJp: "リアール",
+    title: "바다의 신",
+    parentage: "다그데모아와 다난의 아들",
+    accent: "#2A7ABE",
+    lore: [
+      {
+        heading: "여덟 번째 기둥의 신",
+        text: "천지개벽 때 세계에 아직 바다가 없었다. 대지에 높낮이 차이가 생기자, 낮은 곳에 모인 물이 거대한 바다가 되었다. 다그데모아와 다난이 리알을 낳아 이 바다의 관리를 맡겼다. 리알은 이 바다를 바다라 이름 짓고, 물의 정령 마리드에 명하여 바다 속에 사는 동물들을 낳았다."
+      },
+      {
+        heading: "바다와 폭풍의 신",
+        text: "리알은 바다와 폭풍의 신으로, 삼지창을 들고 오른손에 거친 폭풍을 일으키는 강인한 장년 남성의 모습으로 묘사된다. 아에마 동방의 강과 샘의 여신 나키하사메와는 다른 존재로, 리알은 바다 그 자체를 관장한다."
+      },
+      {
+        heading: "신봉자들",
+        text: "신봉자로는 항해사나 어부뿐만 아니라 바다와 삶이 밀접한 자들이 많다. 항해 전 반드시 리알에게 기도를 드리고 출항하는 것이 풍습으로 남아 있다."
+      },
+    ],
+    skills: [
+      {
+        name: "폭풍의 어령", nameJp: "嵐の御霊",
+        timing: "마이너액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "8", slMax: "3",
+        condition: "씬 SL회",
+        effect: "무기 공격을 「대상: 범위(선택)」으로 변경하고, 데미지를 〈풍〉 속성의 마법 데미지로 변경한다. 리알의 폭풍을 이용해 공격하는 천혜 스킬."
+      },
+      {
+        name: "분노의 닻", nameJp: "怒りの錨",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "무기 사용 시 금전판정 달성값에 +SL. 무기 공격의 데미지에 +[SL×2]한다. 리알의 거친 마음을 닻에 깃드는 천혜 스킬."
+      },
+      {
+        name: "바다의 심", nameJp: "海の心",
+        timing: "셋업프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "7", slMax: "1",
+        effect: "수영 상태에 의한 페널티를 받지 않는다. 또한 수영 상태가 아니어도 「사용조건: 수영」의 스킬 효과를 받을 수 있다. 이 효과는 씬 종료까지 지속된다."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "merinusu",
+    name: "메리뉴스",
+    nameJp: "メリヌス",
+    title: "상업의 신 · 도둑의 신",
+    parentage: "칠대신의 사자",
+    accent: "#8A7A28",
+    lore: [
+      {
+        heading: "상업의 시작",
+        text: "메리뉴스는 전직이 없을 때 에르다의 왕국에 잠입해 뛰어난 변장으로 섞여 살았다. 에르다들이 조물에 따라 만들어내는 물건들의 개성에 흥미를 느끼고, 어느 날 에르다의 남자가 다른 이가 만든 물건을 빼앗는 장면을 목격했다. 「원하는 것이 있다면 교환하면 된다」는 제안에 수긍한 에르다의 남자는 물물교환을 배웠다. 이 일화가 「물물교환」, 나아가 오늘날 상업의 기본 개념의 시작이라 전해진다."
+      },
+      {
+        heading: "상업과 도둑의 신",
+        text: "메리뉴스는 상업과 도둑의 신으로도 여겨진다. 검은 새 깃털을 두른 모자와 샌들을 신은 젊은 남성으로 묘사되며, 경계심이 강하고 지혜가 넘쳐 상황을 빠르게 파악한다. 상업이란 이익을 위해 상대와 교섭하는 것으로, 결국 상대를 설득하는 능력이 필요하다는 점이 도둑과의 연결로 이어졌다고 전해진다."
+      },
+    ],
+    skills: [
+      {
+        name: "속임의 칼날", nameJp: "欺きの刃",
+        timing: "마이너액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "5", slMax: "3",
+        effect: "당신이 행하는 공격 대상의 【물리방어력】과 【마법방어력】을 -[SL×5]한다(최저0). 이 효과는 메인프로세스 종료까지 지속된다. 대상을 속여 허점을 만드는 천혜 스킬."
+      },
+      {
+        name: "상기도래", nameJp: "商機到来",
+        timing: "셋업프로세스", judge: "자동성공", target: "단체",
+        range: "20m", cost: "3", slMax: "3",
+        effect: "행동량 증가를 행한다. 「행동량」에 +[SL]한다. 이 효과는 라운드 종료까지 지속된다. 상거래를 중시하는 자에게 행운을 부르는 천혜 스킬."
+      },
+      {
+        name: "거래의 심득", nameJp: "取引の心得",
+        timing: "판정의 직전", judge: "─", target: "자신",
+        range: "─", cost: "4", slMax: "1",
+        condition: "씬1회",
+        effect: "판정의 직전에 사용한다. 그 판정에 +1D한다. 다양한 상황에 대응하기 위한 냉정한 판단력을 발휘하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "tereya",
+    name: "테레이아",
+    nameJp: "テーレイア",
+    title: "사랑과 미의 여신",
+    parentage: "브리간티아의 자매신",
+    accent: "#C04A82",
+    lore: [
+      {
+        heading: "여명의 샛별",
+        text: "예언의 여신 브리간티아에게는 특이한 점이 있었다. 「바람의 시대」의 아직 평화로운 때, 에르다들 사이에서 마음을 이어주는 목소리를 가진 소녀가 있었다. 신으로서의 임무에 방해가 될까 걱정한 브리간티아는 마음이 약해졌다. 스스로 어두운 밤하늘의 공간에서 그 소녀의 모습을 창조했다. 마치 그 광경을 잘라낸 것처럼, 아름다운 모습의 소녀 신을 테레이아라 이름 붙이고 「자매처럼 함께 움직이도록」 말했다."
+      },
+      {
+        heading: "빛나는 별의 여신",
+        text: "테레이아는 사랑과 아름다움, 어둠 속에 빛나는 별의 신으로 여겨진다. 브리간티아의 자매신으로도 전해지나, 전승에 따라서는 브리간티아의 별개 모습이라고도 한다. 밤하늘의 짙은 보라색 긴 머리카락과 금색 뺨, 금빛 큰 거울을 가진 젊은 여성의 모습으로 나타난다. 성격은 청결하며 사랑스럽게 구는 요염한 여성이지만, 내면보다는 외모에서 비롯된 사랑과 아름다움을 상징한다."
+      },
+      {
+        heading: "신봉자들",
+        text: "신봉자로는 외적인 아름다움을 추구하는 자, 아름다움을 사랑하는 귀족 계층 여성들, 연애를 성사시키려는 자들이 많다. 또한 테레이아가 가진 거울이 상대의 마음을 비추어 보는 것처럼, 상대의 진짜 말로 자신을 지키는 수단으로 삼는다."
+      },
+    ],
+    skills: [
+      {
+        name: "사랑의 응원", nameJp: "愛の応援",
+        timing: "메이저액션", judge: "자동성공", target: "범위(선택)",
+        range: "20m", cost: "6", slMax: "3",
+        effect: "데미지 증가를 행한다. 대상의 「분류: 식물·언데드·기계」 이외에 대한 공격의 데미지에 +[SL×2]한다. 이 효과는 씬 종료까지 지속된다."
+      },
+      {
+        name: "미의 빛남", nameJp: "美の輝き",
+        timing: "셋업프로세스", judge: "자동성공", target: "단체",
+        range: "20m", cost: "3", slMax: "3",
+        condition: "씬1회",
+        effect: "「분류: 식물·언데드·기계」 이외에 대한 공격의 데미지에 +[SL]한다. 이 효과는 라운드 종료까지 지속된다. 아름다움으로 상대의 주의를 빼앗는 천혜 스킬."
+      },
+      {
+        name: "별의 거울", nameJp: "星の鏡",
+        timing: "판정의 직전", judge: "자동성공", target: "단체",
+        range: "20m", cost: "7", slMax: "1",
+        condition: "시나리오1회",
+        effect: "대상이 판정을 행하는 직전에 사용한다. 대상은 그 판정에서 불리한 수정을 받지 않는다. 이 효과는 라운드 종료까지 지속된다."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "ribel",
+    name: "리벨",
+    nameJp: "リベル",
+    title: "술의 신",
+    parentage: "아에마의 아들",
+    accent: "#8A4ABE",
+    lore: [
+      {
+        heading: "술의 발견",
+        text: "술은 「빛의 시대」에 리벨이라는 소신에 의해 발견됐다는 이야기가 있다. 어느 풍요로운 때 포도가 방치되어 자연스럽게 발효되었다. 이를 먹은 동물들이 비틀거리거나 즐거워하는 것을 보고, 리벨은 스스로 먹어봤더니 기분이 고양되고 행복감이 넘치는 느낌이 들었다. 그는 이 액체를 「술」이라 이름 붙여 제조하기 시작했다. 이것이 양조의 시작이라 전해진다."
+      },
+      {
+        heading: "풍요와 술의 신",
+        text: "리벨은 아에마의 아들로, 풍요와 술의 신으로 여겨진다. 포도주를 담은 금빛 잔을 손에 들고, 중성적인 분위기의 미청년 모습으로 나타난다. 성격은 자유분방하고 쾌락을 좋아하며, 풍요로운 것을 좋아한다고 전해진다. 어머니 아에마의 일을 거들지 않고, 연회를 열어 새벽까지 즐기다가 결국 아에마를 화나게 해 일에서 쫓겨났다고 한다."
+      },
+    ],
+    skills: [
+      {
+        name: "전투의 술", nameJp: "戦の酒",
+        timing: "효과 참조", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "3",
+        effect: "마이너액션으로 자신에게 「분류: 포션」 아이템을 사용할 때 공격 데미지 증가를 행한다. 이 효과는 씬 종료까지 지속된다. 복수 사용 시 [SL] 횟수 중복. 음주로 자신의 전투력을 높이는 천혜 스킬."
+      },
+      {
+        name: "친구의 잔", nameJp: "友の杯",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "길드원과 같은 인카운터에 있을 때 당신이 행하는 공격의 데미지에 +1D한다. 잔을 교환한 동료와의 연대를 높여, 공격력을 향상시키는 천혜 스킬."
+      },
+      {
+        name: "미주의 샘", nameJp: "美酒の泉",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "당신이 사용하는 「분류: 포션」 아이템의 효과를 +[SL×2]한다. 술에서 비롯된 풍요로운 효과를 높이고, 맛도 더욱 좋게 하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "toteusu",
+    name: "토테우스",
+    nameJp: "トーテウス",
+    title: "여행의 신",
+    parentage: "다난의 아들",
+    accent: "#3A8870",
+    lore: [
+      {
+        heading: "인도의 신",
+        text: "세계에 여혼을 가진 존재가 너무 적어, 동물들은 만들어질 때부터 죽음을 기피하게 되었다. 토테우스는 그것을 기회로 영혼을 다시 육체로 되돌리는 방법을 찾아냈다. 이것이 탄생의 시작이라 전해진다. 영혼을 저세계로 인도하는 역할을 맡았다가, 현재는 죽음의 여행뿐만 아니라 여행을 떠나는 자들에게 가호를 주는 신이 되었다고도 전해진다."
+      },
+      {
+        heading: "여행의 수호신",
+        text: "토테우스는 여행을 수호하는 신으로 여겨진다. 후드가 달린 망토를 두르고, 긴 지팡이와 불 없이 켜지는 랜턴을 든 젊은 남성으로 나타난다. 성격은 과묵하며 자애롭지만 냉담하다. 기본적으로 토테우스는 영혼을 육체에서 분리하여 저세계로 인도하는 역할을 맡았으나, 현재는 여행을 보호하는 신이 되었다."
+      },
+    ],
+    skills: [
+      {
+        name: "안식의 여정", nameJp: "安息の旅路",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "당신이 취득하고 있는 스킬의 「코스트」를 -1한다(최저1). 영혼에 안식을 줘 차분하게 스킬을 사용할 수 있게 하는 천혜 스킬."
+      },
+      {
+        name: "조의의 칼날", nameJp: "弔いの刃",
+        timing: "셋업프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "데미지 증가를 행한다. 공격의 데미지에 +[SL×2]한다. 「분류: 언데드」를 대상으로 하는 경우, 추가로 데미지에 +5한다. 잘 다루기 어려운 언데드를 봉인하는 전술을 나타내는 천혜 스킬."
+      },
+      {
+        name: "여행의 횃불", nameJp: "旅の灯火",
+        timing: "효과 참조", judge: "─", target: "자신",
+        range: "─", cost: "6", slMax: "1",
+        effect: "이동의 직전에 사용한다. 이 이동은 적 캐릭터와 인게이지해도 그 장소에서 계속 이동할 수 있다. 당신의 여행이 누구에게도 방해받지 않음을 나타내는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "kerunosu",
+    name: "케루노스",
+    nameJp: "ケルノス",
+    title: "사냥의 신",
+    parentage: "아에마에게 파견된 소신",
+    accent: "#4A8A38",
+    lore: [
+      {
+        heading: "야생 동물의 신",
+        text: "신들이 천계로 떠나 두 번의 서청을 거친 「땅의 시대」에, 동물의 수를 늘리고 기르는 방법을 편찬해냈다. 그러나 엄격한 서청 이후 살아남은 동물 중에는 생존을 위해 사람을 습격하는 것들도 적지 않았다. 어느 날 인간들 앞에 뿔을 달고 긴 머리카락을 가진 남성이 나타났다. 그는 야생 동물들을 이끌었고, 인간들에게 사냥의 방법을 전수해 주었다. 이 자를 케루노스라 이름 붙였고, 케루노스는 야생 동물들의 수를 유지하면서 사람을 위해 적당히 사냥하는 것을 허가했다."
+      },
+      {
+        heading: "수수께끼에 싸인 신",
+        text: "케루노스는 사냥의 신으로 여겨진다. 수사슴의 뿔을 달고 긴 머리카락을 가진 젊은 남성으로, 손에는 수사슴 뿔로 만든 지팡이와 동물과 함께하는 모습으로 묘사된다. 현재 케루노스에 대한 상세 정보는 거의 없다. 신인지조차 의심받고 있는데, 이는 현존하는 자료가 거의 없기 때문이다."
+      },
+    ],
+    skills: [
+      {
+        name: "사냥꾼의 기도", nameJp: "狩人の祈り",
+        timing: "효과 참조", judge: "자동성공", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        condition: "시나리오 SL회",
+        effect: "당신이 행하는 드롭 품목 결정 롤을 모두 다시 굴린다. 사냥이 성공하도록 기원하는 천혜 스킬."
+      },
+      {
+        name: "헌상의 기도", nameJp: "獻上の祈り",
+        timing: "셋업프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "3", slMax: "3",
+        effect: "당신이 소지하고 있는 「종별: 식량」 아이템을 1개 소비한다. 공격의 데미지에 +4한다. 이 효과는 씬 종료까지 지속된다. 복수 사용 시 SL 갯수 중복. 케루노스에게 음식을 바쳐 전투 능력을 얻는 천혜 스킬."
+      },
+      {
+        name: "사냥의 눈", nameJp: "狩猟の瞳",
+        timing: "셋업프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "에너미 인식을 행한다. 이 효과는 씬 종료까지 지속된다. 관찰력으로 사냥감을 신속하게 식별하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "dinakeito",
+    name: "디나케이트",
+    nameJp: "ディナケイト",
+    title: "의술의 신",
+    parentage: "아켄라브의 아들",
+    accent: "#2A9AAA",
+    lore: [
+      {
+        heading: "의술의 전승",
+        text: "시절은 「땅의 시대」의 마지막. 마왕 바랄이 뿌린 역병이 세계에서 사라질 때가 되었지만, 사람들은 아픔의 절규와 죽음의 공포가 또 마물을 불러들이지 않을까 불안해했다. 어느 날, 네바프족의 집락을 찾아간 남자가 있었다. 집락에는 중병에 걸린 단야 장인이 있었다. 남자는 동료의 모습을 보고 특별한 처방으로 치료했고, 단야 장인은 며칠 후 쾌유해 작업에 복귀할 수 있었다. 이것이 의술의 시작이라 전해진다."
+      },
+      {
+        heading: "신들을 치유한 신",
+        text: "디나케이트는 아켄라브의 아들로 의술의 신으로 여겨진다. 손에 뱀이 감긴 지팡이를 들고 흰 의복을 두른 장년 남성의 모습으로 묘사된다. 성격은 진지하고 성실하지만 고집이 세다. 세계에 사신이 나타나 전쟁이 일어날 때, 신들도 큰 상처를 입었다. 디나케이트는 아버지 아켄라브의 권능과 치유의 술로 신들을 즉각적으로 치유하고 지탱했다고 전해진다."
+      },
+    ],
+    skills: [
+      {
+        name: "의신의 손", nameJp: "医神の手",
+        timing: "효과 참조", judge: "자동성공", target: "자신",
+        range: "─", cost: "3", slMax: "3",
+        condition: "씬1회",
+        effect: "HP 회복을 행하는 스킬과 동시에 사용한다. 그 효과에 +[SL×2]D한다. 치유 능력을 증폭시키는 천혜 스킬."
+      },
+      {
+        name: "긴급치료", nameJp: "緊急治療",
+        timing: "이니시아티브프로세스", judge: "자동성공", target: "범위(선택)",
+        range: "지근", cost: "5", slMax: "1",
+        condition: "씬1회",
+        effect: "대상의 HP 회복을 행한다. 대상의 HP를 [3D+CL×2] 포인트 회복한다. 빠른 치료 행위를 나타내는 천혜 스킬."
+      },
+      {
+        name: "정화결계", nameJp: "清浄結界",
+        timing: "셋업프로세스", judge: "자동성공", target: "범위(선택)",
+        range: "지근", cost: "5", slMax: "1",
+        condition: "시나리오1회",
+        effect: "대상이 나쁜 상태(배드 스테이터스)를 받지 않는다. 이 효과는 라운드 종료까지 지속된다. 병과 독을 막는 결계를 전개하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+]
+
+// ── 소신 섹션 ─────────────────────────────────────────────────────────────────
+
+function MinorGodsSection() {
+  return (
+    <section>
+      {/* 소개 + 공유 이미지 */}
+      <div style={{ display: "flex", gap: 28, marginBottom: 36, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <Prose text="에린을 창세했다고 전해지는 칠대신. 그러나 에린에는 그 외에도 다양한 신들이 신봉되고 있다. 이러한 신들을 「소신(小神)」이라 부른다." />
+          <Prose text="소신이라 해도, 칠대신에 대해 소신이라 불리는 것일 뿐 「작은 신」이라는 의미는 아니다. 에린 서방을 중심으로 신봉되는 주요 8주의 소신을 소개한다." />
+          <div style={{
+            background: "#0C0A06", border: `1px solid ${ACCENT}`,
+            borderRadius: 8, padding: "10px 14px", marginTop: 12
+          }}>
+            <div style={{ color: ACCENT, fontWeight: 700, fontSize: 12, marginBottom: 8 }}>주요 소신 일람</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+              {minorGods.map(g => (
+                <div key={g.id} style={{ fontSize: 12 }}>
+                  <span style={{ color: g.accent, fontWeight: 700 }}>{g.name}</span>
+                  <div style={{ color: "#8A7830", fontSize: 10 }}>{g.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* 공유 이미지 슬롯 */}
+        <div style={{
+          width: 320, flexShrink: 0,
+          border: `2px solid ${ACCENT}`, borderRadius: 10, overflow: "hidden",
+          background: "#0C0A06"
+        }}>
+          <img
+            src="/gods/minor-gods.jpg"
+            alt="소신 일람"
+            style={{ width: "100%", display: "block" }}
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement
+              img.style.display = "none"
+              const wrapper = img.parentElement
+              if (wrapper) {
+                wrapper.style.display = "flex"
+                wrapper.style.flexDirection = "column"
+                wrapper.style.alignItems = "center"
+                wrapper.style.justifyContent = "center"
+                wrapper.style.height = "280px"
+                wrapper.style.color = ACCENT
+                wrapper.style.gap = "8px"
+                wrapper.style.fontSize = "13px"
+                wrapper.innerHTML = `<span style="font-size:40px">🖼</span><span>소신 일람</span><span style="color:#5A5030;font-size:11px">/gods/minor-gods.jpg</span>`
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      {/* 각 소신 */}
+      {minorGods.map((god, idx) => (
+        <div key={god.id} style={{ marginBottom: idx < minorGods.length - 1 ? 48 : 0 }}>
+          {/* 신 헤더 */}
+          <div style={{
+            background: `linear-gradient(135deg, ${god.accent}20 0%, ${god.accent}08 100%)`,
+            border: `1px solid ${god.accent}`,
+            borderRadius: 10, padding: "14px 22px", marginBottom: 20
+          }}>
+            <div style={{ fontSize: 10, color: god.accent, letterSpacing: 3, marginBottom: 4, textTransform: "uppercase" }}>
+              소신 · {god.parentage}
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
+              <span style={{
+                fontSize: 24, fontWeight: 700, color: god.accent,
+                fontFamily: "'Noto Serif KR', serif"
+              }}>{god.name}</span>
+              <span style={{ color: "#8A7830", fontSize: 13 }}>{god.nameJp}</span>
+              <span style={{ color: "#C8B870", fontSize: 13 }}>— {god.title}</span>
+            </div>
+          </div>
+
+          {/* 본문 */}
+          <div style={{ marginBottom: 16 }}>
+            {god.lore.map((section, i) => (
+              <div key={i} style={{ marginBottom: 4 }}>
+                <SecTitle title={section.heading} color={god.accent} />
+                <Prose text={section.text} />
+              </div>
+            ))}
+          </div>
+
+          {/* 천혜 스킬 */}
+          <div style={{
+            background: god.accent + "18",
+            borderLeft: `4px solid ${god.accent}`,
+            padding: "8px 14px", marginBottom: 12, borderRadius: "0 6px 6px 0"
+          }}>
+            <span style={{ color: god.accent, fontWeight: 700, fontSize: 13 }}>✨ 천혜 스킬</span>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
+            {god.skills.map(skill => (
+              <SkillCard key={skill.name} skill={skill} accent={god.accent} />
+            ))}
+          </div>
+
+          {idx < minorGods.length - 1 && (
+            <div style={{ borderTop: "1px solid #2A2810", marginTop: 40 }} />
+          )}
+        </div>
+      ))}
+    </section>
+  )
+}
+
 // ── 섹션 컴포넌트 ──────────────────────────────────────────────────────────────
 
 function OverviewSection() {
@@ -635,6 +1075,7 @@ const navItems = [
   { id: "aema",       label: "아에마",     icon: "💧" },
   { id: "gobannon",   label: "고바논",     icon: "⚒️" },
   { id: "granain",    label: "그랑아인",   icon: "⚡" },
+  { id: "minor",      label: "소신",       icon: "⭐" },
 ]
 
 const godAccentMap: Record<string, string> = Object.fromEntries(
@@ -653,6 +1094,7 @@ export default function MythologyPage() {
       case "overview":  return <OverviewSection />
       case "creation":  return <CreationMythSection />
       case "gods":      return <GodsOverviewSection />
+      case "minor":     return <MinorGodsSection />
       default:
         if (godData) return <GodSection god={godData} />
         return <OverviewSection />
