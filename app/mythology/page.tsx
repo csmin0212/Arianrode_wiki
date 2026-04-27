@@ -1922,6 +1922,415 @@ function SpiritKingsSection() {
   )
 }
 
+// ── 동물의 왕 데이터 ──────────────────────────────────────────────────────────
+
+const animalKings = [
+  {
+    id: "arachne",
+    name: "아라크네",
+    nameJp: "アラクネ",
+    title: "작은 벌레의 왕",
+    accent: "#A07840",
+    lore: [
+      {
+        heading: "왕비의 직물",
+        text: "옛날, 라크레아 왕의 아래에 동방에서 온 상인이 벌레 퇴치약을 팔러 왔다. '밭의 벌레에 작물이 먹히는 일이 없어지고, 왕국이 부유해질 것입니다.' 왕은 '어떤 벌레든 퇴치할 수 있는가'라고 묻자 상인은 '어떤 벌레든 뭐든지 없애드리겠습니다'라고 고개를 숙이며 답했다. '그렇다면 그 약을 사지 않겠다.' 왕은 봄 소식을 알리듯 벌레가 춤추며 날아, 양배추 밭에 색을 더하는 것을 알고 있었다. 과수원에 날아드는 벌들이 꽃가루를 모아 열매가 열리게 한다는 것을 알고 있었다. '어떤 벌레도 무익하지 않다. 무분별하게 그 생명을 빼앗는 것은 있을 수 없는 일이다.' 왕은 그리 말하며 상인을 물러나게 했다. 어느 때, 왕은 역할을 찾고 있었고 연못 옆에서 노래하는 아름다운 소녀를 만났다. 왕은 이 소녀를 마음에 들어 성으로 초대하고, 이윽고 왕은 소녀와 결혼하여 그녀는 왕의 왕비가 되었다."
+      },
+      {
+        heading: "작은 벌레의 왕",
+        text: "아라크네는 작은 벌레들의 왕이다. 그 모습은 거대한 거미, 혹은 상반신이 여성이며 허리에서 하반신이 큰 거미인 모습이라 한다. 아라크네가 내뿜는 실은 대단히 질기며, 어떤 무기로도 끊기 어렵다. 라크레아인의 전승과 같은 이야기가 전해지는 한편, 실에 이끌려 유혹하는 전승도 있어 지역에 따라서는 두려워하는 존재다. 아라크네를 의미하는 아라라니라는 단어는 핀지어스 섬에서는 몸의 치수를 왜소하지 않고 당당히 여기는 자랑 같은 의미로 쓰이며, 무한의 모래사막에서는 끈질기게 달라붙어 떼어낼 수 없다는 의미로 사용된다."
+      },
+    ],
+    skills: [
+      {
+        name: "벌레왕의 그물", nameJp: "蟲王の網",
+        timing: "마이너 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "3",
+        effect: "(페이즈: 아라크네) 1로 취득 가능. 데미지 증가를 행한다. 공격의 데미지에 +[SL×3]한다. 또한 공격으로 대상에게 1점이라도 HP 데미지를 줬을 경우 [슬립]을 부여한다. 이 효과는 메인프로세스 종료까지 지속된다. 공격과 함께 실로 상대의 발목을 묶는 천혜 스킬."
+      },
+      {
+        name: "벌레 부르는 소리", nameJp: "虫呼びの声",
+        timing: "판정의 직전", judge: "자동성공", target: "단체",
+        range: "20m", cost: "─", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 아라크네) 1로 취득 가능. 대상이 행하는 메이저 액션의 판정 직전에 사용한다. 그 판정에 -1D한다. 벌레 무리를 불러내어 대상의 행동을 방해시키는 천혜 스킬."
+      },
+      {
+        name: "요사스러운 실의 벽", nameJp: "妖糸の壁",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 아라크네) 1로 취득 가능. 효과를 다이스로 산출하는 스킬·파워에 유효. 데미지 경감을 행하는 스킬·파워의 효과에 +3한다. 벌레 무리로 엮은 실의 벽으로 더 높은 효과를 얻는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "simurgh",
+    name: "시무르그",
+    nameJp: "シームルグ",
+    title: "하늘 나는 새의 왕",
+    accent: "#4AAA70",
+    lore: [
+      {
+        heading: "페로크룸과 새의 새끼",
+        text: "페로크룸은 상냥하고 사교적인 네바프족이었다. 기질에 맞는 일로 주로 야생에서 혼자 새를 모으는 일에 종사하고 있었다. 어느 날 페로크룸은 땅에 떨어진 새의 새끼를 발견한 것이다. 가냘픈 새를 돌봐주며, 혼자 날 수 있게 될 때까지 심혈을 기울여 성장시켰다. 새는 크게 자라 혼자 날아오를 수 있게 되었을 때, 작은 새를 놓아주었다. 그리고 날아간 작은 새가 돌아와 페로크룸의 근처 작은 가지에 앉으며 이야기했다. \"나는 시무르그의 새끼다. 돌봐주셔서 감사해, 나의 깃털을 받아가세요.\" 그리하여 페로크룸은 들판에 홀로 남아 있던 유일한 깃털 한 장을 손에 넣게 되었다. 이 깃털은 불가사의한 마력을 품고 있어, 부드러운 깃털 끝으로 쓰다듬는 것만으로 어떤 상처든 금방 낫게 하는 효능을 갖추고 있었다 한다."
+      },
+      {
+        heading: "하늘 나는 새의 왕",
+        text: "시무르그는 태고에 신들과 정령들에 의해 탄생한 새들의 왕이다. 산을 잡아 날아오를 정도의 거대한 새로, 한번 날갯짓으로 세계 구석구석을 이동할 수 있다 한다. 또한 그 날개에는 치유의 힘이 깃들어 있다 전해진다. 시무르그는 수천 년을 살며 수명이 다가오면 알을 낳고, 그 알에서 다시 태어난다는 전승도 있다. 대지의 여신 다난과 지상에 있다는 나무를 바라보듯 날고 있다 하여, 시무르그의 자식인 새들은 씨앗을 옮긴다고도 일컬어진다."
+      },
+    ],
+    skills: [
+      {
+        name: "치유의 깃털", nameJp: "癒やしの羽根",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 시무르그) 1로 취득 가능. 당신이 행하는 HP 회복의 효과에 +5한다. 시무르그의 깃털 힘에 의해 치유의 힘을 증폭하는 천혜 스킬."
+      },
+      {
+        name: "큰 날갯짓", nameJp: "大いなる羽ばたき",
+        timing: "무브 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "1",
+        effect: "(페이즈: 시무르그) 1로 취득 가능. 비행 상태가 되어 전투 이동을 행한다. 비행 상태가 되는 것만으로도 이동을 행하지 않아도 된다. 비행 상태는 메인프로세스 종료까지 지속된다. 날개를 펼치듯 일시적으로 하늘을 나는 천혜 스킬."
+      },
+      {
+        name: "새왕의 발톱", nameJp: "鳥王の爪",
+        timing: "마이너 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "5", slMax: "3",
+        condition: "비행 중",
+        effect: "(페이즈: 시무르그) 1로 취득 가능. 데미지 증가를 행한다. 근접 공격의 데미지에 +[SL×4]한다. 이 효과는 메인프로세스 종료까지 지속된다. 공중에서 활공하며 공격하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "leviathan",
+    name: "리바이어던",
+    nameJp: "リヴァイアサン",
+    title: "헤엄치는 물고기의 왕",
+    accent: "#3A78C8",
+    lore: [
+      {
+        heading: "물고기 왕의 비늘",
+        text: "핀지어스 섬의 어부가 낚시를 하고 있자 그물에 거대한 물고기의 등 푸른 비늘이 걸려왔다. 으스스한 물고기의 기운을 풍기고 있지 않은가 걱정된 어부는 동료의 도움을 받아 그 비늘을 반스타 성의 성으로 운반했다. 소문을 들은 황제 제단은 무녀들을 불러모아 예언으로 비늘의 정체를 알려고 하였다. 7일 7밤의 기도 끝에 무녀들에게 예언이 내려왔다. 그에 따르면 이는 '헤엄치는 물고기의 왕' 리바이어던의 비늘이었다. 비늘의 모양이 방패처럼 보여 제단은 이를 병사들의 방패로 활용하라 명했다. 그러나 장인들이 오리할콘의 칼을 써도 원하는 모양으로 가공하기가 어려웠다. 결국 전장에서 병사들이 걸치기에 소형화하는 것은 불가능했다. 아무도 들어올릴 수 없는 거대 방패는 제립박물관에 보관되어 미술품으로만 감상될 뿐이 되었다."
+      },
+      {
+        heading: "헤엄치는 물고기의 왕",
+        text: "리바이어던은 눈을 감을 정도의 거대한 몸집을 가진 거대한 물고기로, 물속 생물들의 왕이다. 그 몸은 무엇으로도 뚫을 수 없는 비늘에 덮여 있으며, 또한 무한의 재생 능력을 보유한다 전해진다. 에린디르 외해의 각 지역에서 이 거대한 소용돌이에 휘말려 해저로 사라진 해적선 등의 전설이 남아 있다. 그중에는 재보를 가득 실은 해적선 이야기도 있어, 해상 남자들의 로망을 자극하는 이야기가 되고 있다. 리바이어던에 삼켜버린 남자의 이야기가 전해지는 남방 마젤라니카다. 신에게 기도하는 것으로 무사히 뱃속에서 토해진 남자의 경우도, 리바이어던의 배 중에 금은 재보가 가득 채워져 있어, 그 보물을 가지고 돌아올 여유는 없었다 전해진다."
+      },
+    ],
+    skills: [
+      {
+        name: "물고기 왕의 비늘", nameJp: "魚王の鱗",
+        timing: "셋업 프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "1",
+        effect: "(페이즈: 리바이어던) 1로 취득 가능. [물리방어력]에 +3한다. 당신이 유영 상태인 경우, [마법방어력]에도 +3한다. 몸을 칠색 비늘로 감싸 방어력을 높이는 천혜 스킬."
+      },
+      {
+        name: "삼키는 소용돌이", nameJp: "飲み込む渦潮",
+        timing: "클린업 프로세스", judge: "자동성공", target: "범위(선택)",
+        range: "근거리", cost: "10", slMax: "1",
+        effect: "(페이즈: 리바이어던) 1로 취득 가능. 대상이 [슬립]을 받은 직후에 유효. 대상에게 5점의 HP 손실을 준다. 대상이 유영 상태인 경우, 5점의 HP 손실을 추가로 준다(합계 10점). 물의 소용돌이를 만들어내어 쓰러져 있는 자를 공격하는 천혜 스킬."
+      },
+      {
+        name: "물 만난 물고기", nameJp: "水を得た魚",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "(페이즈: 리바이어던) 1로 취득 가능. 무기를 사용한 명중 판정과 회피 판정의 달성값에 +SL한다. 물고기나 사하긴처럼 물속에서 자유롭게 움직이는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "fenrir",
+    name: "펜릴",
+    nameJp: "フェンリル",
+    title: "어금니 가진 짐승의 왕",
+    accent: "#9A3A3A",
+    lore: [
+      {
+        heading: "펜릴의 사역",
+        text: "맥이 익을 무렵, 산에서 내려오는 늑대(지역에 따라서는 여우나 들짐승)는 나쁜 짓을 하면 안 된다는 전승이 에린디르의 대부분에 남아 있다. 그러한 사역 동물이 가까이에 다가오는 것은 펜릴이 폭주할 것이라고 믿어지기 때문이다. 또한 갑자기 맹위를 떨쳐 작물이 못 쓰게 되어버리면, 펜릴의 저주라고 믿는 전승도 있다. 신들은 손을 너무 심하게 부리는 폭군이라고 신화에서 묘사되어 있고, 펜릴은 피와 전쟁을 좋아하는 신이라 여겨지며, 그 사역인 늑대는 용맹하게 싸우는 짐승으로서 전사나 병사에게 인기가 높다."
+      },
+      {
+        heading: "어금니 가진 짐승의 왕",
+        text: "펜릴은 어금니를 가진 짐승들의 왕이라 불리는 동물의 왕이다. 그 모습은 신을 가볍게 입에 물 수 있을 정도의 거대한 늑대다. 성난 표정으로 질주하는 검은 털로 덮인 늑대로, 내뿜는 숨은 뜨거운 고열을 내며, 그 어금니는 한번 물면 무엇이든 잘라버린다고 한다. 매우 성격이 거칠어, 그레이브닐이라 불리는 특수한 마법의 사슬로 손발을 결박하지 않으면 통제할 수 없다. 펜릴에서 벗어난 짐승 어금니에서는, 펜릴의 자식이 생겨난다는 전승이 있다. 세계 각지 전설에서 펜릴은 많은 마족과 령수의 아버지로 여겨지는 것은 그 때문이다. 또한 펜릴은 어금니가 수백 년에 한 번 빠지고, 새로운 날카로운 어금니로 생겨난다 전해진다."
+      },
+    ],
+    skills: [
+      {
+        name: "짐승의 자부심", nameJp: "獣の誇り",
+        timing: "마이너 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "5", slMax: "3",
+        effect: "(페이즈: 펜릴) 1로 취득 가능. 데미지 경감을 행한다. 당신이 데미지를 받는 데미지 롤 직후에 사용한다. 그 데미지에 -[SL×2]한다. 맹수처럼 자부심 있게 공격에 견디는 천혜 스킬."
+      },
+      {
+        name: "사냥꾼의 어금니", nameJp: "狩猟者の牙",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "5", slMax: "3",
+        effect: "(페이즈: 펜릴) 1로 취득 가능. 당신이 행하는 공격 대상이 배드 스테이터스를 받고 있던 경우, 그 공격의 데미지에 +2D한다. 먹이를 지키는 자를 더욱 몰아붙이는 천혜 스킬."
+      },
+      {
+        name: "맹수의 분노", nameJp: "猛獣の怒り",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 펜릴) 1로 취득 가능. 당신의 HP가 최대 HP 미만일 때 유효. 당신이 행하는 공격의 데미지에 +1D한다. 상처를 입은 것으로 고양되어 전투 능력을 높이는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "catoblepas",
+    name: "카토브레파스",
+    nameJp: "カトブレパス",
+    title: "발굽 가진 짐승의 왕",
+    accent: "#8A70A0",
+    lore: [
+      {
+        heading: "마안의 영웅",
+        text: "팔리스 왕국의 '부왕'을 섬기던 기사 나자르는, 태어날 때부터 한쪽 눈이 파랗고 크게 자라지 않은 채로 태어났다고 한다. 그 눈이 마주치는 상대가 돌이 되어버리고, 무거운 짐을 지게 되어버리기 때문에 나자르는 '마안의' 나자르로 불리게 되었다. 나자르의 어머니는 은신 숲에 있는 니그리스의 샘에서 물을 마신 적이 있어, 그때 동물의 왕 카토브레파스의 가호를 받았다 한다. 견자의 마력을 행사하는 자라고 믿어지던 나자르 자신도 그 힘을 두려워하여, 평시에는 눈띠를 두르고 마안을 봉인하고, 이따금의 힘만 사용했다. 그러나 '부왕'이 내전에 휘말렸을 때, 나자르는 동료의 배신에 의해 그 눈을 빼앗겼다. 동료들의 배신의 공포로 인해 복수심이 쏟아내어, 그가 자고 있는 사이에 암살자가 되어 있었던 것이다."
+      },
+      {
+        heading: "발굽 가진 짐승의 왕",
+        text: "카토브레파스는 발굽을 가진 짐승들을 지배하는 동물의 왕이다. 그 모습은 물소에 비슷하며, 그 눈을 본 자는 죽어버린다 전해진다. 평소에는 온화하며, 그 눈도 반쯤 감겨 있어서 마안의 효과는 반감되어 있다. 그러나 소나 말을 난폭하게 다루는 자에게는 가혹하며, 마안으로 응시하여 단숨에 죽음에 이르게 하기도 한다. 이 전설을 강조하는 탓에, 모든 지역에서 카토브레파스를 직접 보는 것은 불길한 일로 여겨진다. 물을 좋아하며 물질계에 현현할 때에는 샘이나 습지대에 잠들어 있는 것을 좋아한다. 에린디르 동방의 메이나마이 왕국에는 뛰어난 카토브레파스를 길들여 감사한 남자의 이야기가 전해지며, 거만의 부를 얻었다 한다."
+      },
+    ],
+    skills: [
+      {
+        name: "돌격맹진", nameJp: "突撃猛進",
+        timing: "무브 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "6", slMax: "1",
+        condition: "비행 외",
+        effect: "(페이즈: 카토브레파스) 1로 취득 가능. 비행 상태에서는 사용 불가. 전투 이동을 행한다. 그 이동을 행한 경우, 근접 공격의 데미지에 +1D한다. 또한 마이너 액션을 행할 수 있다. 이 효과는 메인프로세스 종료까지 지속된다. 돌격으로 위력을 높이는 천혜 스킬."
+      },
+      {
+        name: "발굽의 벗", nameJp: "蹄の友",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        condition: "기승 시",
+        effect: "(페이즈: 카토브레파스) 1로 취득 가능. 당신이 행하는 무기를 사용한 명중 판정과 [이동값]에 +[SL+1]한다. 말처럼 유용한 존재들을 자신의 것으로 삼아 자유자재로 다루는 천혜 스킬. 그 기술은 다른 탈것에도 응용할 수 있다."
+      },
+      {
+        name: "마력의 눈", nameJp: "魔力の眼",
+        timing: "셋업 프로세스", judge: "자동성공", target: "단체",
+        range: "─", cost: "─", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 카토브레파스) 1로 취득 가능. 대상에게 [스턴]을 부여한다. 당신의 마안에 카토브레파스의 마안의 힘이 깃들어 있음을 나타내는 천혜 스킬. 마안에 응시당한 자는 몸이 무거워져 움직일 수 없게 된다."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "jormungandr",
+    name: "요르문간드",
+    nameJp: "ヨルムンガンド",
+    title: "비늘 가진 뱀의 왕",
+    accent: "#3A8A3A",
+    lore: [
+      {
+        heading: "신대의 전투",
+        text: "신들이 사악한 그 용속들과의 전투를 되풀이하던 시대, '바람의 시대'. '비늘 가진 뱀의 왕' 요르문간드는 신들의 산이라고도 불리는 볼긴 산에 살고 있었다. 그 시대에 '자랑의 신' 인디마가 신들에게 전투를 도발하여, 아르켄라그가 응하여 싸움이 시작되었다. 인디마는 사악한 신들 중에서도 특별히 두드러진 강인함을 자랑하는 신이었다. 정면에서 달려들면 아르켄라그의 몸은 날아가 폭파될 것이었다. 단 한 번의 교전만으로 아르켄라그의 몸은 날아가 날아가버렸다. 그 아르켄라그의 몸을 멈춘 것이, 대사 요르문간드였다. 아르켄라그는 어리둥절해하다가 잠시 뒤 전의를 회복하여 재차 달려들었다. 거대한 뱀 요르문간드는 꼬리로 인디마에게 독을 품고, 그대로 던져 날렸다. 투척된 요르문간드는 공중에서 인디마에게 독을 뿜으며, 또한 던져 날려 바다 속으로 날아 들어갔다. 많은 마족들이 흘러가고 독에 의해 시야를 빼앗긴 인디마도 물결에 발을 잡혔다."
+      },
+      {
+        heading: "비늘 가진 뱀의 왕",
+        text: "요르문간드는 뱀의 모습을 한 동물의 왕으로, 비늘을 가진 뱀이나 도마뱀 등의 생물을 지배한다 한다. 그 크기는 거대하며, 에린디르를 취둘러 감는 정도라 전해진다. 요르문간드는 세계를 지배하기 위해 때로는 인간의 모습으로 나타난다. 이때 그 모습은 지팡이를 든 젊은 마법사의 모습으로 나타난다. 그러나 정체를 들키면 하얀 뱀의 모습이 되어 이계로 사라진다 한다. 현자의 증거로서 사용되는 지팡이는 '올름의 지팡이'라 불리며, 손에 들면 마력을 증폭하고, 적대하는 것에 저주를 내린다 전해진다."
+      },
+    ],
+    skills: [
+      {
+        name: "뱀의 산", nameJp: "蛇の山",
+        timing: "셋업 프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "2", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 요르문간드) 1로 취득 가능. 당신이 있는 인게이지를 봉쇄한다. [물리방어력]과 [마법방어력]에 +2한다. 이 효과는 라운드 종료까지 지속된다. 거대한 뱀을 불러내어 적의 도주 경로를 막는 천혜 스킬. 또한 뱀의 몸을 이용하여 자신의 방어를 굳힐 수도 있다."
+      },
+      {
+        name: "뱀왕의 독", nameJp: "蛇王の毒",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 요르문간드) 1로 취득 가능. 당신이 부여하는 [독]의 효과 강도에 +1한다. 요르문간드의 힘에 의해 더욱 강력한 독을 만들어내는 천혜 스킬."
+      },
+      {
+        name: "지켜보는 뱀", nameJp: "見守る蛇",
+        timing: "판정의 직전", judge: "자동성공", target: "단체",
+        range: "20m", cost: "6", slMax: "3",
+        condition: "시나리오 1회",
+        effect: "(페이즈: 요르문간드) 1로 취득 가능. 대상이 행하는 판정의 달성값에 +3한다. 이 스킬은 당신을 대상으로 선택할 수 없다. 상황을 냉정히 파악하여 최적의 원조를 행하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "fafnir",
+    name: "파프니르",
+    nameJp: "ファーヴニル",
+    title: "모두 가진 용의 왕",
+    accent: "#D4A020",
+    lore: [
+      {
+        heading: "요마에게 쫓긴 소년",
+        text: "중원의 필버폴의 전승에 파프니르의 궁전에 숨어든 소년 굿티의 이야기가 있다. 굿티는 산에 채광하러 나갔다가, 요마와 마주쳐 날개 달린 소녀가 마수에 잡혀 있었다. 그것이 요정 아브사라스임을 안 굿티는 파프니르의 이름을 빌려 요마를 격퇴하여 그녀를 구출했다. 사연을 들은 파프니르는 굿티의 행동을 영주로서 바라보게 되고, 끈기와 장수가 약속된다 한다. 어느 때 파프니르는 굿티에게 보물과 재물을 요구하는 요마의 명으로부터 지켜주고자, 굿티의 행동을 돕는 역할을 맡았다. 그리고 세 번째 요마는 굿티를 추적하여 상자 안에 들어간 것을 눈치채고 다시 뒤쫓기 시작했다. 마지막 상자를 굿티가 열자, 거기에는 '흘러가지 않는 때'라 쓰여 있었다. 마음 먹고 상자를 던지자, 상자는 순식간에 요마의 입 속에 빨려들어갔다. 그러자 갑자기 요마는 두 번 다시 움직이지 않게 되었다."
+      },
+      {
+        heading: "모두 가진 용의 왕",
+        text: "파프니르는 모든 용들의 조상이다. 직계에 해당하는 10체의 고대룡(8체, 혹은 11체라는 설도 있음)을 비롯하여 그 자손들의 정점으로서 군림한다. 용은 동물들이 지닌 특징 전부를 갖추고 있으며, 그 왕인 파프니르는 '모두 가진 용의 왕'이라 불린다. 그 모습은 황금빛으로 빛나는 거대한 용이며, 빈사 상태가 되었을 때는 인간의 모습으로 변하기도 한다 한다. 파프니르는 두 개의 궁전을 보유하며, 그 왕좌에서 사람들에게 물러날 것을 요구하는 황금을 모은다 한다. 이는 파프니르의 '모두 가진 용의 왕'이라는 특성이 모든 것을 갖추고자 하는 욕구를 낳기 때문이다. 실제로는 황금뿐만 아니라 고금동서의 다양한 보물도 포함되어 있어, 때로는 하찮아 보이는 것까지도 자신의 보물창고에 보관하고 있다 한다."
+      },
+    ],
+    skills: [
+      {
+        name: "황금의 보물", nameJp: "黄金の財宝",
+        timing: "아이템", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 파프니르) 1로 취득 가능. 프리플레이에 장비하거나 소지한 무기 중 하나를 선택한다. 선택한 무기를 장비하는 동안 공격의 데미지에 +3한다. 당신의 무기가 파프니르의 황금 보물 중 하나임을 나타내는 천혜 스킬. 어떻게 손에 넣었는지는 자유롭게 결정할 것."
+      },
+      {
+        name: "용왕의 숨결", nameJp: "竜王の吐息",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 파프니르) 1로 취득 가능. 〈무〉 속성 데미지에 유효. 공격의 데미지에 +1D한다. 파프니르의 숨결 힘을 빌려받아 마법의 위력을 높이는 천혜 스킬."
+      },
+      {
+        name: "용의 피", nameJp: "竜の血",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "(페이즈: 파프니르) 1로 취득 가능. 당신이 행하는 무기 공격으로 1점이라도 HP 데미지를 줬을 경우, 대상에게 [SL×3]점의 HP 손실을 준다. 당신의 공격이 용에 의한 것과 마찬가지로 모든 방어를 꿰뚫음을 나타내는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+]
+
+const ancientDragons = [
+  { id: "gebra",    name: "게브라",    title: "붉은",  accent: "#C83A2A", desc: "홍련의 불꽃과도 같은 새빨간 비늘을 지니며, 도끼에 버금가는 병기를 구상화한 듯한 거대한 이빨을 가진 고대룡. 그 딸로부터 태어난 '참정의' 게브라라고도 불린다." },
+  { id: "ketel",    name: "케텔",    title: "흰",    accent: "#C8C8B8", desc: "전 세계 어디서든 몸을 소환할 수 있으며, 순백의 비늘과 4개의 날개를 가진다는 고대룡. 그 비상하는 힘은 신들에 준한다고도 전해진다." },
+  { id: "kesed",    name: "케세드",    title: "은",    accent: "#A0A8B8", desc: "4장의 날개 같은 은색 비늘을 지닌다는 고대룡. 음유시인으로서 에린디르를 여행하고 있다는 전설도 있다." },
+  { id: "tiferet",  name: "티페레트",  title: "파란", accent: "#4A7ACE", desc: "빛에 닿으면 칠색 무지개와 같은 빛을 발하며, 거대한 뱀과 같은 모습을 가진다고 전해지는 고대룡. '정령룡' 티페레트라고도 불린다." },
+  { id: "malkut",   name: "말쿠트",   title: "검은", accent: "#6A5A7A", desc: "'붉은' 게브라와 마찬가지로 검은 비늘을 가진 고대룡. 바람의 시대의 전투 시 마족 제국을 도운 '악마의 신' 크롬쿠루에 그 몸을 맡겼다는 전설도 있다." },
+  { id: "kumara",   name: "쿠마라",   title: "철의", accent: "#6A7878", desc: "고대룡 중에서도 사려 깊고, 신들의 그릇과도 닮은 흑철의 고대룡. '지혜의' 쿠마라라고도 불린다. 문헌이 적어 후세의 창작도 많다." },
+  { id: "sephiros2",name: "세피로스",  title: "무지개의", accent: "#7890C8", desc: "과거의 고대룡의 장. 제국 200년대에 그 임무를 조하르에게 넘기고, 마족과 마수와 싸운 영웅들과 함께 아리안로드 대륙으로 건너갔다." },
+  { id: "zohal",    name: "조하르",    title: "신룡", accent: "#D4A820", desc: "7체의 고대룡들과 나란히 서는 존재로, '폭풍의 재앙'을 일으키게 된다. 그 존재는 신전에 의해 봉인되었다 전해진다." },
+]
+
+function AnimalKingsSection() {
+  return (
+    <section>
+      <div style={{ borderBottom: `2px solid ${ACCENT}`, paddingBottom: 16, marginBottom: 28 }}>
+        <h2 style={{ margin: 0, fontSize: 28, color: "#F0E8C8", fontFamily: "'Noto Serif KR', serif" }}>
+          동물의 왕 <span style={{ fontSize: 16, color: "#8A7830", fontWeight: 400 }}>動物の王</span>
+        </h2>
+        <p style={{ margin: "10px 0 0", color: "#B0A060", fontSize: 13 }}>
+          정령에게 창조되어, 에린의 모든 동물의 조상 — 그것이 '동물의 왕'이라 불리는 존재이다.
+        </p>
+      </div>
+
+      <div style={{ display: "flex", gap: 28, marginBottom: 36, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <Prose text="에린의 동물들은 '빛의 시대'에 정령들에 의해 창조되었다. 그때 정령의 왕들은 자신들이 그러하듯 신들처럼 동물들 중에서 왕을 정했다. 이것이 '동물의 왕'이다." />
+          <Prose text="동물의 왕들은 단독으로, 혹은 서로 교류하여 많은 동물을 창조했다. 동물의 왕의 도움을 받는 마술을 소환마술이라 부르며, 이 마술을 다루는 자를 서머너라 부른다. 이 섹션에서는 7주의 동물의 왕을 소개한다." />
+          <div style={{ background: "#0C0A06", border: `1px solid ${ACCENT}`, borderRadius: 8, padding: "10px 14px", marginTop: 12 }}>
+            <div style={{ color: ACCENT, fontWeight: 700, fontSize: 12, marginBottom: 8 }}>7주의 동물의 왕</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+              {animalKings.map(g => (
+                <div key={g.id} style={{ fontSize: 12 }}>
+                  <span style={{ color: g.accent, fontWeight: 700 }}>{g.name}</span>
+                  <div style={{ color: "#8A7830", fontSize: 10 }}>{g.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div style={{ width: 320, flexShrink: 0, border: `2px solid ${ACCENT}`, borderRadius: 10, overflow: "hidden", background: "#0C0A06" }}>
+          <img
+            src="/animal-kings/animal-kings.jpg"
+            alt="동물의 왕 일람"
+            style={{ width: "100%", display: "block" }}
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement
+              img.style.display = "none"
+              const wrapper = img.parentElement
+              if (wrapper) {
+                wrapper.style.display = "flex"; wrapper.style.flexDirection = "column"
+                wrapper.style.alignItems = "center"; wrapper.style.justifyContent = "center"
+                wrapper.style.height = "280px"; wrapper.style.color = ACCENT
+                wrapper.style.gap = "8px"; wrapper.style.fontSize = "13px"
+                wrapper.innerHTML = `<span style="font-size:40px">🖼</span><span>동물의 왕 일람</span><span style="color:#5A5030;font-size:11px">/animal-kings/animal-kings.jpg</span>`
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      {animalKings.map((g, idx) => (
+        <div key={g.id} style={{ marginBottom: idx < animalKings.length - 1 ? 52 : 0 }}>
+          <div style={{ background: `linear-gradient(135deg, #0A0808 0%, ${g.accent}1A 100%)`, border: `1px solid ${g.accent}`, borderRadius: 8, padding: "14px 20px", marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ background: g.accent, color: "#0A0808", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, flexShrink: 0 }}>{g.title}</span>
+            <h3 style={{ margin: 0, fontSize: 22, color: g.accent, fontFamily: "'Noto Serif KR', serif" }}>{g.name}</h3>
+            <span style={{ color: "#6A5820", fontSize: 13, marginLeft: 2 }}>{g.nameJp}</span>
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            {g.lore.map((section, i) => (
+              <div key={i} style={{ marginBottom: i < g.lore.length - 1 ? 18 : 0 }}>
+                <div style={{ color: g.accent, fontWeight: 700, fontSize: 14, borderLeft: `3px solid ${g.accent}`, paddingLeft: 10, marginBottom: 8 }}>{section.heading}</div>
+                <p style={{ margin: 0, color: "#C8B870", fontSize: 13, lineHeight: 1.85 }}>{section.text}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+            {g.skills.map((skill, si) => <SkillCard key={si} skill={skill} accent={g.accent} />)}
+          </div>
+          {idx < animalKings.length - 1 && <div style={{ borderTop: "1px solid #2A2810", marginTop: 44 }} />}
+        </div>
+      ))}
+    </section>
+  )
+}
+
+function AncientDragonsSection() {
+  return (
+    <section>
+      <div style={{ borderBottom: `2px solid ${ACCENT}`, paddingBottom: 16, marginBottom: 28 }}>
+        <h2 style={{ margin: 0, fontSize: 28, color: "#F0E8C8", fontFamily: "'Noto Serif KR', serif" }}>
+          고대룡 <span style={{ fontSize: 16, color: "#8A7830", fontWeight: 400 }}>古代竜</span>
+        </h2>
+        <p style={{ margin: "10px 0 0", color: "#B0A060", fontSize: 13 }}>
+          영원을 살아가는 고대룡들. 파프니르의 직계에 해당하는 8체의 고대룡이다.
+        </p>
+      </div>
+
+      <div style={{ display: "flex", gap: 28, marginBottom: 36, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <Prose text="고문헌과 전승에 따르면, 고대룡의 수는 전부 10체라고 전해진다. 단, 8체, 혹은 11체라는 설도 있어 정확한 수는 불분명하다. 현재 이러한 문헌이나 전설에서 전해지는 고대룡에 관해, 이 책에는 '붉은', '흰', '은', '파란', '검은', '금', '무지개의' 세피로스, '신룡' 조하르 등이 전해진다." />
+          <Prose text="이들 고대룡은 모두 파프니르의 직계로 여겨진다. 신들은 이들 고대룡의 힘 일부를 봉인하여 현세에의 지나친 개입을 금했다 전해진다." />
+        </div>
+        <div style={{ width: 320, flexShrink: 0, border: `2px solid ${ACCENT}`, borderRadius: 10, overflow: "hidden", background: "#0C0A06" }}>
+          <img
+            src="/ancient-dragons/ancient-dragons.jpg"
+            alt="고대룡 일람"
+            style={{ width: "100%", display: "block" }}
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement
+              img.style.display = "none"
+              const wrapper = img.parentElement
+              if (wrapper) {
+                wrapper.style.display = "flex"; wrapper.style.flexDirection = "column"
+                wrapper.style.alignItems = "center"; wrapper.style.justifyContent = "center"
+                wrapper.style.height = "280px"; wrapper.style.color = ACCENT
+                wrapper.style.gap = "8px"; wrapper.style.fontSize = "13px"
+                wrapper.innerHTML = `<span style="font-size:40px">🖼</span><span>고대룡 일람</span><span style="color:#5A5030;font-size:11px">/ancient-dragons/ancient-dragons.jpg</span>`
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+        {ancientDragons.map(d => (
+          <div key={d.id} style={{ background: `linear-gradient(135deg, #0C0A06 0%, ${d.accent}12 100%)`, border: `1px solid ${d.accent}44`, borderRadius: 10, padding: "16px 20px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+              <span style={{ background: d.accent, color: "#0A0808", fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 4 }}>{d.title}</span>
+              <span style={{ color: d.accent, fontWeight: 700, fontSize: 16, fontFamily: "'Noto Serif KR', serif" }}>{d.name}</span>
+            </div>
+            <p style={{ margin: 0, color: "#B8A868", fontSize: 13, lineHeight: 1.8 }}>{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 // ── 섹션 컴포넌트 ──────────────────────────────────────────────────────────────
 
 function OverviewSection() {
@@ -2147,6 +2556,8 @@ const navItems = [
   { id: "messengers", label: "신사",       icon: "🕊️" },
   { id: "heroes",     label: "영웅신",     icon: "🦸" },
   { id: "spirits",    label: "정령의 왕",  icon: "✨" },
+  { id: "animals",    label: "동물의 왕",  icon: "🐾" },
+  { id: "ancients",   label: "고대룡",     icon: "🐲" },
 ]
 
 const godAccentMap: Record<string, string> = Object.fromEntries(
@@ -2169,6 +2580,8 @@ export default function MythologyPage() {
       case "messengers": return <DivineMassengersSection />
       case "heroes":     return <HeroGodsSection />
       case "spirits":    return <SpiritKingsSection />
+      case "animals":    return <AnimalKingsSection />
+      case "ancients":   return <AncientDragonsSection />
       default:
         if (godData) return <GodSection god={godData} />
         return <OverviewSection />
