@@ -1293,6 +1293,635 @@ function DivineMassengersSection() {
   )
 }
 
+// ── 영웅신 데이터 ─────────────────────────────────────────────────────────────
+
+const heroGods = [
+  {
+    id: "baffel",
+    name: "바펠",
+    nameJp: "バッフェル",
+    title: "초대황제",
+    accent: "#C8A020",
+    lore: [
+      {
+        heading: "다리즈가이르 추락",
+        text: "핀지어스 섬의 '보이지 않는 검왕' 다리즈가이르는 후세에 십소왕 중 하나로 꼽히는 오우가족의 무왕이었다. 바힌 산맥의 지배 지역을 가진 다리즈가이르는 네바프족을 노예로 삼고, 그들에게 무기를 만들게 했다. 그중에서도 천익족의 싸움에 대비하여 다리즈가이르가 만들게 한 특제 동익전은, 상상조차 불가능한 신속의 비행 능력을 갖춘 자에게 주는 마도 기구라 전해진다. 그런데 해방자 네바프족의 두목 바노그가 당시 왕에 막 가담한 바펠에게 접촉하여, 동익전의 결점을 가르쳐주는 것과 맞교환으로 바펠의 보물을 빌리고자 거래를 제안했다."
+      },
+      {
+        heading: "반스타의 초대황제",
+        text: "황제 바펠은, 대륙에서 건너온 영웅이라 전해지며, 다세력이 다투던 핀지어스 섬을 통일하여 반스타 제국을 세운 초대황제이다. 핀지어스 섬에는 황제 바펠이 성공시켰다는 수많은 무공과 모략의 이야기가 전해진다. 그 대부분은 바펠의 당당한 풍채와 함께, 그를 지탱하는 부하들과 전우들의 지원을 강조하는 내용이다. 또한 그가 핀지어스에 오기 이전에, 대륙에서 어떤 인물이었는가에 관한 사료는 남아 있지 않고, 수많은 인물로 이야기되고 있다."
+      },
+    ],
+    skills: [
+      {
+        name: "영광의 일격", nameJp: "栄光の一撃",
+        timing: "메이저 액션", judge: "명중 판정", target: "단체",
+        range: "무기", cost: "3", slMax: "3",
+        condition: "씬 SL회",
+        effect: "(페이즈: 바펠) 1로 취득 가능. 대상에게 무기 공격을 행한다. 그 공격의 데미지에 +2D한다. 영광을 거머쥐기 위한 운명에 의해 거대한 일격을 날리는 천혜 스킬."
+      },
+      {
+        name: "승리의 명예", nameJp: "勝利の誉れ",
+        timing: "판정의 직전", judge: "자동성공", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        condition: "시나리오 1회",
+        effect: "(페이즈: 바펠) 1로 취득 가능. 당신이 행하는 명중 판정 직전에 사용한다. 그 판정에 +2D한다. 전투에서 승리하는 운명을 끌어당겨 공격을 명중시키는 천혜 스킬."
+      },
+      {
+        name: "불멸의 명예", nameJp: "不滅の誉れ",
+        timing: "셋업 프로세스", judge: "자동성공", target: "자신",
+        range: "─", cost: "5", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 바펠) 1로 취득 가능. 당신의 [물리방어력]과 [마법방어력]에 +5한다. 이 효과는 라운드 종료까지 지속된다. 전투에서 승리하는 운명을 끌어당겨 공격에 견디는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "elluran",
+    name: "에루란",
+    nameJp: "エルーラン",
+    title: "신의 어사",
+    accent: "#6AAABE",
+    lore: [
+      {
+        heading: "북풍의 여왕",
+        text: "현재 에루란 왕국 국토의 북방 대부분은, 일찍이 13명의 마녀들이 지배하는 극락의 땅이었다. 그녀들은 1년마다 교대로 수장을 맡으며, 이 땅을 차지하고 있었다. 에루란은 12명의 신력을 빌려, 그때마다 에루란은 인간 세계에서 걸출한 공적을 성취하여 마녀들에게 승리했다. 이렇게 에루란이 승리하자 사람들이 살 수 없었던 극락의 땅은 마녀의 지배에서 해방되어 사람들이 생활하는 풍요로운 토지로 변해갔다. 마녀들은 패배할 때마다 남은 자매들에게 패배의 내용을 교육했지만, 13명의 마녀 중 12명의 마녀가 에루란의 앞에 쓰러지고, 12개의 빙원을 에루란에게 내주고 말았다."
+      },
+      {
+        heading: "신의 어사",
+        text: "에루란은 에린디르 서방에서 가장 오랜 역사를 가진 에루란 왕국을 연 인물이다. 그는 평범한 인물이 아닌 12개의 신력을 가진 신의 어사로서 신앙되고 있으며, 왕국의 각 지역에는 에루란과 그를 따른 국가가 신들과 함께 그려진 신화가 있다. 12의 신력이 무엇을 나타내는가에 관해서는, 문헌 내에서도 견해 차이가 보이는 외에 신력의 수 자체도 10이라 되기도 한다. 다양한 사정을 지녀 훌륭한 능력을 가지고 있었다는 것이 통설이며, 뛰어난 자라면 그 사람의 능력에 특화한 힘을 에루란이 수여한 것으로 알려진다."
+      },
+    ],
+    skills: [
+      {
+        name: "개척자의 왕", nameJp: "開拓者の王",
+        timing: "셋업 프로세스", judge: "자동성공", target: "범위(선택)",
+        range: "시야", cost: "─", slMax: "3",
+        condition: "시나리오 SL회",
+        effect: "(페이즈: 에루란) 1로 취득 가능. 대상이 행하는 메이저 액션의 판정 달성도에 +2한다. 이 효과는 라운드 종료까지 지속된다. 이 스킬은 대상에 당신을 선택할 수 없다. 대상에게 승리를 위한 작전을 전하는 천혜 스킬."
+      },
+      {
+        name: "승리의 비책", nameJp: "勝利の秘策",
+        timing: "메이저 액션", judge: "자동성공", target: "단체",
+        range: "20m", cost: "6", slMax: "1",
+        effect: "(페이즈: 에루란) 1로 취득 가능. 대상에게 데미지 증가를 행한다. 대상이 행하는 공격의 달성도에 +2D한다. 이 스킬은 대상에 당신을 선택할 수 없다. 이 효과는 라운드 종료까지 지속된다."
+      },
+      {
+        name: "인도하는 자", nameJp: "導く者",
+        timing: "효과 참조", judge: "자동성공", target: "단체",
+        range: "20m", cost: "─", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 에루란) 1로 취득 가능. 대상이 다이스 증가를 위해 페이트를 사용하는 직전에 사용한다. 페이트를 1점 소비한다. 대상의 다이스 롤에 +1D한다. 이 스킬은 당신을 대상으로 선택할 수 없다. 조언이나 격려에 의해 대상에게 운명을 개척하는 힘을 주는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "nareshu",
+    name: "나레슈",
+    nameJp: "ナレシュ",
+    title: "용살자",
+    accent: "#5A9A3A",
+    lore: [
+      {
+        heading: "나레슈와 큰 거북",
+        text: "나레슈가 \"마룡\" 브리토라를 쓰러뜨리기 이전에 육용사와 함께 마젤라니카를 탐색하던 중, 한 여성이 마수에 습격당하고 있었다. 그 여성은 요정 아브사라스로, 나레슈에게 청혼을 신청했다. 나레슈는 청혼을 거절했으나, 아브사라스의 수련은 깊어 하나의 보옥을 나레슈에게 주었다. 그것은 투상한 상대와 육체를 교환하는 마도 기구로, 가까운 장래 반드시 나레슈에게 도움이 될 것이라 전했다. 보옥을 받은 수일 후, 불현듯 나레슈의 몸에서 보옥이 사라지고, 나레슈가 저주받은 것처럼 잠들어버렸다. 보옥을 통해 거대 거북 아크바라의 몸과 나레슈의 몸이 교환되어버린 것이다."
+      },
+      {
+        heading: "용살자의 영웅",
+        text: "나레슈는 마젤라니카 대륙을 지배하던 \"마룡\" 브리토라를 쓰러뜨린 건국의 영웅이다. 브리토라 토벌 후 6명의 동료들과 함께 대륙을 개척하여, 현재의 마젤라니카 왕국의 주요 도시의 기초를 쌓았다. 이 도정의 다양한 사건은 나레슈의 모험담으로서 전승되고, 수도 카이라샤에 있는 대형 나레슈 신전의 벽화에도 그려져 있다. 신앙의 대상으로서의 나레슈는 휴린족으로 검고 아름다운 남성으로 그려지며, 허리에는 반다나를 두르고 허리 위는 맨몸인 차림이 많다. 허리에는 다양한 도구를 들고 있어 이것은 나레슈의 개척자로서의 측면과 사냥꾼으로서의 측면 양쪽을 나타낸 것이다."
+      },
+    ],
+    skills: [
+      {
+        name: "영웅신의 활", nameJp: "英雄神の弓",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        condition: "활 사용",
+        effect: "(페이즈: 나레슈) 1로 취득 가능. 무기를 사용한 명중 판정 달성도에 +SL, 데미지에 +[SL×2]한다. 영웅신 나레슈로부터 그의 활 솜씨를 부여받았음을 나타내는 천혜 스킬."
+      },
+      {
+        name: "상약의 신체", nameJp: "常若の身体",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "8", slMax: "1",
+        condition: "방어 중 1회",
+        effect: "(페이즈: 나레슈) 1로 취득 가능. 당신이 배드 스테이터스를 받은 직후에 사용한다. 그때 받은 배드 스테이터스를 전부 회복한다. '상약신'이라고도 불리는 나레슈처럼 불로의 신체를 지닌 것을 나타내는 천혜 스킬."
+      },
+      {
+        name: "마수 사냥", nameJp: "魔獣狩り",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "(페이즈: 나레슈) 1로 취득 가능. 공격 대상이 「분류: 마수」일 때 유효. 공격의 데미지에 +[SL×5]한다. 마수와 싸우기 위한 힘을 부여받았음을 나타내는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "piani",
+    name: "피아니",
+    nameJp: "ピアニィ・ルティナベール・フェリタニア",
+    title: "",
+    accent: "#C04A4A",
+    lore: [
+      {
+        heading: "얼음에 갇힌 마물",
+        text: "유각족의 카다르크는 마을 제일의 장난꾸러기 소년이다. 어른들의 말에는 귀를 기울이지 않으며, 오늘도 나쁜 짓을 일삼고 있었다. 어느 날, 카다르크가 항상의 굴 던전 놀이를 마치고 돌아가려 하자, 갑자기 주변이 음침해졌다. 근처가 한겨울처럼 서리가 내리고, 하늘까지 안개가 끼었다. 들어온 어머니의 말을 떠올린 카다르크는 두려워져 마을로 향하는 귀로를 서두르다, 딱딱하고 차가운 무언가에 부딪혔다. 올려다보니 발톱과 이빨을 드러낸 거대한 마물이었다. 그리고 그 마물은 1마리 2마리가 아니라 사방에 가득했다. 카다르크는 비명을 지르려 했지만 의식을 잃었다. 마을 촌장의 광고판에 장식된 그림 속 인물, 복숭아빛 머리카락을 묶은 소녀의 모습을……."
+      },
+      {
+        heading: "구세의 왕녀",
+        text: "피아니·루티나베루·페리타니아는, 전란이 계속되는 아리안로드 대륙의 역사 속에서 폭풍처럼 활약하여 두각을 나타낸 소녀다. 레이월의 왕녀로 태어났지만 기묘한 운명을 따라, 아리안로드를 다스리는 페리타니아 합중국의 통일제로서 군림한다. 왕국식으로 일어난 대재앙 '대붕괴'를 계기로, 피안에 사는 신사들을 맞이하게 되었다. 전쟁을 거쳐 아리안로드에 남겨진 피아니의 동료들과 동맹국 사람들은, 아리안로드를 마족들의 침략에서 지키기 위해 피아니가 제창한 전란을 끝낼 페리타니아 합중국 통일을 이루기 위한 노력을 계속하고 있다. 전장에서 알려진 그녀의 외모는 레이월에서 좋아하는 붉은 장식을 걸치고, 분홍빛 머리카락을 두 갈래로 묶은 소녀이며, 활을 갖추고 귀여운 외모의 마법사로 알려진다."
+      },
+    ],
+    skills: [
+      {
+        name: "살의 있어라", nameJp: "殺意あれ",
+        timing: "셋업 프로세스", judge: "─", target: "자신",
+        range: "─", cost: "3", slMax: "3",
+        condition: "시나리오 1회",
+        effect: "(페이즈: 피아니) 1로 취득 가능. 당신이 행하는 공격의 명중 판정에 +[SL D]한다. 리액션 판정에 더해, 이 공격의 데미지에 +1D한다. 이 효과는 라운드 종료까지 지속된다. 적을 확실히 쓰러뜨린다. 그 살의로써 공격 전부에 거는 천혜 스킬."
+      },
+      {
+        name: "전투 애호가", nameJp: "戦闘愛好者",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 피아니) 1로 취득 가능. 당신이 행하는 공격의 명중 판정에 +1D, 이 공격이 크리티컬에 의한 데미지 롤의 데미지 증가에 더해 데미지에 +2D한다. 당신의 전투에 거는 열정에 의해 공격의 위력을 이끌어내는 천혜 스킬."
+      },
+      {
+        name: "평화의 염원", nameJp: "平和の願い",
+        timing: "판정의 직후", judge: "─", target: "자신",
+        range: "─", cost: "6", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 피아니) 1로 취득 가능. 당신이 행하는 공격의 명중 판정 직후에 사용한다. 이 공격이 크리티컬에 의한 데미지 증가에 더해 데미지를 추가한다. 당신의 공격을 강제로 명중시키는 천혜 스킬. 당신의 그 격렬함이 평화로 이어진다. 그 염원이 결과를 이끌어내는 것이다."
+      },
+    ] as Skill[],
+  },
+]
+
+function HeroGodsSection() {
+  return (
+    <section>
+      {/* 섹션 헤더 */}
+      <div style={{ borderBottom: `2px solid ${ACCENT}`, paddingBottom: 16, marginBottom: 28 }}>
+        <h2 style={{ margin: 0, fontSize: 28, color: "#F0E8C8", fontFamily: "'Noto Serif KR', serif" }}>
+          영웅신 <span style={{ fontSize: 16, color: "#8A7830", fontWeight: 400 }}>英雄神</span>
+        </h2>
+        <p style={{ margin: "10px 0 0", color: "#B0A060", fontSize: 13 }}>
+          생전의 공적으로 신에게 불려 올라가 신이 된 자, 혹은 산 채로 신들로부터 역할과 힘을 부여받은 자를 영웅신이라 부른다.
+        </p>
+      </div>
+
+      {/* 소개 + 공유 이미지 */}
+      <div style={{ display: "flex", gap: 28, marginBottom: 36, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <Prose text="그리스 신화의 영웅들을 예로 들 것도 없이, 사람에서 신이 된 자는 많다. 『아리안로드』의 무대가 되는 에린에서도 사람이 신이 되어 신앙의 대상이 되는 것은 드물지 않다." />
+          <Prose text="영웅신의 신앙은 그 성립 상 수호에 중점을 두게 된다. 국가를 지키고, 토지를 지키고, 백성을 지킨다…… 그러한 면이 강하게 나타난다. 이 섹션에서는 아래의 4주의 영웅신을 소개한다." />
+          <div style={{
+            background: "#0C0A06", border: `1px solid ${ACCENT}`,
+            borderRadius: 8, padding: "10px 14px", marginTop: 12
+          }}>
+            <div style={{ color: ACCENT, fontWeight: 700, fontSize: 12, marginBottom: 8 }}>주요 영웅신 일람</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+              {heroGods.map(g => (
+                <div key={g.id} style={{ fontSize: 12 }}>
+                  <span style={{ color: g.accent, fontWeight: 700 }}>{g.name}</span>
+                  <div style={{ color: "#8A7830", fontSize: 10 }}>{g.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* 공유 이미지 슬롯 */}
+        <div style={{
+          width: 320, flexShrink: 0,
+          border: `2px solid ${ACCENT}`, borderRadius: 10, overflow: "hidden",
+          background: "#0C0A06"
+        }}>
+          <img
+            src="/heroes/heroes.jpg"
+            alt="영웅신 일람"
+            style={{ width: "100%", display: "block" }}
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement
+              img.style.display = "none"
+              const wrapper = img.parentElement
+              if (wrapper) {
+                wrapper.style.display = "flex"
+                wrapper.style.flexDirection = "column"
+                wrapper.style.alignItems = "center"
+                wrapper.style.justifyContent = "center"
+                wrapper.style.height = "280px"
+                wrapper.style.color = ACCENT
+                wrapper.style.gap = "8px"
+                wrapper.style.fontSize = "13px"
+                wrapper.innerHTML = `<span style="font-size:40px">🖼</span><span>영웅신 일람</span><span style="color:#5A5030;font-size:11px">/heroes/heroes.jpg</span>`
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      {/* 각 영웅신 */}
+      {heroGods.map((g, idx) => (
+        <div key={g.id} style={{ marginBottom: idx < heroGods.length - 1 ? 52 : 0 }}>
+          {/* 헤더 배너 */}
+          <div style={{
+            background: `linear-gradient(135deg, #0A0808 0%, ${g.accent}1A 100%)`,
+            border: `1px solid ${g.accent}`,
+            borderRadius: 8, padding: "14px 20px", marginBottom: 20,
+            display: "flex", alignItems: "center", gap: 12,
+          }}>
+            {g.title && (
+              <span style={{
+                background: g.accent, color: "#0A0808",
+                fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, flexShrink: 0,
+              }}>{g.title}</span>
+            )}
+            <h3 style={{ margin: 0, fontSize: 22, color: g.accent, fontFamily: "'Noto Serif KR', serif" }}>
+              {g.name}
+            </h3>
+            <span style={{ color: "#6A5820", fontSize: 13, marginLeft: 2 }}>{g.nameJp}</span>
+          </div>
+
+          {/* 로어 텍스트 */}
+          <div style={{ marginBottom: 20 }}>
+            {g.lore.map((section, i) => (
+              <div key={i} style={{ marginBottom: i < g.lore.length - 1 ? 18 : 0 }}>
+                <div style={{
+                  color: g.accent, fontWeight: 700, fontSize: 14,
+                  borderLeft: `3px solid ${g.accent}`, paddingLeft: 10, marginBottom: 8
+                }}>
+                  {section.heading}
+                </div>
+                <p style={{ margin: 0, color: "#C8B870", fontSize: 13, lineHeight: 1.85 }}>
+                  {section.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* 스킬 카드 */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+            {g.skills.map((skill, si) => (
+              <SkillCard key={si} skill={skill} accent={g.accent} />
+            ))}
+          </div>
+
+          {idx < heroGods.length - 1 && (
+            <div style={{ borderTop: "1px solid #2A2810", marginTop: 44 }} />
+          )}
+        </div>
+      ))}
+    </section>
+  )
+}
+
+// ── 정령의 왕 데이터 ──────────────────────────────────────────────────────────
+
+const spiritKings = [
+  {
+    id: "dijini",
+    name: "디지니",
+    nameJp: "ディジニ",
+    title: "대기의 왕",
+    accent: "#7ABEDE",
+    lore: [
+      {
+        heading: "금은보화의 도시",
+        text: "아주 옛날, 욕심 많은 자들이 사는 메르엠이라는 도시가 있었다. 도시는 수많은 황금의 탑이 늘어서고, 대단히 화려하고 요란한 것이었다. 사람들은 탑에 금은보화를 넣어 살았으며, 한편으로 보물이 도난당하지 않을까 매일 아침 마음 졸이지 않으면 안 되었다. 도시의 상인 살루만은 자신들의 보물을 지킬 방법이 없을까 고민하여, 마법을 이용해 '대기의 왕' 디지니를 불러내어 말했다. '우리의 재물을 누구도 빼앗을 수 없도록 지켜주고, 우리가 안심하고 잘 수 있게 해 달라.' 디지니는 '원하는 것을 들어주겠다'고 큰 목소리로 모래폭풍을 일으켜 도시를 통째로 모래사막에 묻어버렸다 한다."
+      },
+      {
+        heading: "대기의 왕",
+        text: "\"대기의 왕\" 디지니는 '빛의 시대'에 신들이 낳은 정령에서 바람의 왕이 된 정령이다. 신들과 정령들의 싸움 중에 황폐해진 세계를 정화하여 '바람의 청정'을 일으킨 존재로 알려진다. 많은 민간 전승과 설화에서 디지니의 본래 모습은 그림자로만 보인다 한다. 그러나 시기에 따라 모습을 드러내는 예도 있다. 그 모습은 다양하다. 사막 전승에 등장하는 디지니는 노년의 마법사의 모습으로 그려지며, 도둑질을 한 인간을 모래바람에 휘말리게 하는 두려운 정령이다. 한편으로 박막을 두른 젊은 여성의 모습으로 나타나거나, 정기 있는 청년의 모습으로 나타나기도 한다 전해진다. 사막을 나는 흰 큰 매가 죽은 자의 혼을 하늘에 올려 보내는 신의 사자라 믿어진다."
+      },
+    ],
+    skills: [
+      {
+        name: "폭풍과 화살의 무도", nameJp: "嵐と矢の舞踏",
+        timing: "마이너 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "3", slMax: "3",
+        effect: "(페이즈: 디지니) 1로 취득 가능. 데미지 증가를 행한다. 당신이 행하는 사격 공격의 데미지에 +[SL×3]한다. 이 효과는 메인프로세스 종료까지 지속된다. 바람과 화살을 가속하는 천혜 스킬. 화살은 마치 춤추듯 적을 덮친다."
+      },
+      {
+        name: "바람의 은총", nameJp: "風の恩寵",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 디지니) 1로 취득 가능. 〈바람〉 속성 마법 데미지를 주는 공격에 유효. 공격의 데미지에 +1D한다. 바람의 정령과 강한 연결이 있음을 나타내는 천혜 스킬."
+      },
+      {
+        name: "바람의 옷", nameJp: "風の衣",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        condition: "비행 중",
+        effect: "(페이즈: 디지니) 1로 취득 가능. 당신이 행하는 회피 판정의 달성값에 +3한다. 주위에 전개한 바람으로 공격을 흘려내어 회피하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "ifrit",
+    name: "이프리트",
+    nameJp: "イフリート",
+    title: "화염의 왕",
+    accent: "#DE5A28",
+    lore: [
+      {
+        heading: "이프리트의 주문",
+        text: "정령이나 정령왕에 대한 신앙은 에린디르 각지에서 지금도 민간에 남아 있다. 그중에서도 이프리트에 얽힌 것들이 많다고 한다. 예를 들어 에린디르 서방에서는 어머니가 아이에게 요리가 맛있어지는 주문을 가르치는 것이 있다. 화로 앞에서 손가락을 튕기며 '에푸리타·우에라'라고 외치는 것이 그 주문이다. 주문의 의미는 지금은 잊혀졌지만, 이는 여신 브리간티아가 이프리트에게 불의 향기를 불어넣었다는 고사에서 유래한다고 전해진다. 손가락을 튕기는 동작은 이 시대에 냄비의 뚜껑을 여는 동작에서 비롯된 것으로, 옛날에는 이나카도의 뚜껑이 사용되었다 전해진다."
+      },
+      {
+        heading: "화염의 왕",
+        text: "\"화염의 왕\" 이프리트는 '빛의 시대'에 신들이 낳은 정령에서 불의 왕이 된 정령이다. 물질계에 현현할 때는 불꽃을 두른 전신 갑주의 거대한 전사 같은 모습이나, 붉고 피부를 가진 거인 같은 모습, 타는 것 같은 검은 피부, 뿔과 꼬리, 발굽을 가진 모습으로 나타나기도 한다. 단, 이프리트는 싫어하는 것이 있으면 어떤 형태로도 변신하는 능력을 가졌다 한다. 불꽃의 힘이 남아 있는 한, 어떠한 모습으로도 변신하는 것이 가능하다. 단, 그 몸속에서는 불꽃의 기운이 흐르고, 주의를 기울이면 금방 알아챌 수 있다 한다. 성질은 돌발적으로 잔인하거나 우아하기 그지없는 극단을 달린다. 격렬한 기질이지만, 스스로 경의를 표하는 자에게는 충실하다 한다."
+      },
+    ],
+    skills: [
+      {
+        name: "진화의 일격", nameJp: "真火の一撃",
+        timing: "마이너 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "5", slMax: "1",
+        effect: "(페이즈: 이프리트) 1로 취득 가능. 「분류: 마술(불)」 스킬·파워에 유효. 마법 공격은 대상의 [마법방어력]에 -5(최저 0)하여 HP 데미지를 산출한다. 이 효과는 메인프로세스 종료까지 지속된다. 불의 정령의 힘에 의해 방어를 초과한 공격을 행하는 천혜 스킬."
+      },
+      {
+        name: "폭렬돌진", nameJp: "爆裂突進",
+        timing: "무브 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "3",
+        effect: "(페이즈: 이프리트) 1로 취득 가능. 데미지 증가를 행한다. 전투 이동을 행하는 경우, 당신이 행하는 무기 공격의 데미지에 +[SL×3]한다. 이 효과는 메인프로세스 종료까지 지속된다. 불의 폭발로 가속하여 직후의 공격 위력을 높이는 천혜 스킬."
+      },
+      {
+        name: "불의 은총", nameJp: "火の恩寵",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 이프리트) 1로 취득 가능. 〈불〉 속성 마법 데미지를 주는 공격에 유효. 공격의 데미지에 +1D한다. 불의 정령과 강한 연결이 있음을 나타내는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "dao",
+    name: "다오",
+    nameJp: "ダオ",
+    title: "대지의 왕",
+    accent: "#9A8040",
+    lore: [
+      {
+        heading: "다오와 정령의 산 만들기",
+        text: "창세의 무렵, 신들의 '높은 것을 높게 세우라'는 말씀에 따라 대지의 정령왕인 다오는 정령들에게 앞다퉈 나아가도록 명했다. 처음에 대지의 정령들은 쉽게 높은 곳에 나아갈 수 없었다. 그래서 다오는 정령들에게 발파를 가하여, 누가 가장 높은 산을 솟구쳐 올릴 수 있는지 경쟁을 시켰다. 이리하여 세계 각지에 셀 수 없이 많은 산이 생겨났다. 지금도 산을 숭배하는 지역에서는 재앙이 일어났을 때 정령의 분노를 가라앉히기 위해 정령왕 다오에게 중재를 청하는 의식을 행한다 전해진다."
+      },
+      {
+        heading: "대지의 왕",
+        text: "\"대지의 왕\" 다오는 '빛의 시대'에 신들이 낳은 정령에서 땅의 왕이 된 정령이다. '지의 시대' 말에 마족왕 파라르와 마족들을 정화하여 '지의 청정'을 일으킨 존재로 알려진다. 에린의 대지 곳곳에 사는 동물들의 탄생에 중요한 역할을 한 존재로 여겨지며, 농가나 목동, 광산 노동자, 산에서 수행하는 승려, 숲에서 생활하는 레인저 등에게도 신앙을 모은다. 물질계에 현현할 때는 광택 있는 암석으로 만들어진 갑주와 같은 모습, 유쾌하고 중년 남성의 모습인 경우가 많다. 대지신 다난과 관련지어 신앙받는 경우가 많으며, 다오가 대지의 혜택을 상징하는 한편 다오에 대한 신앙은 산을 비롯한 자연에 대한 경외를 나타내는 신앙으로 남아 있는 경우가 많다."
+      },
+    ],
+    skills: [
+      {
+        name: "땅의 은총", nameJp: "地の恩寵",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 다오) 1로 취득 가능. 〈땅〉 속성 마법 데미지를 주는 공격에 유효. 공격의 데미지에 +1D한다. 대지의 정령과 강한 연결이 있음을 나타내는 천혜 스킬."
+      },
+      {
+        name: "땅의 강인함", nameJp: "地の剛力",
+        timing: "무브 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "3", slMax: "1",
+        condition: "비행 외",
+        effect: "(페이즈: 다오) 1로 취득 가능. 당신이 비행 상태가 아닐 때 사용 가능. 데미지 증가를 행한다. 당신이 행하는 근접 공격의 데미지에 +5한다. 이 효과는 라운드 종료까지 지속된다. 지면에서 힘을 얻어 공격을 행하는 천혜 스킬."
+      },
+      {
+        name: "융기의 주먹", nameJp: "隆起の拳",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        effect: "(페이즈: 다오) 1로 취득 가능. 공격 대상이 비행 상태가 아닐 때 유효. 당신이 행하는 근접 공격의 데미지에 +[SL×3]한다. 당신의 공격에 맞춰 융기한 지면이 추격하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "marid",
+    name: "마리드",
+    nameJp: "マリッド",
+    title: "수류의 왕",
+    accent: "#3A8ABE",
+    lore: [
+      {
+        heading: "이계로의 문",
+        text: "로흐라는 젊은이가 있었다. 어느 때 로흐가 숲의 나무 그늘에서 쉬고 있자, 근처의 풀을 뜯고 있던 자신의 말이 연못에 빠져버렸다. 연못에 뛰어들어 말을 구하려 하자 눈 깜짝할 사이에 어딘가로 날아갔다. 그러자 로흐는 어느새 의식을 잃고, 낯선 숲속에서 눈을 떴다. 놀라 주변을 둘러보던 로흐 앞에 젊은 여성이 나타났다. 그녀는 마리드라고 이름을 밝히고, 여기가 이계이며 일이 있어 돌아가고 싶다고 전했다. 그 이야기를 들은 로흐는 거대한 용감함과 성실함으로 원래 세계에 돌려보내주겠다고 답했다."
+      },
+      {
+        heading: "수류의 왕",
+        text: "\"수류의 왕\" 마리드는 '빛의 시대'에 신들이 낳은 정령에서 물의 왕이 된 정령이다. '물의 청정'을 일으킨 존재로 알려진다. 물질계에 현현할 때 그 모습은 물로 이루어진 신체를 가진 여성의 모습, 물의 의복을 두른 아름다운 유녀의 모습이라 한다. 앞서 언급한 로흐와 그의 애마 민화는 중원의 팔리스 동맹 제국에 널리 퍼진 것으로, 아마도 필버폴의 민간 전승을 원출전으로 한다. 여행하는 사람이 여행 도중 보이는 샘에 기도하는 관습이 있다. 여행자에게 물의 확보는 중요하며, 갈증을 달래주고 안전한 여행을 마칠 수 있게 해달라고 기도하는 장면도 있을 것이다. 元은 그렇다 쳐도, 여행 목적지도 모르는 땅에서 마리드의 신앙을 드러냄으로써 무사히 데려다 주는 자가 있을 것이라 믿는 자도 많다."
+      },
+    ],
+    skills: [
+      {
+        name: "물의 은총", nameJp: "水の恩寵",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 마리드) 1로 취득 가능. 〈물〉 속성 마법 데미지를 주는 공격 스킬·파워에 유효. 공격의 데미지에 +1D한다. 물의 정령과 강한 연결이 있음을 나타내는 천혜 스킬."
+      },
+      {
+        name: "물의 범람", nameJp: "水の氾濫",
+        timing: "무브 액션", judge: "자동성공", target: "효과 참조",
+        range: "─", cost: "4", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 마리드) 1로 취득 가능. 「대상: 단체」의 「분류: 마술(물)」 스킬·파워에 유효. 대상을 「사거리: [SL×10]m」로 하고, 「대상: 범위(선택)」으로 변경한다. 이 효과는 메인프로세스 종료까지 지속된다. 물로 소용돌이를 만들어 마술을 확대 발동하는 천혜 스킬."
+      },
+      {
+        name: "물의 급류", nameJp: "水の奔流",
+        timing: "메이저 액션", judge: "명중 판정", target: "단체",
+        range: "효과 참조", cost: "4", slMax: "3",
+        effect: "(페이즈: 마리드) 1로 취득 가능. 대상에게 근접 공격을 행한다. 그 사거리는 [SL×10]m가 되며, 인게이지하지 않은 대상에게도 행할 수 있다. 크리티컬: 다이스 증가. 휘두른 무기 끝에서 강렬한 수류를 발사하여 적을 공격하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "maraika",
+    name: "마라이카",
+    nameJp: "マライカ",
+    title: "광휘의 왕",
+    accent: "#E0C840",
+    lore: [
+      {
+        heading: "빛의 성인",
+        text: "라로이스가 살았던 것은 악명 높은 교황 파이레마이스가 신관 권력을 남용하는 사악한 시대였다. 400년의 이 시대, 소국의 출신으로 대주교가 된 라로이스는 가난한 자에게 시주를 잊지 않고, 산에 틀어박혀서는 산 사람들을 위해 설교를 이어가는 청렴한 성직자의 소리를 들었다. 그의 앞에 '광휘의 왕' 마라이카가 나타나 축복을 주는 것을 기회로 그는 산을 내려가 성도 디아스로시로 향했다. 라로이스 21세 때의 일이다. 처형 집행 바로 그 순간, 기적이 일어났다. 공중에 빛나는 물체가 나타나 처형장 너머로 날아갔다. 그 광경은 마치 하늘이 무너지는 듯했으며, 성스러운 불꽃이 가득 찬 것 같았다. 빛을 본 처형 집행인과 병사들은 갑자기 죄책감이 증대되어 모두 두려움을 느끼고 달아났다. 그래서 처형은 결국 집행되지 않았다."
+      },
+      {
+        heading: "광휘의 왕",
+        text: "마라이카는 '빛의 시대'에 신들이 낳은 정령에서 빛의 왕이 된 정령이다. '빛의 시대'에 세계를 비추는 존재로 여겨지며, '광휘의 왕'이라는 이름을 가진다. 그 본질은 맑고 어디까지나 깨끗한 빛이다. 정령들의 왕 중에서도 가장 선한 존재라 여겨지는 한편, 아르켄라그가 빛 그 자체인 존재라고도 풀이된다. 물질계에 현현할 때 마라이카의 모습은 보는 자에 따라 달라 보인다 한다. 어떤 자에게는 빛의 갑옷을 두른 여전사로 보여도, 그 옆에 있는 자에게는 빛의 신호 그 자체로 보인다는 것이다. 어느 쪽이든 그 모습을 보는 것만으로 마음을 빼앗겨, 그 목소리를 듣는 것만으로 시야가 열려 의지가 솟구친다 한다."
+      },
+    ],
+    skills: [
+      {
+        name: "집속일섬", nameJp: "収束一閃",
+        timing: "마이너 액션", judge: "자동성공", target: "자신",
+        range: "─", cost: "4", slMax: "1",
+        effect: "(페이즈: 마라이카) 1로 취득 가능. 「분류: 마술(빛)」 스킬·파워에 유효. 마법 공격의 대상을 「대상: 단체」로 변경하고 데미지에 +2D한다. 당신이 「암흑」[명도 1 이하]의 영향을 받는 경우 사용할 수 없다. 이 효과는 메인프로세스 종료까지 지속된다."
+      },
+      {
+        name: "빛의 은총", nameJp: "光の恩寵",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 마라이카) 1로 취득 가능. 〈빛〉 속성 마법 데미지를 주는 공격에 유효. 공격의 데미지에 +1D한다. 빛의 정령과 강한 연결이 있음을 나타내는 천혜 스킬."
+      },
+      {
+        name: "빛의 궤적", nameJp: "光の道筋",
+        timing: "판정의 직전", judge: "자동성공", target: "단체",
+        range: "20m", cost: "6", slMax: "3",
+        condition: "씬 SL회",
+        effect: "(페이즈: 마라이카) 1로 취득 가능. 대상이 행하는 근접 무기의 명중 판정 직전에 사용한다. 그 판정에 +1D한다. 공격을 명중시키기 위한 궤도를 빛으로 제시하는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+  {
+    id: "diabolos",
+    name: "디아볼로스",
+    nameJp: "ディアボロス",
+    title: "암흑의 왕",
+    accent: "#9A5ABE",
+    lore: [
+      {
+        heading: "디아볼로스의 전설",
+        text: "'바람의 시대'. 아크시네라는 외모가 좋은 소녀가 신들의 아버지 다그데모아를 섬기고 있었다. 그러나 아크시네는 사악한 플레르그가 화한 모습임을 예언한 여신 브리간티아는 이프리트와 디아볼로스를 간파하고 있었다. 여신은 어둠의 정령을 넣은 자루를 준비하여, 위험이 가까워지면 사용하도록 다그데모아에게 전했다. 그 무렵, 아크시네는 다그데모아를 유혹하려는 행동을 시작했다. 아크시네의 매력에 넘어간 다그데모아가 자루를 열자, 디아볼로스가 날아나왔다. 순식간에 다그데모아의 눈이 어둠에 덮였다. 이로써 아크시네의 요염한 모습에 미혹당하지 않을 수 있게 된 것이다."
+      },
+      {
+        heading: "암흑의 왕",
+        text: "\"암흑의 왕\" 디아볼로스는 어둠의 왕이라 불리는 정령이다. 이 왕이 지배하는 '어둠의 시대'는 인류가 소멸한 '불의 시대' 뒤에 찾아오는 아무것도 없는 시대라 부르는 자도 있다. 이 정령의 왕은 도둑이나 암살자를 비롯하여 야음을 타서 일을 이루는 자들에게 가호를 준다 전해진다. 또한 자고 있는 사이에 꾸는 꿈을 관장한다는 전설도 있다. 디아볼로스는 물질계에 거의 현현하지 않는다고 전해진다. 그 모습은 항상 어둠에 싸여 있다. '무엇'이라는 것은 분명하지만, 그것이 무엇인지는 결코 알 수 없다……. 그런 존재라 한다."
+      },
+    ],
+    skills: [
+      {
+        name: "어둠의 손", nameJp: "暗闇の手",
+        timing: "판정의 직전", judge: "자동성공", target: "단체",
+        range: "20m", cost: "6", slMax: "1",
+        condition: "씬 1회",
+        effect: "(페이즈: 디아볼로스) 1로 취득 가능. 대상이 행하는 회피 판정 직전에 사용한다. 대상의 판정에 -1D한다. 손바닥 크기의 어둠으로 대상의 시야를 막아 무기나 마법을 하나 숨기는 천혜 스킬."
+      },
+      {
+        name: "어둠의 은총", nameJp: "闇の恩寵",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "1",
+        effect: "(페이즈: 디아볼로스) 1로 취득 가능. 〈어둠〉 속성 마법 데미지를 주는 공격에 유효. 공격의 데미지에 +1D한다. 어둠의 정령과 강한 연결이 있음을 나타내는 천혜 스킬."
+      },
+      {
+        name: "어둠 두르기", nameJp: "闇まとい",
+        timing: "패시브", judge: "─", target: "자신",
+        range: "─", cost: "─", slMax: "3",
+        condition: "은밀",
+        effect: "(페이즈: 디아볼로스) 1로 취득 가능. 공격의 데미지에 +[SL×3]한다. 당신의 모습을 감추고 있는 어둠을 이용하여 공격의 위력을 높이는 천혜 스킬."
+      },
+    ] as Skill[],
+  },
+]
+
+function SpiritKingsSection() {
+  return (
+    <section>
+      {/* 섹션 헤더 */}
+      <div style={{ borderBottom: `2px solid ${ACCENT}`, paddingBottom: 16, marginBottom: 28 }}>
+        <h2 style={{ margin: 0, fontSize: 28, color: "#F0E8C8", fontFamily: "'Noto Serif KR', serif" }}>
+          정령의 왕 <span style={{ fontSize: 16, color: "#8A7830", fontWeight: 400 }}>精霊の王</span>
+        </h2>
+        <p style={{ margin: "10px 0 0", color: "#B0A060", fontSize: 13 }}>
+          세계를 구성하는 6개의 원소를 관장하는 정령. 이들 정령을 묶는, 신들에 준하는 권능자로서 창조된 '정령의 왕'이라 불리는 존재이다.
+        </p>
+      </div>
+
+      {/* 소개 + 공유 이미지 */}
+      <div style={{ display: "flex", gap: 28, marginBottom: 36, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <Prose text="신들이 세계를 창조했던 '빛의 시대'. 〈지〉〈수〉〈화〉〈풍〉〈광〉〈암〉이라는 세계의 이치를 관장하는 것으로서, 신들은 정령을 창조했다. 신들은 이 정령들 중에서도 특히 빛나는 것들을 '왕'으로 정하고, 정령들을 묶도록 명했다. 이리하여 '정령의 왕'이 탄생한 것이다." />
+          <Prose text="정령에게 의지는 없지만, 신들에 준하는 것으로서 창조된 정령의 왕에게는 자아와 의지가 있다. 그러나 신들에게는 결코 거역할 수 없다. 그들은 어디까지나 신들에 따라 세계의 이치를 관장하는 존재인 것이다. 이 섹션에서는 6주의 정령의 왕을 소개한다." />
+          <div style={{
+            background: "#0C0A06", border: `1px solid ${ACCENT}`,
+            borderRadius: 8, padding: "10px 14px", marginTop: 12
+          }}>
+            <div style={{ color: ACCENT, fontWeight: 700, fontSize: 12, marginBottom: 8 }}>6주의 정령의 왕</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
+              {spiritKings.map(g => (
+                <div key={g.id} style={{ fontSize: 12 }}>
+                  <span style={{ color: g.accent, fontWeight: 700 }}>{g.name}</span>
+                  <div style={{ color: "#8A7830", fontSize: 10 }}>{g.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* 공유 이미지 슬롯 */}
+        <div style={{
+          width: 320, flexShrink: 0,
+          border: `2px solid ${ACCENT}`, borderRadius: 10, overflow: "hidden",
+          background: "#0C0A06"
+        }}>
+          <img
+            src="/spirit-kings/spirit-kings.jpg"
+            alt="정령의 왕 일람"
+            style={{ width: "100%", display: "block" }}
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement
+              img.style.display = "none"
+              const wrapper = img.parentElement
+              if (wrapper) {
+                wrapper.style.display = "flex"
+                wrapper.style.flexDirection = "column"
+                wrapper.style.alignItems = "center"
+                wrapper.style.justifyContent = "center"
+                wrapper.style.height = "280px"
+                wrapper.style.color = ACCENT
+                wrapper.style.gap = "8px"
+                wrapper.style.fontSize = "13px"
+                wrapper.innerHTML = `<span style="font-size:40px">🖼</span><span>정령의 왕 일람</span><span style="color:#5A5030;font-size:11px">/spirit-kings/spirit-kings.jpg</span>`
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      {/* 각 정령의 왕 */}
+      {spiritKings.map((g, idx) => (
+        <div key={g.id} style={{ marginBottom: idx < spiritKings.length - 1 ? 52 : 0 }}>
+          {/* 헤더 배너 */}
+          <div style={{
+            background: `linear-gradient(135deg, #0A0808 0%, ${g.accent}1A 100%)`,
+            border: `1px solid ${g.accent}`,
+            borderRadius: 8, padding: "14px 20px", marginBottom: 20,
+            display: "flex", alignItems: "center", gap: 12,
+          }}>
+            <span style={{
+              background: g.accent, color: "#0A0808",
+              fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, flexShrink: 0,
+            }}>{g.title}</span>
+            <h3 style={{ margin: 0, fontSize: 22, color: g.accent, fontFamily: "'Noto Serif KR', serif" }}>
+              {g.name}
+            </h3>
+            <span style={{ color: "#6A5820", fontSize: 13, marginLeft: 2 }}>{g.nameJp}</span>
+          </div>
+
+          {/* 로어 텍스트 */}
+          <div style={{ marginBottom: 20 }}>
+            {g.lore.map((section, i) => (
+              <div key={i} style={{ marginBottom: i < g.lore.length - 1 ? 18 : 0 }}>
+                <div style={{
+                  color: g.accent, fontWeight: 700, fontSize: 14,
+                  borderLeft: `3px solid ${g.accent}`, paddingLeft: 10, marginBottom: 8
+                }}>
+                  {section.heading}
+                </div>
+                <p style={{ margin: 0, color: "#C8B870", fontSize: 13, lineHeight: 1.85 }}>
+                  {section.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* 스킬 카드 */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+            {g.skills.map((skill, si) => (
+              <SkillCard key={si} skill={skill} accent={g.accent} />
+            ))}
+          </div>
+
+          {idx < spiritKings.length - 1 && (
+            <div style={{ borderTop: "1px solid #2A2810", marginTop: 44 }} />
+          )}
+        </div>
+      ))}
+    </section>
+  )
+}
+
 // ── 섹션 컴포넌트 ──────────────────────────────────────────────────────────────
 
 function OverviewSection() {
@@ -1516,6 +2145,8 @@ const navItems = [
   { id: "granain",    label: "그랑아인",   icon: "⚡" },
   { id: "minor",      label: "소신",       icon: "⭐" },
   { id: "messengers", label: "신사",       icon: "🕊️" },
+  { id: "heroes",     label: "영웅신",     icon: "🦸" },
+  { id: "spirits",    label: "정령의 왕",  icon: "✨" },
 ]
 
 const godAccentMap: Record<string, string> = Object.fromEntries(
@@ -1536,6 +2167,8 @@ export default function MythologyPage() {
       case "gods":      return <GodsOverviewSection />
       case "minor":      return <MinorGodsSection />
       case "messengers": return <DivineMassengersSection />
+      case "heroes":     return <HeroGodsSection />
+      case "spirits":    return <SpiritKingsSection />
       default:
         if (godData) return <GodSection god={godData} />
         return <OverviewSection />
