@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 
 // ─── 타입 ──────────────────────────────────────────────────────────────────
 
-type SkillTier = 'normal' | 'cl5' | 'cl10' | 'special'
+type SkillTier = 'making' | 'normal' | 'cl5' | 'cl10' | 'special'
 
 interface Skill {
   id: string
@@ -36,7 +36,17 @@ interface Aggregate {
 // ─── 데이터 ─────────────────────────────────────────────────────────────────
 
 const RACES: Category[] = [
-  { id: 'hurin',      name: '휴린',       accent: '#C85A1E', skills: [] },
+  { id: 'hurin', name: '휴린', accent: '#C85A1E', skills: [
+    { id: 'hurin-ollaround',      name: '올라운드',      tier: 'making' },
+    { id: 'hurin-providence',     name: '프로비던스',    tier: 'making' },
+    { id: 'hurin-half-blood',     name: '하프 블러드',   tier: 'making' },
+    { id: 'hurin-gift',           name: '기프트',        tier: 'normal' },
+    { id: 'hurin-combat-mastery', name: '컴뱃 마스터리', tier: 'normal' },
+    { id: 'hurin-predominant',    name: '프리도미던트',  tier: 'normal' },
+    { id: 'hurin-razor-sharp',    name: '레이저 샤프',   tier: 'cl5'    },
+    { id: 'hurin-meister',        name: '마이스터',      tier: 'cl5'    },
+    { id: 'hurin-esotekira',      name: '에소테키라',    tier: 'cl10'   },
+  ] },
   { id: 'eldanan',    name: '엘다난',     accent: '#5A6A9A', skills: [] },
   { id: 'nevaf',      name: '네바프',     accent: '#7A6030', skills: [] },
   { id: 'pilbor',     name: '필보르',     accent: '#4A8A5A', skills: [] },
@@ -68,6 +78,7 @@ const ACCENT_MAIN = '#5E3A1E'
 const SIDEBAR_BG = '#1E1812'
 
 const TIER_CONFIG: Record<SkillTier, { label: string; color: string; bg: string }> = {
+  making:  { label: '메이킹', color: '#7B8FE8', bg: '#7B8FE822' },
   normal:  { label: '일반',   color: '#4CAF50', bg: '#4CAF5022' },
   cl5:     { label: 'CL5+',  color: '#FFC107', bg: '#FFC10722' },
   cl10:    { label: 'CL10+', color: '#8D6E63', bg: '#8D6E6322' },
@@ -430,7 +441,10 @@ export default function SkillsPage() {
           transition: 'left 0.3s ease', boxShadow: showNav ? '4px 0 20px rgba(0,0,0,0.4)' : 'none',
         } : {}),
       }}>
-        <div style={{ padding: '28px 20px 16px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ padding: '16px 20px 14px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#7A6A50', textDecoration: 'none', marginBottom: 10, letterSpacing: '0.02em' }}>
+            ← 메인으로
+          </a>
           <div style={{ fontSize: 10, letterSpacing: '0.2em', color: '#7a7060', marginBottom: 6, fontFamily: "'Noto Serif KR', serif" }}>ARIANROD 2E · SKILL WIKI</div>
           <div style={{ fontSize: 17, fontWeight: 700, color: '#E8E2D4', letterSpacing: '0.04em', lineHeight: 1.4, fontFamily: "'Noto Serif KR', serif" }}>아리안로드<br />스킬 위키</div>
         </div>
@@ -478,13 +492,7 @@ export default function SkillsPage() {
           })}
         </div>
 
-        <div style={{ padding: '12px 20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <a href="/mythology" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#9A7A18', textDecoration: 'none', background: 'rgba(154,122,24,0.08)', borderRadius: 6, padding: '7px 10px', marginBottom: 6, border: '1px solid rgba(154,122,24,0.2)' }}>
-            <span>✨</span><span style={{ fontWeight: 500 }}>신화 가이드</span>
-          </a>
-          <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#9A7A18', textDecoration: 'none', background: 'rgba(154,122,24,0.08)', borderRadius: 6, padding: '7px 10px', marginBottom: 10, border: '1px solid rgba(154,122,24,0.2)' }}>
-            <span>🌍</span><span style={{ fontWeight: 500 }}>월드 섹션</span>
-          </a>
+        <div style={{ padding: '10px 20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <div style={{ fontSize: 11, color: '#5A4A30' }}>아리안로드 위키</div>
         </div>
       </nav>
