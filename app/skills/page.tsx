@@ -774,7 +774,7 @@ const CLASSES: Category[] = [
     { id: 'brd-allegro',           name: '알레그로',            tier: 'normal' },
     { id: 'brd-accessory-change',  name: '액세서리 체인지',     tier: 'normal' },
     { id: 'brd-anthem',            name: '앤섬',                tier: 'normal' },
-    { id: 'brd-impromptu',         name: '엠프롱프투',          tier: 'normal' },
+    { id: 'brd-impromptu',         name: '엠프롱프튀',          tier: 'normal' },
     { id: 'brd-etude',             name: '에튀드',              tier: 'normal' },
     { id: 'brd-oratorio',          name: '오라토리오',          tier: 'normal' },
     { id: 'brd-joyful-joyful',     name: '조이풀 조이풀',       tier: 'normal' },
