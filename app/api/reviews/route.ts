@@ -1,9 +1,13 @@
 import { NextRequest } from 'next/server'
-import { readFileSync, writeFileSync, mkdirSync } from 'fs'
-import { join, dirname } from 'path'
+import { Redis } from '@upstash/redis'
 import { createHash } from 'crypto'
 
-const DB_PATH = join(process.cwd(), 'data', 'reviews.json')
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
+})
+
+const DB_KEY = 'arianrode:reviews'
 
 interface Review {
   id: string
@@ -15,21 +19,17 @@ interface Review {
   createdAt: string
 }
 
-interface DB {
-  reviews: Review[]
-}
-
-function readDB(): DB {
+async function readReviews(): Promise<Review[]> {
   try {
-    return JSON.parse(readFileSync(DB_PATH, 'utf-8'))
+    const data = await redis.get<Review[]>(DB_KEY)
+    return data ?? []
   } catch {
-    return { reviews: [] }
+    return []
   }
 }
 
-function writeDB(data: DB) {
-  mkdirSync(dirname(DB_PATH), { recursive: true })
-  writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8')
+async function writeReviews(reviews: Review[]) {
+  await redis.set(DB_KEY, reviews)
 }
 
 function hashPassword(password: string): string {
@@ -44,23 +44,23 @@ function sanitize(r: Review) {
 
 export async function GET(req: NextRequest) {
   const skillId = req.nextUrl.searchParams.get('skillId')
-  const db = readDB()
+  const reviews = await readReviews()
 
   if (skillId) {
-    const reviews = db.reviews.filter(r => r.skillId === skillId)
-    const avgRating = reviews.length > 0
-      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+    const filtered = reviews.filter(r => r.skillId === skillId)
+    const avgRating = filtered.length > 0
+      ? filtered.reduce((sum, r) => sum + r.rating, 0) / filtered.length
       : 0
     return Response.json({
-      reviews: reviews.map(sanitize),
+      reviews: filtered.map(sanitize),
       avgRating: Math.round(avgRating * 10) / 10,
-      count: reviews.length,
+      count: filtered.length,
     })
   }
 
   // 전체 스킬별 평균 집계
   const aggregates: Record<string, { avgRating: number; count: number }> = {}
-  for (const r of db.reviews) {
+  for (const r of reviews) {
     if (!aggregates[r.skillId]) aggregates[r.skillId] = { avgRating: 0, count: 0 }
     aggregates[r.skillId].count++
     aggregates[r.skillId].avgRating += r.rating
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: '평점은 1~5 사이여야 합니다.' }, { status: 400 })
   }
 
-  const db = readDB()
+  const reviews = await readReviews()
   const review: Review = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
     skillId,
@@ -95,8 +95,8 @@ export async function POST(req: NextRequest) {
     createdAt: new Date().toISOString(),
   }
 
-  db.reviews.push(review)
-  writeDB(db)
+  reviews.push(review)
+  await writeReviews(reviews)
 
   return Response.json({ success: true, review: sanitize(review) })
 }
@@ -113,11 +113,11 @@ export async function DELETE(req: NextRequest) {
     // no body
   }
 
-  const db = readDB()
-  const index = db.reviews.findIndex(r => r.id === id)
+  const reviews = await readReviews()
+  const index = reviews.findIndex(r => r.id === id)
   if (index === -1) return Response.json({ error: '리뷰를 찾을 수 없습니다.' }, { status: 404 })
 
-  const review = db.reviews[index]
+  const review = reviews[index]
   if (review.passwordHash) {
     if (!password) return Response.json({ error: '비밀번호가 필요합니다.' }, { status: 403 })
     if (hashPassword(password) !== review.passwordHash) {
@@ -125,8 +125,8 @@ export async function DELETE(req: NextRequest) {
     }
   }
 
-  db.reviews.splice(index, 1)
-  writeDB(db)
+  reviews.splice(index, 1)
+  await writeReviews(reviews)
 
   return Response.json({ success: true })
 }
