@@ -72,7 +72,9 @@ export async function GET(req: NextRequest) {
     a.avgRating = Math.round((a.avgRating / a.count) * 10) / 10
   }
 
-  return Response.json({ aggregates })
+  return Response.json({ aggregates }, {
+    headers: { 'Cache-Control': 'no-store, max-age=0' },
+  })
 }
 
 export async function POST(req: NextRequest) {

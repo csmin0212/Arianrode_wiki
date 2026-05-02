@@ -1942,9 +1942,9 @@ function Stars({ value, onChange, size = 20 }: { value: number; onChange?: (v: n
 }
 
 function SkillCard({
-  skill, accent, aggregate, onClick, selected,
+  skill, accent, aggregate, aggregatesLoaded, onClick, selected,
 }: {
-  skill: Skill; accent: string; aggregate?: Aggregate; onClick: () => void; selected: boolean
+  skill: Skill; accent: string; aggregate?: Aggregate; aggregatesLoaded: boolean; onClick: () => void; selected: boolean
 }) {
   return (
     <button
@@ -1969,16 +1969,16 @@ function SkillCard({
             <Stars value={Math.round(aggregate.avgRating)} size={13} />
             <span style={{ fontSize: 11, color: '#A09070' }}>{aggregate.avgRating.toFixed(1)} ({aggregate.count})</span>
           </div>
-        ) : (
+        ) : aggregatesLoaded ? (
           <span style={{ fontSize: 11, color: '#5A4A30', flexShrink: 0 }}>미평가</span>
-        )}
+        ) : null}
       </div>
     </button>
   )
 }
 
-function SkillDetail({ skill, accent, onClose }: {
-  skill: Skill; accent: string; onClose: () => void
+function SkillDetail({ skill, accent, onClose, onReviewSubmitted }: {
+  skill: Skill; accent: string; onClose: () => void; onReviewSubmitted: () => void
 }) {
   const [reviews, setReviews] = useState<Review[]>([])
   const [avgRating, setAvgRating] = useState(0)
@@ -2025,6 +2025,7 @@ function SkillDetail({ skill, accent, onClose }: {
       if (res.ok) {
         setRating(0); setComment(''); setAuthorName(''); setPassword('')
         await fetchReviews()
+        onReviewSubmitted()
       } else {
         const data = await res.json()
         setFormError(data.error || '오류가 발생했습니다.')
@@ -2185,6 +2186,7 @@ export default function SkillsPage() {
   const [selectedId, setSelectedId] = useState<string>(RACES[0].id)
   const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null)
   const [aggregates, setAggregates] = useState<Record<string, Aggregate>>({})
+  const [aggregatesLoaded, setAggregatesLoaded] = useState(false)
   const [mob, setMob] = useState(false)
   const [showNav, setShowNav] = useState(false)
 
@@ -2198,8 +2200,8 @@ export default function SkillsPage() {
   useEffect(() => {
     fetch('/api/reviews', { cache: 'no-store' })
       .then(r => r.json())
-      .then(data => setAggregates(data.aggregates || {}))
-      .catch(() => {})
+      .then(data => { setAggregates(data.aggregates || {}); setAggregatesLoaded(true) })
+      .catch(() => { setAggregatesLoaded(true) })
   }, [])
 
   const categories = tab === 'race' ? RACES : CLASSES
@@ -2293,7 +2295,9 @@ export default function SkillsPage() {
                 <span>{cat.name}</span>
                 {avg !== null
                   ? <span style={{ fontSize: 10, color: '#F0C030' }}>★ {avg.toFixed(1)}</span>
-                  : <span style={{ fontSize: 10, color: '#4A3A20' }}>미평가</span>
+                  : aggregatesLoaded
+                    ? <span style={{ fontSize: 10, color: '#4A3A20' }}>미평가</span>
+                    : null
                 }
               </button>
             )
@@ -2313,6 +2317,7 @@ export default function SkillsPage() {
             skill={selectedSkill}
             accent={selectedCat.accent}
             onClose={() => { setSelectedSkillId(null); refreshAggregates() }}
+            onReviewSubmitted={refreshAggregates}
           />
         ) : (
           <div style={{ flex: 1, overflowY: 'auto' }}>
@@ -2355,6 +2360,7 @@ export default function SkillsPage() {
                       skill={skill}
                       accent={selectedCat.accent}
                       aggregate={aggregates[skill.id]}
+                      aggregatesLoaded={aggregatesLoaded}
                       onClick={() => setSelectedSkillId(skill.id)}
                       selected={false}
                     />
