@@ -2196,7 +2196,7 @@ export default function SkillsPage() {
   }, [])
 
   useEffect(() => {
-    fetch('/api/reviews')
+    fetch('/api/reviews', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => setAggregates(data.aggregates || {}))
       .catch(() => {})
@@ -2220,7 +2220,7 @@ export default function SkillsPage() {
   }
 
   function refreshAggregates() {
-    fetch('/api/reviews')
+    fetch('/api/reviews', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => setAggregates(data.aggregates || {}))
       .catch(() => {})
