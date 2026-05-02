@@ -1552,7 +1552,7 @@ const CLASSES: Category[] = [
     { id: 'mlt-weapon-wing',       name: '웨폰 윙',             tier: 'normal' },
     { id: 'mlt-weapon-regain',     name: '웨폰 리게인',         tier: 'normal' },
   ] },
-  { id: 'contractor', name: '컨트렉터', accent: '#7A5A9A', skills: [
+  { id: 'contractor', name: '컨트렉터(레거시)', accent: '#7A5A9A', skills: [
     { id: 'ctr-contract',          name: '컨트랙트',            tier: 'normal' },
     { id: 'ctr-contract-mastery',  name: '컨트랙트 마스터리',   tier: 'normal' },
     { id: 'ctr-chant-contract',    name: '체인트 컨트랙트',     tier: 'normal' },
@@ -1581,7 +1581,7 @@ const CLASSES: Category[] = [
     { id: 'ctr-lenanshee-lute',    name: '라난시 류트',         tier: 'normal' },
     { id: 'ctr-lenanshee-recital', name: '라난시 리사이틀',     tier: 'normal' },
   ] },
-  { id: 'warlock', name: '워록', accent: '#6A2080', skills: [
+  { id: 'warlock', name: '워록(레거시)', accent: '#6A2080', skills: [
     { id: 'wlk-elemental-weapon',  name: '엘레멘탈 웨폰',       tier: 'normal' },
     { id: 'wlk-great-elemental',   name: '그레이트 엘레멘탈',   tier: 'normal' },
     { id: 'wlk-double-elemental',  name: '더블 엘레멘탈',       tier: 'normal' },
@@ -1610,7 +1610,7 @@ const CLASSES: Category[] = [
     { id: 'wlk-heavy-dark',        name: '해비 다크',           tier: 'normal' },
     { id: 'wlk-long-shadow',       name: '롱 새도우',           tier: 'normal' },
   ] },
-  { id: 'fortunate', name: '포츄네이트', accent: '#C0A030', skills: [
+  { id: 'fortunate', name: '포츄네이트(레거시)', accent: '#C0A030', skills: [
     { id: 'ftn-arcana',            name: '아르카나',            tier: 'normal' },
     { id: 'ftn-card-boost',        name: '카드 부스트',         tier: 'normal' },
     { id: 'ftn-card-master',       name: '카드 마스터',         tier: 'normal' },
@@ -1621,7 +1621,7 @@ const CLASSES: Category[] = [
     { id: 'ftn-reserve',           name: '리저브',              tier: 'normal' },
     { id: 'ftn-reverse-card',      name: '리버스 카드',         tier: 'normal' },
   ] },
-  { id: 'warlord', name: '워로드', accent: '#A02828', skills: [
+  { id: 'warlord', name: '워로드(상급)', accent: '#A02828', skills: [
     { id: 'wld-great-burst',       name: '그레이트 버스트',     tier: 'normal' },
     { id: 'wld-desperado',         name: '데스페라도',          tier: 'normal' },
     { id: 'wld-defense-line',      name: '디펜스 라인',         tier: 'normal' },
@@ -1653,7 +1653,7 @@ const CLASSES: Category[] = [
     { id: 'wld-clock-up-force',    name: '클록 업 포스',        tier: 'normal' },
     { id: 'wld-hyper-gain',        name: '하이퍼 게인',         tier: 'normal' },
   ] },
-  { id: 'knight', name: '나이트', accent: '#4A6A9A', skills: [
+  { id: 'knight', name: '나이트(상급)', accent: '#4A6A9A', skills: [
     { id: 'knt-grandeur',          name: '그란디어',            tier: 'normal' },
     { id: 'knt-gladiate',          name: '글라디에이트',        tier: 'normal' },
     { id: 'knt-riding',            name: '라이딩',              tier: 'normal' },
@@ -1685,7 +1685,7 @@ const CLASSES: Category[] = [
     { id: 'knt-aggrandize',        name: '어그란다이즈',        tier: 'normal' },
     { id: 'knt-impregnable',       name: '인프래그너블',        tier: 'normal' },
   ] },
-  { id: 'paladin', name: '팔라딘', accent: '#C8B040', skills: [
+  { id: 'paladin', name: '팔라딘(상급)', accent: '#C8B040', skills: [
     { id: 'pld-go-slow',           name: '고 슬로우',           tier: 'normal' },
     { id: 'pld-grace-force',       name: '그레이스 포스',       tier: 'normal' },
     { id: 'pld-dignity',           name: '디그니티',            tier: 'normal' },
@@ -1717,7 +1717,7 @@ const CLASSES: Category[] = [
     { id: 'pld-field-protection',  name: '필드 프로텍션',       tier: 'normal' },
     { id: 'pld-high-punisher',     name: '하이 퍼니셔',         tier: 'normal' },
   ] },
-  { id: 'priest', name: '프리스트', accent: '#8A60C0', skills: [
+  { id: 'priest', name: '프리스트(상급)', accent: '#8A60C0', skills: [
     { id: 'pst-god-force',         name: '갓 포스',             tier: 'normal' },
     { id: 'pst-glory-divine',      name: '글로리 디바인',       tier: 'normal' },
     { id: 'pst-dark-star',         name: '다크 스타',           tier: 'normal' },
@@ -1749,7 +1749,7 @@ const CLASSES: Category[] = [
     { id: 'pst-holy-war',          name: '홀리 워',             tier: 'normal' },
     { id: 'pst-heal-mastery',      name: '힐 마스터',           tier: 'normal' },
   ] },
-  { id: 'wizard', name: '위저드', accent: '#4878C0', skills: [
+  { id: 'wizard', name: '위저드(상급)', accent: '#4878C0', skills: [
     { id: 'wzd-dual-effect',       name: '듀얼 이펙트',         tier: 'normal' },
     { id: 'wzd-long-spell',        name: '롱 스펠',             tier: 'normal' },
     { id: 'wzd-magic-edge',        name: '매직 에지',           tier: 'normal' },
@@ -1781,7 +1781,7 @@ const CLASSES: Category[] = [
     { id: 'wzd-frost-prism',       name: '프로스트 프리즘',     tier: 'normal' },
     { id: 'wzd-flame-crack',       name: '플레임 크랙',         tier: 'normal' },
   ] },
-  { id: 'sorcerer', name: '소서러', accent: '#B84040', skills: [
+  { id: 'sorcerer', name: '소서러(상급)', accent: '#B84040', skills: [
     { id: 'src-negate',            name: '니게이트',            tier: 'normal' },
     { id: 'src-double-cast',       name: '더블 캐스트',         tier: 'normal' },
     { id: 'src-demons-web',        name: '데몬즈 웹',           tier: 'normal' },
@@ -1813,7 +1813,7 @@ const CLASSES: Category[] = [
     { id: 'src-aggressive-magic',  name: '어그레시브 매직',     tier: 'normal' },
     { id: 'src-fine-art',          name: '파인 아트',           tier: 'normal' },
   ] },
-  { id: 'explorer', name: '익스플로러', accent: '#40A060', skills: [
+  { id: 'explorer', name: '익스플로러(상급)', accent: '#40A060', skills: [
     { id: 'exp-gale-slash',        name: '게일 슬래시',         tier: 'normal' },
     { id: 'exp-ghost-step',        name: '고스트 스텝',         tier: 'normal' },
     { id: 'exp-ghost-attack',      name: '고스트 어택',         tier: 'normal' },
@@ -1845,7 +1845,7 @@ const CLASSES: Category[] = [
     { id: 'exp-accel-hit',         name: '액셀 히트',           tier: 'normal' },
     { id: 'exp-top-gear',          name: '탑 기어',             tier: 'normal' },
   ] },
-  { id: 'scout', name: '스카우트', accent: '#8B6914', skills: [
+  { id: 'scout', name: '스카우트(상급)', accent: '#8B6914', skills: [
     { id: 'sct-double-shot',       name: '더블 샷',             tier: 'normal' },
     { id: 'sct-defense-trick',     name: '디펜스 트릭',         tier: 'normal' },
     { id: 'sct-last-luck',         name: '라스트 럭',           tier: 'normal' },
