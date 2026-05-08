@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useContext, createContext, useMemo } from 'react'
 
 // ─── 타입 ──────────────────────────────────────────────────────────────────
 
@@ -1879,6 +1879,24 @@ const CLASSES: Category[] = [
   ] },
 ]
 
+// ─── 테마 ──────────────────────────────────────────────────────────────────
+
+interface ThemeConfig {
+  bg: string; sidebarBg: string; cardBg: string; cardBorder: string
+  text: string; textMuted: string; textSubtle: string; accentMain: string
+}
+
+const DARK_THEME: ThemeConfig = {
+  bg: '#06080E', sidebarBg: '#1E1812', cardBg: '#0E0C08', cardBorder: '#2A2520',
+  text: '#D0C8B0', textMuted: '#7A6A50', textSubtle: '#5A4A30', accentMain: '#5E3A1E',
+}
+const LIGHT_THEME: ThemeConfig = {
+  bg: '#F2EDE4', sidebarBg: '#E4DDD0', cardBg: '#FDFAF5', cardBorder: '#D0C8B8',
+  text: '#2A2018', textMuted: '#7A6050', textSubtle: '#9A8870', accentMain: '#8B5A2B',
+}
+
+const ThemeCtx = createContext<ThemeConfig>(DARK_THEME)
+
 // ─── 유틸 ──────────────────────────────────────────────────────────────────
 
 const ACCENT_MAIN = '#5E3A1E'
@@ -1946,12 +1964,13 @@ function SkillCard({
 }: {
   skill: Skill; accent: string; aggregate?: Aggregate; aggregatesLoaded: boolean; onClick: () => void; selected: boolean
 }) {
+  const th = useContext(ThemeCtx)
   return (
     <button
       onClick={onClick}
       style={{
-        background: selected ? avgColor(accent, 0.2) : '#0E0C08',
-        border: `1px solid ${selected ? accent : '#2A2520'}`,
+        background: selected ? avgColor(accent, 0.2) : th.cardBg,
+        border: `1px solid ${selected ? accent : th.cardBorder}`,
         borderRadius: 10, padding: '16px 18px',
         textAlign: 'left', cursor: 'pointer',
         transition: 'all 0.15s', width: '100%',
@@ -1959,7 +1978,7 @@ function SkillCard({
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 700, color: '#F0E0C0', fontSize: 15, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <div style={{ fontWeight: 700, color: th.text, fontSize: 15, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {skill.name}
           </div>
           <TierBadge tier={skill.tier} />
@@ -1967,10 +1986,10 @@ function SkillCard({
         {aggregate && aggregate.count > 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3, flexShrink: 0 }}>
             <Stars value={Math.round(aggregate.avgRating)} size={13} />
-            <span style={{ fontSize: 11, color: '#A09070' }}>{aggregate.avgRating.toFixed(1)} ({aggregate.count})</span>
+            <span style={{ fontSize: 11, color: th.textMuted }}>{aggregate.avgRating.toFixed(1)} ({aggregate.count})</span>
           </div>
         ) : aggregatesLoaded ? (
-          <span style={{ fontSize: 11, color: '#5A4A30', flexShrink: 0 }}>미평가</span>
+          <span style={{ fontSize: 11, color: th.textSubtle, flexShrink: 0 }}>미평가</span>
         ) : null}
       </div>
     </button>
@@ -2190,6 +2209,43 @@ export default function SkillsPage() {
   const [mob, setMob] = useState(false)
   const [showNav, setShowNav] = useState(false)
 
+  // ── 테마 ──
+  type ThemeMode = 'dark' | 'light' | 'custom'
+  const [themeMode, setThemeMode] = useState<ThemeMode>('dark')
+  const [customBg,        setCustomBg]        = useState('#1A1A2E')
+  const [customSidebar,   setCustomSidebar]   = useState('#16213E')
+  const [customAccent,    setCustomAccent]    = useState('#5E3A1E')
+  const [showSettings,    setShowSettings]    = useState(false)
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('wiki-theme') || '{}')
+      if (saved.mode) setThemeMode(saved.mode)
+      if (saved.customBg)      setCustomBg(saved.customBg)
+      if (saved.customSidebar) setCustomSidebar(saved.customSidebar)
+      if (saved.customAccent)  setCustomAccent(saved.customAccent)
+    } catch { /* ignore */ }
+  }, [])
+
+  const theme = useMemo<ThemeConfig>(() => {
+    if (themeMode === 'dark')  return DARK_THEME
+    if (themeMode === 'light') return LIGHT_THEME
+    const isDark = parseInt(customBg.slice(1), 16) < 0x888888
+    return {
+      bg: customBg, sidebarBg: customSidebar,
+      cardBg:     customBg + (isDark ? 'CC' : 'AA'),
+      cardBorder: customAccent + '55',
+      text:       isDark ? '#D0C8B0' : '#2A2018',
+      textMuted:  isDark ? '#7A6A50' : '#7A6050',
+      textSubtle: isDark ? '#5A4A30' : '#9A8870',
+      accentMain: customAccent,
+    }
+  }, [themeMode, customBg, customSidebar, customAccent])
+
+  function saveTheme(mode: ThemeMode, bg = customBg, sb = customSidebar, acc = customAccent) {
+    localStorage.setItem('wiki-theme', JSON.stringify({ mode, customBg: bg, customSidebar: sb, customAccent: acc }))
+  }
+
   useEffect(() => {
     const check = () => setMob(window.innerWidth <= 768)
     check()
@@ -2228,45 +2284,136 @@ export default function SkillsPage() {
       .catch(() => {})
   }
 
+  // 설정 패널 색상 (모드에 관계없이 항상 어두운 팝업)
+  const panelBg = '#1A1612', panelBorder = '#3A3028'
+
   return (
-    <div style={{ display: 'flex', height: '100vh', fontFamily: "'Noto Sans KR', sans-serif", background: '#06080E', color: '#D0C8B0' }}>
+    <ThemeCtx.Provider value={theme}>
+    <div style={{ display: 'flex', height: '100vh', fontFamily: "'Noto Sans KR', sans-serif", background: theme.bg, color: theme.text, transition: 'background 0.3s, color 0.3s' }}>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet" />
 
       {mob && (
         <button
           onClick={() => setShowNav(!showNav)}
-          style={{ position: 'fixed', top: 12, left: 12, zIndex: 1000, background: ACCENT_MAIN, color: '#fff', border: 'none', borderRadius: 8, padding: '8px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+          style={{ position: 'fixed', top: 12, left: 12, zIndex: 1000, background: theme.accentMain, color: '#fff', border: 'none', borderRadius: 8, padding: '8px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
         >
           {showNav ? '✕' : '☰'}
         </button>
       )}
 
+      {/* ── 설정 버튼 ────────────────────────────────── */}
+      <button
+        onClick={() => setShowSettings(v => !v)}
+        title="테마 설정"
+        style={{
+          position: 'fixed', top: 16, right: 16, zIndex: 1100,
+          width: 36, height: 36, borderRadius: '50%',
+          background: showSettings ? theme.accentMain : theme.sidebarBg,
+          border: `1px solid ${theme.accentMain}55`,
+          color: showSettings ? '#fff' : theme.textMuted,
+          fontSize: 16, cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.35)',
+          transition: 'all 0.2s',
+        }}
+      >⚙</button>
+
+      {/* ── 설정 패널 ────────────────────────────────── */}
+      {showSettings && (
+        <>
+          {/* 바깥 클릭 닫기 */}
+          <div onClick={() => setShowSettings(false)} style={{ position: 'fixed', inset: 0, zIndex: 1099 }} />
+          <div style={{
+            position: 'fixed', top: 58, right: 16, zIndex: 1100,
+            background: panelBg, border: `1px solid ${panelBorder}`,
+            borderRadius: 14, padding: '18px 20px', width: 260,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+            animation: 'fadeSlideDown 0.18s ease',
+          }}>
+            <style>{`@keyframes fadeSlideDown { from { opacity:0; transform:translateY(-8px) } to { opacity:1; transform:translateY(0) } }`}</style>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: '#7A6A50', marginBottom: 14 }}>THEME</div>
+
+            {/* 모드 버튼 3개 */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+              {([
+                { mode: 'dark'   as const, label: '🌙 다크',   },
+                { mode: 'light'  as const, label: '☀️ 라이트', },
+                { mode: 'custom' as const, label: '🎨 커스텀', },
+              ]).map(({ mode, label }) => (
+                <button key={mode} onClick={() => { setThemeMode(mode); saveTheme(mode) }}
+                  style={{
+                    flex: 1, padding: '7px 0', border: `1px solid ${themeMode === mode ? theme.accentMain : panelBorder}`,
+                    borderRadius: 8, cursor: 'pointer', fontSize: 11, fontWeight: 600,
+                    background: themeMode === mode ? theme.accentMain + '33' : 'transparent',
+                    color: themeMode === mode ? '#E8D8B0' : '#7A6A50',
+                    transition: 'all 0.15s',
+                  }}
+                >{label}</button>
+              ))}
+            </div>
+
+            {/* 커스텀 색상 피커 */}
+            {themeMode === 'custom' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {([
+                  { label: '배경색',   val: customBg,      set: setCustomBg,      key: 'bg'      },
+                  { label: '사이드바', val: customSidebar, set: setCustomSidebar, key: 'sidebar' },
+                  { label: '강조색',   val: customAccent,  set: setCustomAccent,  key: 'accent'  },
+                ] as const).map(({ label, val, set }) => (
+                  <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+                    <span style={{ fontSize: 12, color: '#A09070', flex: 1 }}>{label}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontSize: 11, color: '#6A5A40', fontFamily: 'monospace' }}>{val}</span>
+                      <input type="color" value={val}
+                        onChange={e => {
+                          set(e.target.value)
+                          saveTheme('custom',
+                            label === '배경색'   ? e.target.value : customBg,
+                            label === '사이드바' ? e.target.value : customSidebar,
+                            label === '강조색'   ? e.target.value : customAccent,
+                          )
+                        }}
+                        style={{
+                          width: 32, height: 28, border: 'none', borderRadius: 6,
+                          cursor: 'pointer', padding: 2, background: 'transparent',
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
       {/* ── 사이드바 ─────────────────────────────────── */}
       <nav style={{
         width: 248, minWidth: 248,
-        background: SIDEBAR_BG, color: '#D4CFC7',
+        background: theme.sidebarBg, color: theme.text,
         display: 'flex', flexDirection: 'column', overflow: 'hidden',
+        transition: 'background 0.3s',
         ...(mob ? {
           position: 'fixed', top: 0, left: showNav ? 0 : -260, height: '100vh', zIndex: 999,
           transition: 'left 0.3s ease', boxShadow: showNav ? '4px 0 20px rgba(0,0,0,0.4)' : 'none',
         } : {}),
       }}>
-        <div style={{ padding: '16px 20px 14px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#7A6A50', textDecoration: 'none', marginBottom: 10, letterSpacing: '0.02em' }}>
+        <div style={{ padding: '16px 20px 14px', borderBottom: `1px solid ${theme.accentMain}22` }}>
+          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: theme.textMuted, textDecoration: 'none', marginBottom: 10, letterSpacing: '0.02em' }}>
             ← 메인으로
           </a>
-          <div style={{ fontSize: 10, letterSpacing: '0.2em', color: '#7a7060', marginBottom: 6, fontFamily: "'Noto Serif KR', serif" }}>ARIANROD 2E · SKILL WIKI</div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: '#E8E2D4', letterSpacing: '0.04em', lineHeight: 1.4, fontFamily: "'Noto Serif KR', serif" }}>아리안로드<br />스킬 위키</div>
+          <div style={{ fontSize: 10, letterSpacing: '0.2em', color: theme.textMuted, marginBottom: 6, fontFamily: "'Noto Serif KR', serif" }}>ARIANROD 2E · SKILL WIKI</div>
+          <div style={{ fontSize: 17, fontWeight: 700, color: theme.text, letterSpacing: '0.04em', lineHeight: 1.4, fontFamily: "'Noto Serif KR', serif" }}>아리안로드<br />스킬 위키</div>
         </div>
 
-        <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ display: 'flex', borderBottom: `1px solid ${theme.accentMain}22` }}>
           {(['race', 'class'] as const).map(t => (
             <button key={t} onClick={() => { setTab(t); setSelectedId(t === 'race' ? RACES[0].id : CLASSES[0].id); setSelectedSkillId(null) }}
               style={{
                 flex: 1, padding: '10px 0', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
-                background: tab === t ? 'rgba(255,255,255,0.07)' : 'transparent',
-                color: tab === t ? '#E8E2D4' : '#6A6050',
-                borderBottom: tab === t ? `2px solid ${ACCENT_MAIN}` : '2px solid transparent',
+                background: tab === t ? `${theme.accentMain}22` : 'transparent',
+                color: tab === t ? theme.text : theme.textMuted,
+                borderBottom: tab === t ? `2px solid ${theme.accentMain}` : '2px solid transparent',
               }}
             >
               {t === 'race' ? '종족' : '클래스'}
@@ -2286,8 +2433,8 @@ export default function SkillsPage() {
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                   width: '100%', padding: '9px 20px', border: 'none', cursor: 'pointer', textAlign: 'left',
                   fontSize: 13, fontWeight: isActive ? 600 : 400,
-                  background: isActive ? 'rgba(255,255,255,0.07)' : 'transparent',
-                  color: isActive ? cat.accent : '#A09888',
+                  background: isActive ? `${theme.accentMain}22` : 'transparent',
+                  color: isActive ? cat.accent : theme.textMuted,
                   borderLeft: isActive ? `3px solid ${cat.accent}` : '3px solid transparent',
                   transition: 'all 0.15s',
                 }}
@@ -2296,7 +2443,7 @@ export default function SkillsPage() {
                 {avg !== null
                   ? <span style={{ fontSize: 10, color: '#F0C030' }}>★ {avg.toFixed(1)}</span>
                   : aggregatesLoaded
-                    ? <span style={{ fontSize: 10, color: '#4A3A20' }}>미평가</span>
+                    ? <span style={{ fontSize: 10, color: theme.textSubtle }}>미평가</span>
                     : null
                 }
               </button>
@@ -2304,8 +2451,8 @@ export default function SkillsPage() {
           })}
         </div>
 
-        <div style={{ padding: '10px 20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ fontSize: 11, color: '#5A4A30' }}>아리안로드 위키</div>
+        <div style={{ padding: '10px 20px', borderTop: `1px solid ${theme.accentMain}18` }}>
+          <div style={{ fontSize: 11, color: theme.textSubtle }}>아리안로드 위키</div>
         </div>
       </nav>
 
@@ -2321,9 +2468,9 @@ export default function SkillsPage() {
           />
         ) : (
           <div style={{ flex: 1, overflowY: 'auto' }}>
-            {/* 헤더 — 종족/클래스 이름만 */}
+            {/* 헤더 */}
             <div style={{
-              background: `linear-gradient(135deg, ${avgColor(selectedCat.accent, 0.12)} 0%, #06080E 100%)`,
+              background: `linear-gradient(135deg, ${avgColor(selectedCat.accent, 0.12)} 0%, ${theme.bg} 100%)`,
               borderBottom: `3px solid ${selectedCat.accent}20`,
               padding: mob ? '60px 20px 24px' : '32px 36px 28px',
             }}>
@@ -2333,7 +2480,7 @@ export default function SkillsPage() {
               <h1 style={{
                 fontFamily: "'Noto Serif KR', serif",
                 fontSize: mob ? 24 : 30, fontWeight: 700,
-                color: '#E8E2D4', margin: 0, letterSpacing: '0.02em',
+                color: theme.text, margin: 0, letterSpacing: '0.02em',
               }}>
                 {selectedCat.name}
               </h1>
@@ -2341,7 +2488,7 @@ export default function SkillsPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10 }}>
                   <Stars value={Math.round(catAvgRating(selectedCat)!)} size={14} />
                   <span style={{ color: '#F0C030', fontWeight: 700 }}>{catAvgRating(selectedCat)!.toFixed(1)}</span>
-                  <span style={{ color: '#5A4A30', fontSize: 12 }}>종합 평균</span>
+                  <span style={{ color: theme.textSubtle, fontSize: 12 }}>종합 평균</span>
                 </div>
               )}
             </div>
@@ -2349,7 +2496,7 @@ export default function SkillsPage() {
             {/* 스킬 그리드 */}
             <div style={{ padding: mob ? '20px 16px 60px' : '28px 40px 60px', maxWidth: 1200 }}>
               {selectedCat.skills.length === 0 ? (
-                <div style={{ color: '#5A4A30', fontSize: 13, padding: '20px 0' }}>
+                <div style={{ color: theme.textSubtle, fontSize: 13, padding: '20px 0' }}>
                   스킬 데이터 준비 중입니다.
                 </div>
               ) : (
@@ -2372,5 +2519,6 @@ export default function SkillsPage() {
         )}
       </div>
     </div>
+    </ThemeCtx.Provider>
   )
 }
