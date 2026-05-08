@@ -45,7 +45,7 @@ const RACES: Category[] = [
     { id: 'hurin-predominant',    name: '프리도미던트',  tier: 'normal' },
     { id: 'hurin-razor-sharp',    name: '레이저 샤프',   tier: 'cl5'    },
     { id: 'hurin-meister',        name: '마이스터',      tier: 'cl5'    },
-    { id: 'hurin-esotekira',      name: '에소테키라',    tier: 'cl10'   },
+    { id: 'hurin-esotekira',      name: '에소테리카',    tier: 'cl10'   },
   ] },
   { id: 'eldanan', name: '엘다난', accent: '#5A6A9A', skills: [
     { id: 'eldanan-magic-sensor',      name: '매직 센서',      tier: 'making' },
