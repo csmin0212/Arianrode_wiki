@@ -53,7 +53,8 @@ const navItems: NavItem[] = [
   { id: "history",   label: "에린의 역사",         icon: "⏳" },
   { id: "gods",      label: "신들과 정령왕",       icon: "✨" },
   { id: "structure", label: "세계의 구조",         icon: "🔮" },
-  { id: "regions",   label: "에린의 제지역",       icon: "🗺️" },
+  { id: "map",       label: "세계 지도",           icon: "🗺️" },
+  { id: "regions",   label: "에린의 제지역",       icon: "🌐" },
   { id: "countries", label: "서방 4대국",          icon: "⚔️" },
   { id: "notable",   label: "특징 있는 지역",      icon: "🏰" },
   { id: "timeline",  label: "서방 연표",           icon: "📅" },
@@ -256,6 +257,103 @@ const notablePlaces: NotablePlace[] = [
     nickname: "반신전 비밀 결사",
     href: "/dynastokabal",
     content: `에린딜 서방에서 활동하는 비밀 결사. 신전 조직의 악폐와 부패를 폭로하고 개혁을 촉구하는 것을 공식 목적으로 내세우고 있다.\n\n대수령(신원 불명)을 정점으로 하는 피라미드형 조직 구조를 지닌다. 연금술로 동식물의 특성을 이식한 인공 인간 "괴인(怪人)"을 보유하며, 신전 비방 팸플릿 배포·정보 공작·인재 모집 등 다양한 수단으로 활동한다.`,
+  },
+];
+
+// ---- 지도 데이터 ----
+// 지도 이미지는 /public/map.png 에 저장해주세요.
+// x, y 값(%)은 지도 이미지 기준 위치입니다 — 실제 지도에 맞게 조정 가능합니다.
+
+interface MapSpot {
+  id: string;
+  label: string;
+  x: number;  // 이미지 왼쪽에서 % (좌상단 기준)
+  y: number;  // 이미지 위에서 % (좌상단 기준)
+  w: number;  // 클릭 영역 너비 %
+  h: number;  // 클릭 영역 높이 %
+  color: string;
+  subtitle?: string;
+  content: string;
+  href?: string;
+}
+
+// x, y: 지도 이미지 내 좌상단 기준 %, w/h: 클릭 영역 크기 %
+// 좌표는 map.png 실제 텍스트 위치에 맞춰 설정됨
+const mapSpots: MapSpot[] = [
+  // ── 서방 4대국 ──
+  {
+    id: "paris",
+    label: "파리스 동맹",
+    x: 6.5, y: 30, w: 14, h: 7,
+    color: "#1A6B4A",
+    subtitle: "신성 번스터 제국에 대항하는 연합",
+    content: `신성 번스터 제국의 침략에 대항하기 위해 맺어진 국가 연합. 성력 1002년에 성립됐다.\n\n성립 이후 국가 간의 큰 싸움은 거의 일어나지 않았지만, 최근 북방에서 마족의 대규모 침략을 받아 고전하고 있다. 이를 계기로 신성 번스터 제국이 다시 개전을 준비하고 있다는 소문도 돌고 있다.`,
+  },
+  {
+    id: "bunster",
+    label: "신성 번스터 제국",
+    x: 11.5, y: 63.5, w: 24, h: 7.5,
+    color: "#8B2D2D",
+    subtitle: "서쪽 바다의 섬 제국",
+    content: `서쪽 바다의 핀지아스 섬을 거점으로 하는 제국. 성력 719년에 번스터 제국으로 건국되어, 999년에 신성 번스터 제국으로 개칭했다.\n\n동방 진출을 노리며 에를랑 왕국 등과 긴장 관계에 있다. 4대국의 세력 균형 아래 상호 견제 상태에 있으나, 최근 다시 개전을 준비하고 있다는 소문이 돌고 있어 긴장이 고조되고 있다.`,
+  },
+  {
+    id: "erlang",
+    label: "에를랑 왕국",
+    x: 47, y: 73.5, w: 23, h: 8.5,
+    color: "#2A5F9E",
+    subtitle: "에린딜 서방 최고의 왕국",
+    content: `에린딜 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경에 건국된 것으로 알려져 있으며, 오랫동안 에린딜 서방의 정치적 중심 역할을 담당해 왔다.\n\n성력 1002년 파리스 동맹 성립 이후 4대국의 세력 균형이 유지되고 있으며, 전통과 권위를 상징하는 나라로 자리잡고 있다. 왕도 로그레스가 주요 도시이다.`,
+  },
+  {
+    id: "kirdia",
+    label: "키르디아 공화국",
+    x: 70, y: 22.5, w: 21, h: 8.5,
+    color: "#8B6914",
+    subtitle: '"무한의 사막"에 건국된 공화국',
+    content: `광대한 "무한의 사막"에 건국된 공화국. 성력 996년에 건국됐다.\n\n사막을 기반으로 독자적인 문화와 정치 체계를 발전시켜, 4대국의 균형에서 독특한 위치를 차지하고 있다.`,
+  },
+  // ── 주요 지역 ──
+  {
+    id: "silence-icefield",
+    label: "침묵의 빙원",
+    x: 6.5, y: 1.5, w: 18, h: 4.5,
+    color: "#5A88A0",
+    subtitle: "에린딜 최북단의 빙원",
+    content: `에린딜 서방 최북단에 펼쳐지는 광대한 빙원. "라프 대동굴"이 있는 코나카타 산맥의 북쪽에 위치하며, 극한의 기후로 인해 대다수 종족에게는 생존이 불가능한 지역이다.\n\n일부 내한성이 강한 마물이나 특수한 존재만이 서식한다고 전해진다.`,
+  },
+  {
+    id: "mistforest",
+    label: "안개의 숲",
+    x: 28.5, y: 13, w: 13, h: 5,
+    color: "#2D7A4A",
+    subtitle: "스피아르 엘다난의 땅",
+    content: `에린딜 북부, 파리스 동맹 북쪽에 펼쳐지는 광대한 숲. 코나카타 산맥과 힐레디온 산맥 사이에 위치하며, 연중 짙은 안개로 뒤덮여 있다. 스피아르 엘다난이라 불리는 엘다난 씨족의 거주지이다.\n\n숲 유일의 도시 스피아르존에는 90%가 스피아르 엘다난으로 이루어진다. 여왕 에아르핀(엘다난 여, 909세)의 통치 아래 북쪽 마군의 동향을 감시하는 역할을 담당한다.`,
+    href: "/mist-forest",
+  },
+  {
+    id: "aemuje",
+    label: "아에무체",
+    x: 61, y: 3.5, w: 10, h: 4.5,
+    color: "#9E6B2A",
+    subtitle: "에린딜 동방의 관문 도시",
+    content: `에린딜 서방과 동방 세계를 잇는 교역 거점. 무한의 사막 북단에 위치하며, 동서 두 문명이 교차하는 특수한 문화적 환경을 가지고 있다.`,
+  },
+  {
+    id: "moche-forest",
+    label: "모체숲의 사냥터",
+    x: 67, y: 33.5, w: 16, h: 6.5,
+    color: "#5A7A2A",
+    subtitle: "동방 서쪽의 광대한 사냥터",
+    content: `키르디아 공화국 서쪽에 위치하는 광대한 숲 지대. 다양한 마수와 희귀 동물이 서식하여 사냥꾼과 모험자들이 즐겨 찾는 곳이다.\n\n이곳에서 채취할 수 있는 희귀한 소재들은 키르디아 공화국의 주요 교역품 중 하나이다.`,
+  },
+  {
+    id: "infinite-desert",
+    label: "무한 사막",
+    x: 64, y: 44, w: 13.5, h: 6,
+    color: "#C8901A",
+    subtitle: "에린딜 서방과 동방을 가르는 사막",
+    content: `에린딜 서방과 동방 세계를 가르는 광대한 사막. 끝이 보이지 않을 정도로 광대하여 "무한의 사막"이라 불린다.\n\n키르디아 공화국이 이 사막을 기반으로 건국됐다. 사막을 넘으면 에린딜 동방 세계로 이어지지만, 무사히 횡단하려면 상당한 준비가 필요하다.`,
   },
 ];
 
@@ -637,6 +735,207 @@ function NotableSection({ color }: { color: string }) {
   );
 }
 
+function MapSection() {
+  const [selected, setSelected] = useState<MapSpot | null>(null);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <div>
+      <p style={{ fontSize: "14px", lineHeight: 1.9, color: "#3a3a3a", marginBottom: 16 }}>
+        에린의 세계 지도입니다. 지명을 클릭하면 해당 지역의 정보를 볼 수 있습니다.
+      </p>
+
+      {/* 지도 컨테이너 */}
+      <div style={{
+        position: "relative",
+        borderRadius: 10,
+        overflow: "hidden",
+        border: "1px solid #D8D0C0",
+        background: "#1E1812",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+        lineHeight: 0,
+      }}>
+        {imgError ? (
+          <div style={{
+            height: 360, display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center",
+            color: "#888", fontSize: "14px", lineHeight: 1.6,
+            background: "#F7F4EE",
+          }}>
+            <span style={{ fontSize: "32px", marginBottom: 12 }}>🗺️</span>
+            <div>지도 이미지를 찾을 수 없습니다.</div>
+            <div style={{ fontSize: "12px", color: "#aaa", marginTop: 4 }}>
+              /public/map.png 파일을 확인해주세요.
+            </div>
+          </div>
+        ) : (
+          <img
+            src="/map.png"
+            alt="에린 세계 지도"
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgError(true)}
+            style={{ width: "100%", display: "block", opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s" }}
+          />
+        )}
+
+        {/* 로딩 플레이스홀더 */}
+        {!imgLoaded && !imgError && (
+          <div style={{
+            position: "absolute", inset: 0, display: "flex", alignItems: "center",
+            justifyContent: "center", background: "#2A2018", color: "#7a6a50",
+            fontSize: "13px", minHeight: 300,
+          }}>
+            지도를 불러오는 중…
+          </div>
+        )}
+
+        {/* 투명 클릭 영역 — 지도 원본 텍스트 위에 겹쳐서 클릭 가능하게 */}
+        {imgLoaded && mapSpots.map(spot => {
+          const isSelected = selected?.id === spot.id;
+          return (
+            <button
+              key={spot.id}
+              title={spot.label}
+              onClick={() => setSelected(isSelected ? null : spot)}
+              style={{
+                position: "absolute",
+                left: `${spot.x}%`,
+                top: `${spot.y}%`,
+                width: `${spot.w}%`,
+                height: `${spot.h}%`,
+                background: isSelected ? `${spot.color}28` : "transparent",
+                border: isSelected
+                  ? `1.5px solid ${spot.color}70`
+                  : "1.5px solid transparent",
+                borderRadius: 4,
+                cursor: "pointer",
+                transition: "background 0.15s, border-color 0.15s, box-shadow 0.15s",
+                boxShadow: isSelected ? `inset 0 0 0 1px ${spot.color}40` : "none",
+                zIndex: isSelected ? 10 : 1,
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLButtonElement;
+                if (!isSelected) {
+                  el.style.background = `${spot.color}18`;
+                  el.style.borderColor = `${spot.color}50`;
+                }
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLButtonElement;
+                if (!isSelected) {
+                  el.style.background = "transparent";
+                  el.style.borderColor = "transparent";
+                }
+              }}
+            />
+          );
+        })}
+
+        {/* 저작권 표기 */}
+        <div style={{
+          position: "absolute", bottom: 8, right: 10,
+          fontSize: "10px", color: "rgba(255,255,255,0.45)",
+          fontStyle: "italic", letterSpacing: "0.05em",
+          textShadow: "0 1px 4px rgba(0,0,0,0.9)",
+          pointerEvents: "none", lineHeight: 1,
+        }}>
+          by. 나리
+        </div>
+      </div>
+
+      {/* 정보 패널 */}
+      {selected && (
+        <div style={{
+          marginTop: 16,
+          background: "#fff",
+          border: `1px solid ${selected.color}35`,
+          borderLeft: `5px solid ${selected.color}`,
+          borderRadius: 8,
+          padding: "18px 22px",
+          animation: "slideDown 0.2s ease",
+        }}>
+          <style>{`@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }`}</style>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12, gap: 10 }}>
+            <div>
+              <h3 style={{
+                fontFamily: "'Noto Serif KR', serif",
+                fontSize: "17px", fontWeight: 700,
+                color: selected.color, marginBottom: 6,
+              }}>
+                {selected.label}
+              </h3>
+              {selected.subtitle && (
+                <span style={{
+                  fontSize: "11px",
+                  background: `${selected.color}18`,
+                  color: selected.color,
+                  padding: "2px 8px", borderRadius: 4, fontWeight: 500,
+                }}>
+                  {selected.subtitle}
+                </span>
+              )}
+            </div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+              {selected.href && (
+                <a
+                  href={selected.href}
+                  style={{
+                    fontSize: "12px", color: selected.color,
+                    textDecoration: "none",
+                    border: `1px solid ${selected.color}50`,
+                    borderRadius: 4, padding: "4px 12px",
+                    fontWeight: 500,
+                  }}
+                >
+                  자세히 →
+                </a>
+              )}
+              <button
+                onClick={() => setSelected(null)}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  fontSize: "16px", color: "#aaa", padding: "2px 4px",
+                  lineHeight: 1,
+                }}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+          <Prose text={selected.content} />
+        </div>
+      )}
+
+      {/* 범례 */}
+      {!selected && imgLoaded && (
+        <div style={{
+          marginTop: 12,
+          display: "flex", flexWrap: "wrap", gap: 6,
+          fontSize: "11px", color: "#888",
+        }}>
+          <span style={{ color: "#aaa", marginRight: 2 }}>지명 클릭 시 상세 정보 표시 |</span>
+          {mapSpots.map(s => (
+            <button
+              key={s.id}
+              onClick={() => setSelected(s)}
+              style={{
+                background: "none", border: "none", cursor: "pointer",
+                color: s.color, padding: 0, fontSize: "11px",
+                fontFamily: "'Noto Sans KR', sans-serif",
+                fontWeight: 500, textDecoration: "underline",
+                textUnderlineOffset: 2,
+              }}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TimelineSection({ color }: { color: string }) {
   return (
     <div>
@@ -707,6 +1006,7 @@ export default function ArianrodWiki() {
       case "history":   return <HistorySection color={ACCENT} />;
       case "gods":      return <GodsSection color={ACCENT} />;
       case "structure": return <StructureSection color={ACCENT} />;
+      case "map":       return <MapSection />;
       case "regions":   return <RegionsSection color={ACCENT} />;
       case "countries": return <CountriesSection color={ACCENT} />;
       case "notable":   return <NotableSection color={ACCENT} />;
