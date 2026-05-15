@@ -278,16 +278,17 @@ interface MapSpot {
 }
 
 // x, y: 지도 이미지 내 좌상단 기준 %, w/h: 클릭 영역 크기 %
-// 좌표는 map.png 실제 텍스트 위치에 맞춰 설정됨
+// href 있으면 해당 페이지로 이동 / 없으면 팝업 표시
 const mapSpots: MapSpot[] = [
-  // ── 서방 4대국 ──
+  // ── 서방 4대국 (대형 텍스트) ──
   {
     id: "paris",
     label: "파리스 동맹",
     x: 6.5, y: 30, w: 14, h: 7,
     color: "#1A6B4A",
     subtitle: "신성 번스터 제국에 대항하는 연합",
-    content: `신성 번스터 제국의 침략에 대항하기 위해 맺어진 국가 연합. 성력 1002년에 성립됐다.\n\n성립 이후 국가 간의 큰 싸움은 거의 일어나지 않았지만, 최근 북방에서 마족의 대규모 침략을 받아 고전하고 있다. 이를 계기로 신성 번스터 제국이 다시 개전을 준비하고 있다는 소문도 돌고 있다.`,
+    href: "/erindil-west",
+    content: `신성 번스터 제국의 침략에 대항하기 위해 맺어진 국가 연합. 성력 1002년에 성립됐다.\n\n성립 이후 국가 간의 큰 싸움은 거의 일어나지 않았지만, 최근 북방에서 마족의 대규모 침략을 받아 고전하고 있다.`,
   },
   {
     id: "bunster",
@@ -295,7 +296,8 @@ const mapSpots: MapSpot[] = [
     x: 11.5, y: 63.5, w: 24, h: 7.5,
     color: "#8B2D2D",
     subtitle: "서쪽 바다의 섬 제국",
-    content: `서쪽 바다의 핀지아스 섬을 거점으로 하는 제국. 성력 719년에 번스터 제국으로 건국되어, 999년에 신성 번스터 제국으로 개칭했다.\n\n동방 진출을 노리며 에를랑 왕국 등과 긴장 관계에 있다. 4대국의 세력 균형 아래 상호 견제 상태에 있으나, 최근 다시 개전을 준비하고 있다는 소문이 돌고 있어 긴장이 고조되고 있다.`,
+    href: "/vanstar",
+    content: `서쪽 바다의 핀지아스 섬을 거점으로 하는 제국. 성력 719년 건국, 999년 신성 번스터 제국으로 개칭.`,
   },
   {
     id: "erlang",
@@ -303,7 +305,8 @@ const mapSpots: MapSpot[] = [
     x: 47, y: 73.5, w: 23, h: 8.5,
     color: "#2A5F9E",
     subtitle: "에린딜 서방 최고의 왕국",
-    content: `에린딜 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경에 건국된 것으로 알려져 있으며, 오랫동안 에린딜 서방의 정치적 중심 역할을 담당해 왔다.\n\n성력 1002년 파리스 동맹 성립 이후 4대국의 세력 균형이 유지되고 있으며, 전통과 권위를 상징하는 나라로 자리잡고 있다. 왕도 로그레스가 주요 도시이다.`,
+    href: "/erlan",
+    content: `에린딜 서방에서 가장 오래된 역사를 자랑하는 왕국. 성력 300년경 건국. 왕도는 로그레스.`,
   },
   {
     id: "kirdia",
@@ -311,9 +314,10 @@ const mapSpots: MapSpot[] = [
     x: 70, y: 22.5, w: 21, h: 8.5,
     color: "#8B6914",
     subtitle: '"무한의 사막"에 건국된 공화국',
-    content: `광대한 "무한의 사막"에 건국된 공화국. 성력 996년에 건국됐다.\n\n사막을 기반으로 독자적인 문화와 정치 체계를 발전시켜, 4대국의 균형에서 독특한 위치를 차지하고 있다.`,
+    href: "/kirdia",
+    content: `광대한 "무한의 사막"에 건국된 공화국. 성력 996년 건국.`,
   },
-  // ── 주요 지역 ──
+  // ── 주요 지역 (팝업) ──
   {
     id: "silence-icefield",
     label: "침묵의 빙원",
@@ -328,8 +332,8 @@ const mapSpots: MapSpot[] = [
     x: 28.5, y: 13, w: 13, h: 5,
     color: "#2D7A4A",
     subtitle: "스피아르 엘다난의 땅",
-    content: `에린딜 북부, 파리스 동맹 북쪽에 펼쳐지는 광대한 숲. 코나카타 산맥과 힐레디온 산맥 사이에 위치하며, 연중 짙은 안개로 뒤덮여 있다. 스피아르 엘다난이라 불리는 엘다난 씨족의 거주지이다.\n\n숲 유일의 도시 스피아르존에는 90%가 스피아르 엘다난으로 이루어진다. 여왕 에아르핀(엘다난 여, 909세)의 통치 아래 북쪽 마군의 동향을 감시하는 역할을 담당한다.`,
     href: "/mist-forest",
+    content: `에린딜 북부, 파리스 동맹 북쪽에 펼쳐지는 광대한 숲. 연중 짙은 안개로 뒤덮여 있다. 스피아르 엘다난이라 불리는 엘다난 씨족의 거주지이다.`,
   },
   {
     id: "aemuje",
@@ -345,7 +349,7 @@ const mapSpots: MapSpot[] = [
     x: 67, y: 33.5, w: 16, h: 6.5,
     color: "#5A7A2A",
     subtitle: "동방 서쪽의 광대한 사냥터",
-    content: `키르디아 공화국 서쪽에 위치하는 광대한 숲 지대. 다양한 마수와 희귀 동물이 서식하여 사냥꾼과 모험자들이 즐겨 찾는 곳이다.\n\n이곳에서 채취할 수 있는 희귀한 소재들은 키르디아 공화국의 주요 교역품 중 하나이다.`,
+    content: `키르디아 공화국 서쪽에 위치하는 광대한 숲 지대. 다양한 마수와 희귀 동물이 서식하여 사냥꾼과 모험자들이 즐겨 찾는 곳이다.`,
   },
   {
     id: "infinite-desert",
@@ -353,7 +357,98 @@ const mapSpots: MapSpot[] = [
     x: 64, y: 44, w: 13.5, h: 6,
     color: "#C8901A",
     subtitle: "에린딜 서방과 동방을 가르는 사막",
-    content: `에린딜 서방과 동방 세계를 가르는 광대한 사막. 끝이 보이지 않을 정도로 광대하여 "무한의 사막"이라 불린다.\n\n키르디아 공화국이 이 사막을 기반으로 건국됐다. 사막을 넘으면 에린딜 동방 세계로 이어지지만, 무사히 횡단하려면 상당한 준비가 필요하다.`,
+    content: `에린딜 서방과 동방 세계를 가르는 광대한 사막. 끝이 보이지 않을 정도로 광대하여 "무한의 사막"이라 불린다.\n\n사막을 넘으면 에린딜 동방 세계로 이어지지만, 무사히 횡단하려면 상당한 준비가 필요하다.`,
+  },
+  // ── 도시 / 거리 (소형 텍스트, 좌표는 map.png 기준 추정값) ──
+  {
+    id: "line",
+    label: "라인",
+    x: 36, y: 39, w: 6, h: 3.5,
+    color: "#6B4A8B",
+    subtitle: '"유적의 거리"',
+    href: "/line",
+    content: `파리스 동맹 소속의 독립 도시. 오래된 유적을 중심으로 발달한 학술·모험 거점이다.`,
+  },
+  {
+    id: "hammerville",
+    label: "하마르빌",
+    x: 15, y: 50.5, w: 7.5, h: 3.5,
+    color: "#8B5A2A",
+    subtitle: '"대장간의 거리"',
+    href: "/hammerville",
+    content: `파리스 동맹 소속의 대장간 도시. 뛰어난 금속 가공 기술로 유명하며, 에린딜 서방 최고급 무구의 생산지이다.`,
+  },
+  {
+    id: "hilbenia",
+    label: "힐베니아",
+    x: 20, y: 58, w: 7, h: 3.5,
+    color: "#1A5A8B",
+    subtitle: '"모험의 항구"',
+    href: "/hilbenia",
+    content: `파리스 동맹 소속의 항구 도시. 모험자와 상인들이 모여드는 서방 서해안의 주요 거점이다.`,
+  },
+  {
+    id: "kanan",
+    label: "카난",
+    x: 34, y: 47.5, w: 5.5, h: 3.5,
+    color: "#2A7A6B",
+    subtitle: '"기계의 거리"',
+    href: "/kanan",
+    content: `파리스 동맹 소속의 기계 도시. 네바프의 연금술과 기계 기술이 집약된 특수한 도시이다.`,
+  },
+  {
+    id: "gran-felden",
+    label: "그란펠덴",
+    x: 29.5, y: 32.5, w: 8, h: 3.5,
+    color: "#6B3A1A",
+    subtitle: "파리스 동맹 구성국",
+    href: "/gran-felden",
+    content: `파리스 동맹의 구성국 중 하나인 그란펠덴 왕국. 북방의 방위선으로서 중요한 역할을 담당하고 있다.`,
+  },
+  {
+    id: "elcrest",
+    label: "엘크레스트",
+    x: 36.5, y: 55.5, w: 8, h: 3.5,
+    color: "#4A3A8B",
+    subtitle: '"현자의 거리"',
+    href: "/elcrest",
+    content: `에린딜 서방 중남부에 위치한 독립 도시 국가. 전기제 대학 엘크레스트 칼리지를 보유하며 정령마법 연구의 중심지이다.`,
+  },
+  {
+    id: "okar",
+    label: "오카",
+    x: 36, y: 63, w: 5, h: 3.5,
+    color: "#8B6B1A",
+    subtitle: '"대학 도시"',
+    href: "/okar",
+    content: `디아스론드 신전이 설립을 선언한 대학 도시. 성력 1010년에 선언, 1012년 마족들의 대규모 침략을 받아 큰 피해를 입었다.`,
+  },
+  {
+    id: "logres",
+    label: "로그레스",
+    x: 62.5, y: 81, w: 7, h: 3.5,
+    color: "#2A5F9E",
+    subtitle: "에를랑 왕국 왕도",
+    href: "/logres",
+    content: `에를랑 왕국의 수도. 에린딜 서방에서 가장 오래되고 번성한 도시 중 하나이다.`,
+  },
+  {
+    id: "mises",
+    label: "미스",
+    x: 63.5, y: 42, w: 5, h: 3.5,
+    color: "#8B6914",
+    subtitle: "키르디아 서방 도시",
+    href: "/mises",
+    content: `키르디아 공화국 서방에 위치한 도시. 무한의 사막과 서방 세계의 경계 부근에 자리잡고 있다.`,
+  },
+  {
+    id: "kalkand",
+    label: "카르칸드",
+    x: 70.5, y: 55, w: 8, h: 3.5,
+    color: "#8B6914",
+    subtitle: "키르디아 공화국 도시",
+    href: "/kalkand",
+    content: `키르디아 공화국 내에 위치한 사막 도시. 독자적인 문화와 건축 양식을 자랑한다.`,
   },
 ];
 
@@ -793,32 +888,63 @@ function MapSection() {
         {/* 투명 클릭 영역 — 지도 원본 텍스트 위에 겹쳐서 클릭 가능하게 */}
         {imgLoaded && mapSpots.map(spot => {
           const isSelected = selected?.id === spot.id;
+          const baseStyle: React.CSSProperties = {
+            position: "absolute",
+            left: `${spot.x}%`,
+            top: `${spot.y}%`,
+            width: `${spot.w}%`,
+            height: `${spot.h}%`,
+            borderRadius: 4,
+            cursor: "pointer",
+            display: "block",
+            transition: "background 0.15s, border-color 0.15s",
+          };
+
+          // href 있으면 해당 페이지로 이동하는 <a> 링크
+          if (spot.href) {
+            return (
+              <a
+                key={spot.id}
+                href={spot.href}
+                title={spot.label}
+                style={{
+                  ...baseStyle,
+                  background: "transparent",
+                  border: "1.5px solid transparent",
+                  textDecoration: "none",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.background = `${spot.color}22`;
+                  el.style.borderColor = `${spot.color}55`;
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.background = "transparent";
+                  el.style.borderColor = "transparent";
+                }}
+              />
+            );
+          }
+
+          // href 없으면 팝업 표시 버튼
           return (
             <button
               key={spot.id}
               title={spot.label}
               onClick={() => setSelected(isSelected ? null : spot)}
               style={{
-                position: "absolute",
-                left: `${spot.x}%`,
-                top: `${spot.y}%`,
-                width: `${spot.w}%`,
-                height: `${spot.h}%`,
+                ...baseStyle,
                 background: isSelected ? `${spot.color}28` : "transparent",
-                border: isSelected
-                  ? `1.5px solid ${spot.color}70`
-                  : "1.5px solid transparent",
-                borderRadius: 4,
-                cursor: "pointer",
-                transition: "background 0.15s, border-color 0.15s, box-shadow 0.15s",
+                border: isSelected ? `1.5px solid ${spot.color}70` : "1.5px solid transparent",
                 boxShadow: isSelected ? `inset 0 0 0 1px ${spot.color}40` : "none",
                 zIndex: isSelected ? 10 : 1,
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLButtonElement;
                 if (!isSelected) {
-                  el.style.background = `${spot.color}18`;
-                  el.style.borderColor = `${spot.color}50`;
+                  el.style.background = `${spot.color}22`;
+                  el.style.borderColor = `${spot.color}55`;
                 }
               }}
               onMouseLeave={e => {
