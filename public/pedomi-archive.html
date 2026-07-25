@@ -459,28 +459,48 @@ function rankRow(cardId){
     <span class="meta">★ ${r.avg} · ${r.count}명</span></div>`;
 }
 
-async function loadRatings(){
-  // 1) 캐시 우선 — 즉시 표시
+/* ── 리뷰 본문까지 통째로 캐시 ──
+   카드를 열 때마다 요청하면 매번 서버 왕복이 생긴다. 서버는 어차피 전체
+   리뷰를 읽으므로, 시작할 때 pedomi 네임스페이스 전체를 1회만 받아 캐시한다.
+   → 카드 열기는 네트워크 요청 0회, 즉시 표시. */
+const REVIEWS_KEY = "pedomi-reviews-cache";
+let REVIEWS = {};          // { 카드id: [리뷰...] }
+let reviewsReady = false;  // 서버 응답을 받았는가
+const reviewSubs = new Set();   // 캐시 갱신 시 다시 그릴 콜백
+
+const reviewsOf = (cardId) => REVIEWS[cardId] || [];
+function onReviewsUpdate(fn){ reviewSubs.add(fn); return () => reviewSubs.delete(fn); }
+
+function applyReviewCache(byId, agg){
+  REVIEWS = byId || {};
+  const next = {};
+  for(const id in (agg||{})) next[id] = { avg: agg[id].avgRating, count: agg[id].count };
+  RATINGS = next;
   try{
-    const c = localStorage.getItem(RATINGS_KEY);
-    if(c){ RATINGS = JSON.parse(c) || {}; }
+    localStorage.setItem(RATINGS_KEY, JSON.stringify(next));
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(byId||{}));
+  }catch(e){}
+  if(typeof renderGrid === "function") renderGrid();
+  reviewSubs.forEach(fn=>{ try{ fn(); }catch(e){} });
+}
+
+async function loadReviews(){
+  // 1) 로컬 캐시로 즉시 표시 (첫 페인트에 네트워크를 기다리지 않는다)
+  try{
+    const a = localStorage.getItem(RATINGS_KEY);
+    const b = localStorage.getItem(REVIEWS_KEY);
+    if(a) RATINGS = JSON.parse(a) || {};
+    if(b) REVIEWS = JSON.parse(b) || {};
   }catch(e){}
 
-  // 2) 서버에서 전체 집계 1회 요청 후 갱신
+  // 2) 서버에서 pedomi 리뷰 전체를 1회 요청 → 이후 카드 열기는 전부 캐시 히트
   try{
-    const r = await fetch("/api/reviews", { cache:"no-store" });
+    const r = await fetch("/api/reviews?prefix=pedomi%3A", { cache:"no-store" });
     if(!r.ok) return;
     const d = await r.json();
-    const agg = d.aggregates || {};
-    const next = {};
-    for(const sid in agg){
-      if(!sid.startsWith("pedomi:")) continue;   // 스킬 위키 리뷰와 분리
-      next[sid.slice(7)] = { avg: agg[sid].avgRating, count: agg[sid].count };
-    }
-    RATINGS = next;
-    try{ localStorage.setItem(RATINGS_KEY, JSON.stringify(next)); }catch(e){}
-    if(typeof renderGrid === "function") renderGrid();
+    applyReviewCache(d.byId, d.aggregates);
   }catch(e){}
+  finally{ reviewsReady = true; reviewSubs.forEach(fn=>{ try{ fn(); }catch(e){} }); }
 }
 
 /* ══════════ 공용 평점 · 댓글 모듈 ══════════
@@ -542,47 +562,43 @@ async function loadRatings(){
     const avgEl = sec.querySelector("#rvAvg");
     const errEl = sec.querySelector("#rvErr");
 
-    // 캐시된 평균을 먼저 그려 빈 화면을 없앤다
-    const cached = (typeof ratingOf === "function") ? ratingOf(e.id) : null;
-    if(cached && cached.count){
-      avgEl.innerHTML = `${starRow(Math.round(cached.avg))} <b>${cached.avg}</b> · ${cached.count}개`;
-    }
+    /* 캐시에서 즉시 그린다 — 카드를 열 때 네트워크를 기다리지 않는다 */
+    function paintList(){
+      const rv = reviewsOf(e.id);
+      const r = ratingOf(e.id);
+      avgEl.innerHTML = (r && r.count)
+        ? `${starRow(Math.round(r.avg))} <b>${r.avg}</b> · ${r.count}개` : "";
 
-    async function refresh(){
-      try{
-        const r = await fetch(`${API}?skillId=${encodeURIComponent(key(e.id))}`, { cache:"no-store" });
-        const d = await r.json();
-        const rv = d.reviews || [];
-        avgEl.innerHTML = d.count ? `${starRow(Math.round(d.avgRating))} <b>${d.avgRating}</b> · ${d.count}개` : "";
+      const rb = document.querySelector("#detail .rankbox");
+      if(rb) rb.outerHTML = rankRow(e.id);
 
-        // 평점 캐시 갱신 → 목록의 랭크 배지와 상세의 평가란에 즉시 반영
-        if(typeof RATINGS !== "undefined"){
-          if(d.count) RATINGS[e.id] = { avg: d.avgRating, count: d.count };
-          else delete RATINGS[e.id];
-          try{ localStorage.setItem(RATINGS_KEY, JSON.stringify(RATINGS)); }catch(err){}
-          if(typeof renderGrid === "function") renderGrid();
-          const rb = document.querySelector("#detail .rankbox");
-          if(rb) rb.outerHTML = rankRow(e.id);
-        }
-        if(!rv.length){ listEl.innerHTML = `<div class="rv-empty">아직 평가가 없습니다. 첫 평가를 남겨보세요.</div>`; return; }
-        rv.sort((a,b)=> (b.createdAt||"").localeCompare(a.createdAt||""));
-        listEl.innerHTML = rv.map(x=>`
-          <div class="rv-item">
-            <div class="top">
-              <span class="who">${escR(x.authorName||"익명")}</span>
-              ${starRow(x.rating)}
-              <span class="when">${when(x.createdAt)}</span>
-              <button class="del" data-id="${x.id}" title="삭제">✕</button>
-            </div>
-            <div class="body">${escR(x.comment)}</div>
-          </div>`).join("");
-        listEl.querySelectorAll(".del").forEach(btn=>{
-          btn.addEventListener("click", ()=>del(btn.dataset.id));
-        });
-      }catch(err){
-        listEl.innerHTML = `<div class="rv-empty">평가를 불러오지 못했습니다.</div>`;
+      if(!rv.length){
+        listEl.innerHTML = reviewsReady
+          ? `<div class="rv-empty">아직 평가가 없습니다. 첫 평가를 남겨보세요.</div>`
+          : `<div class="rv-empty">불러오는 중…</div>`;
+        return;
       }
+      listEl.innerHTML = rv.map(x=>`
+        <div class="rv-item">
+          <div class="top">
+            <span class="who">${escR(x.authorName||"익명")}</span>
+            ${starRow(x.rating)}
+            <span class="when">${when(x.createdAt)}</span>
+            <button class="del" data-id="${x.id}" title="삭제">✕</button>
+          </div>
+          <div class="body">${escR(x.comment)}</div>
+        </div>`).join("");
+      listEl.querySelectorAll(".del").forEach(btn=>{
+        btn.addEventListener("click", ()=>del(btn.dataset.id));
+      });
     }
+    paintList();
+
+    // 최초 로드가 아직이면, 캐시가 채워질 때 자동으로 다시 그린다
+    const unsub = onReviewsUpdate(()=>{
+      if(!sec.isConnected){ unsub(); return; }
+      paintList();
+    });
 
     async function del(id){
       const pw = prompt("이 댓글의 삭제용 비밀번호를 입력하세요. (비밀번호 없이 등록된 댓글은 그냥 확인)");
@@ -595,8 +611,23 @@ async function loadRatings(){
         });
         const d = await r.json();
         if(!r.ok){ alert(d.error || "삭제하지 못했습니다."); return; }
-        refresh();
+        // 낙관적 반영 후 서버와 재동기화
+        REVIEWS[e.id] = reviewsOf(e.id).filter(x=>x.id!==id);
+        recalcLocal(e.id); paintList();
+        loadReviews();
       }catch{ alert("삭제 중 오류가 발생했습니다."); }
+    }
+
+    /* 로컬 캐시만으로 평균을 다시 계산 (서버 응답 전 즉시 반영용) */
+    function recalcLocal(id){
+      const rv = reviewsOf(id);
+      if(!rv.length) delete RATINGS[id];
+      else RATINGS[id] = {
+        avg: Math.round((rv.reduce((s,x)=>s+x.rating,0)/rv.length)*10)/10,
+        count: rv.length,
+      };
+      try{ localStorage.setItem(RATINGS_KEY, JSON.stringify(RATINGS)); }catch(err){}
+      if(typeof renderGrid === "function") renderGrid();
     }
 
     const submit = sec.querySelector("#rvSubmit");
@@ -620,15 +651,23 @@ async function loadRatings(){
         });
         const d = await r.json();
         if(!r.ok){ errEl.textContent = d.error || "등록하지 못했습니다."; return; }
+
+        // 낙관적 반영 — 서버 응답을 기다리지 않고 즉시 목록에 추가
+        const mine = d.review || {
+          id: "tmp"+Date.now(), authorName: sec.querySelector("#rvName").value.trim()||"익명",
+          rating: picked, comment, createdAt: new Date().toISOString(),
+        };
+        REVIEWS[e.id] = [mine, ...reviewsOf(e.id)];
+        recalcLocal(e.id);
+
         sec.querySelector("#rvComment").value = "";
         sec.querySelector("#rvPw").value = "";
         picked = 0; paint(0);
-        refresh();
+        paintList();
+        loadReviews();   // 백그라운드 재동기화
       }catch{ errEl.textContent = "등록 중 오류가 발생했습니다."; }
       finally{ submit.disabled = false; submit.textContent = "등록"; }
     });
-
-    refresh();
   };
 })();
 </script>
@@ -6646,6 +6685,71 @@ function applyDeckData(){
   });
 }
 applyDeckData();
+
+/* ══════════ 카드 일러스트 ══════════
+   drive_cards 원본을 520px webp로 줄여 public/cards/ 에 넣어 두고 참조한다.
+   (base64로 카드에 박으면 저장할 때마다 함께 전송되어 용량 한도를 넘는다)
+   scripts/build-card-images.js 로 생성 */
+const CARD_IMAGES = {
+  "s1": "/cards/s1.webp",
+  "custom_servant_02_bb41be36": "/cards/custom_servant_02_bb41be36.webp",
+  "custom_servant_03_1f59e679": "/cards/custom_servant_03_1f59e679.webp",
+  "custom_servant_04_6c7e59f9": "/cards/custom_servant_04_6c7e59f9.webp",
+  "custom_servant_05_09c5c4aa": "/cards/custom_servant_05_09c5c4aa.webp",
+  "custom_servant_06_34a499ca": "/cards/custom_servant_06_34a499ca.webp",
+  "custom_servant_07_382167cb": "/cards/custom_servant_07_382167cb.webp",
+  "custom_servant_08_0b91bb87": "/cards/custom_servant_08_0b91bb87.webp",
+  "custom_servant_09_1d38b75b": "/cards/custom_servant_09_1d38b75b.webp",
+  "custom_servant_10_8c306410": "/cards/custom_servant_10_8c306410.webp",
+  "custom_master_01_755beee6": "/cards/custom_master_01_755beee6.webp",
+  "custom_master_02_eb8cc5c2": "/cards/custom_master_02_eb8cc5c2.webp",
+  "custom_master_03_5a6e90e8": "/cards/custom_master_03_5a6e90e8.webp",
+  "custom_master_04_5c91dc93": "/cards/custom_master_04_5c91dc93.webp",
+  "custom_master_05_d78cf789": "/cards/custom_master_05_d78cf789.webp",
+  "custom_master_06_4b084a9c": "/cards/custom_master_06_4b084a9c.webp",
+  "custom_master_07_be8e0a69": "/cards/custom_master_07_be8e0a69.webp",
+  "custom_master_08_d72ff00a": "/cards/custom_master_08_d72ff00a.webp",
+  "custom_master_09_ccfa6a5c": "/cards/custom_master_09_ccfa6a5c.webp",
+  "custom_master_10_a6d5c76f": "/cards/custom_master_10_a6d5c76f.webp",
+  "custom_master_11_0dd95fce": "/cards/custom_master_11_0dd95fce.webp",
+  "custom_master_12_3204d2be": "/cards/custom_master_12_3204d2be.webp",
+  "custom_master_13_b3f6885b": "/cards/custom_master_13_b3f6885b.webp",
+  "custom_master_14_3e5cf2ab": "/cards/custom_master_14_3e5cf2ab.webp",
+  "custom_servant_11_fc79d0c2": "/cards/custom_servant_11_fc79d0c2.webp",
+  "custom_servant_12_ebfa8681": "/cards/custom_servant_12_ebfa8681.webp",
+  "custom_servant_13_4c1b8280": "/cards/custom_servant_13_4c1b8280.webp",
+  "custom_servant_14_d97951eb": "/cards/custom_servant_14_d97951eb.webp",
+  "custom_servant_15_7d64a673": "/cards/custom_servant_15_7d64a673.webp",
+  "custom_servant_16_877ef696": "/cards/custom_servant_16_877ef696.webp",
+  "custom_servant_17_141031ec": "/cards/custom_servant_17_141031ec.webp",
+  "custom_servant_18_d0233d05": "/cards/custom_servant_18_d0233d05.webp",
+  "custom_servant_19_a351cb99": "/cards/custom_servant_19_a351cb99.webp",
+  "custom_servant_20_856c6d81": "/cards/custom_servant_20_856c6d81.webp",
+  "custom_servant_21_f44e9012": "/cards/custom_servant_21_f44e9012.webp",
+  "custom_servant_22_243ec0db": "/cards/custom_servant_22_243ec0db.webp",
+  "custom_servant_23_14e3f6aa": "/cards/custom_servant_23_14e3f6aa.webp",
+  "custom_servant_24_375d997b": "/cards/custom_servant_24_375d997b.webp",
+  "custom_servant_25_de369d60": "/cards/custom_servant_25_de369d60.webp",
+  "custom_servant_26_05165894": "/cards/custom_servant_26_05165894.webp",
+  "custom_servant_27_b51c6ac4": "/cards/custom_servant_27_b51c6ac4.webp",
+  "custom_servant_28_aa41968d": "/cards/custom_servant_28_aa41968d.webp",
+  "custom_servant_29_9bf53dfe": "/cards/custom_servant_29_9bf53dfe.webp",
+  "custom_servant_30_bfdec50d": "/cards/custom_servant_30_bfdec50d.webp",
+  "custom_servant_31_4ac1b6db": "/cards/custom_servant_31_4ac1b6db.webp",
+  "custom_servant_32_5c7879da": "/cards/custom_servant_32_5c7879da.webp",
+  "custom_servant_33_54153cee": "/cards/custom_servant_33_54153cee.webp",
+  "custom_servant_34_4824505b": "/cards/custom_servant_34_4824505b.webp",
+  "custom_servant_35_a5da5d86": "/cards/custom_servant_35_a5da5d86.webp",
+  "custom_servant_36_ad829f36": "/cards/custom_servant_36_ad829f36.webp",
+  "custom_servant_37_73140fb6": "/cards/custom_servant_37_73140fb6.webp",
+  "custom_servant_38_0b4bf514": "/cards/custom_servant_38_0b4bf514.webp",
+  "custom_servant_39_205dc782": "/cards/custom_servant_39_205dc782.webp",
+  "custom_servant_40_5ad6b513": "/cards/custom_servant_40_5ad6b513.webp"
+};
+function applyCardImages(){
+  SEED.forEach(e=>{ if(CARD_IMAGES[e.id] && !e.illust) e.illust = CARD_IMAGES[e.id]; });
+}
+applyCardImages();
 // BEGIN AUTO MASTER SYNERGY PATCH
 function applyAutoMasterSynergy(){
   const servantType = "\uc11c\ubc88\ud2b8";
@@ -6716,6 +6820,13 @@ let NAV = [], CUR = null;
 function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1900); }
 function kw(t){ let h=esc(t); KW.forEach(k=>{ h=h.replace(new RegExp(k+":","g"), "<kw>"+k+":</kw>"); }); return h; }
 
+/* 기본 일러스트 채우기 — 서버 데이터에도 적용한다.
+   이미 이미지가 있는 카드(직접 올린 것 포함)는 건드리지 않는다. */
+function fillCardImages(){
+  if(typeof CARD_IMAGES === "undefined" || !Array.isArray(DB)) return;
+  DB.forEach(e=>{ if(e && !e.illust && CARD_IMAGES[e.id]) e.illust = CARD_IMAGES[e.id]; });
+}
+
 /* ══════════ 저장 ══════════ */
 async function load(){
   // 1) 로컬 캐시가 있으면 먼저 즉시 렌더 → 반복 방문 시 체감 속도 대폭 개선
@@ -6724,7 +6835,7 @@ async function load(){
     const cached = localStorage.getItem(KEY);
     if(cached){
       const p = JSON.parse(cached);
-      if(Array.isArray(p) && p.length){ DB = p; hasLocal = true; render(); }
+      if(Array.isArray(p) && p.length){ DB = p; hasLocal = true; fillCardImages(); render(); }
     }
   }catch(e){}
 
@@ -6736,6 +6847,7 @@ async function load(){
       if(Array.isArray(parsed) && parsed.length){
         const changed = !hasLocal || JSON.stringify(DB) !== r.value;
         DB = parsed;
+        fillCardImages();
         try{ localStorage.setItem(KEY, r.value); }catch(e){}
         if(changed) render();
         return;
@@ -6790,11 +6902,21 @@ function syncSeedSkills(row, seed){
   });
 }
 async function save(){
+  // 카드 안에 base64 이미지가 남아 있으면 먼저 분리한다.
+  // (이미지를 DB blob에 넣으면 저장할 때마다 함께 전송되어 요청 크기 한도를 넘는다)
+  try{ await migrateInlineImages(); }catch(e){}
+
   const json = JSON.stringify(DB);
   // 로컬 캐시를 먼저 갱신해 두면 새로고침해도 방금 작업이 남는다
   try{ localStorage.setItem(KEY, json); }catch(e){}
   try{ await window.storage.set(KEY, json); }
-  catch(e){ toast("서버 저장에 실패했어요. 내보내기로 백업해 두세요."); }
+  catch(e){
+    // 서버 저장이 실패하면 내 브라우저에만 남는다 = 다른 사람에게는 보이지 않는다.
+    // 토스트로만 알리면 저장된 줄 알기 쉬우므로 분명하게 알린다.
+    alert("서버 저장에 실패했습니다.\n" + ((e && e.message) ? e.message : "") +
+      "\n\n변경 내용이 이 브라우저에만 남아 있어, 다른 사람에게는 보이지 않습니다." +
+      "\n'내보내기'로 백업해 두시고 잠시 후 다시 시도해 주세요.");
+  }
 }
 
 /* ══════════ 렌더 ══════════ */
@@ -7218,23 +7340,64 @@ function setField(k,v){ draft[k]=v; drawEditor(); }
 function addRow(k){ draft[k].push(k==="skills"?{name:"",tags:"",cost:"",power:"",text:""}:{name:"",text:""}); drawEditor(); }
 function delRow(k,i){ draft[k].splice(i,1); if(!draft[k].length) addRow(k); else drawEditor(); }
 
-/* 이미지: 저장 용량을 위해 가로 520px로 축소 */
+/* 이미지: 가로 520px로 축소한 뒤 서버에 올리고, 카드에는 짧은 URL만 저장한다.
+   (base64를 카드에 그대로 넣으면 저장할 때마다 DB 전체와 함께 전송되어
+    요청 크기 한도를 넘고, 결국 나에게만 보이는 이미지가 된다) */
 function pickImage(file){
   if(!file || !file.type.startsWith("image/")) return;
   const r = new FileReader();
   r.onload = () => {
     const img = new Image();
-    img.onload = () => {
+    img.onload = async () => {
       const max = 520, sc = Math.min(1, max/img.width);
       const cv = document.createElement("canvas");
       cv.width = Math.round(img.width*sc); cv.height = Math.round(img.height*sc);
       cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
-      draft.illust = cv.toDataURL("image/jpeg", .82);
+      const dataUrl = cv.toDataURL("image/jpeg", .82);
+
+      draft.illust = dataUrl;      // 업로드 동안 미리보기
       drawEditor();
+      toast("이미지 업로드 중…");
+      try{
+        const url = await uploadImage(dataUrl);
+        draft.illust = url;        // 공유 가능한 URL로 교체
+        drawEditor();
+        toast("이미지를 업로드했습니다");
+      }catch(err){
+        draft.illust = "";
+        drawEditor();
+        alert("이미지 업로드에 실패했습니다.\n" + (err && err.message ? err.message : "") +
+              "\n\n이미지를 올리지 않으면 카드의 나머지 내용은 정상 저장됩니다.");
+      }
     };
     img.src = r.result;
   };
   r.readAsDataURL(file);
+}
+
+/* 데이터 URL을 서버에 올리고 공유 가능한 주소를 돌려받는다 */
+async function uploadImage(dataUrl){
+  const res = await fetch("/api/image", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ data: dataUrl }),
+  });
+  let d = {};
+  try{ d = await res.json(); }catch(e){}
+  if(!res.ok || !d.url) throw new Error(d.error || `서버 오류 (${res.status})`);
+  return d.url;
+}
+
+/* 예전에 base64로 박혀 있던 이미지를 URL로 옮긴다 (저장 직전 1회) */
+async function migrateInlineImages(){
+  const targets = DB.filter(e => typeof e.illust === "string" && e.illust.startsWith("data:"));
+  if(!targets.length) return 0;
+  let moved = 0;
+  for(const e of targets){
+    try{ e.illust = await uploadImage(e.illust); moved++; }
+    catch(err){ e.illust = ""; }   // 옮기지 못하면 비워서 저장이 막히지 않게 한다
+  }
+  return moved;
 }
 
 async function commit(){
@@ -7291,5 +7454,5 @@ try{
 $("#sort").addEventListener("change", e=>setSort(e.target.value));
 
 load();
-loadRatings();   // 전체 평균 평점 1회 로드 → 랭크 배지 표시
+loadReviews();   // pedomi 리뷰 전체를 1회 로드 → 이후 카드 열기는 즉시 표시
 </script>

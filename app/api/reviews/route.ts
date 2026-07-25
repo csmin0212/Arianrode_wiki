@@ -46,7 +46,36 @@ function sanitize(r: Review) {
 
 export async function GET(req: NextRequest) {
   const skillId = req.nextUrl.searchParams.get('skillId')
+  const prefix = req.nextUrl.searchParams.get('prefix')
   const reviews = await readReviews()
+
+  // 접두사 일괄 조회 — 해당 네임스페이스의 리뷰를 한 번의 요청으로 모두 반환한다.
+  // (서버는 어차피 전체를 읽으므로, 카드마다 따로 요청하는 것보다 훨씬 싸다)
+  if (prefix) {
+    const byId: Record<string, ReturnType<typeof sanitize>[]> = {}
+    const aggregates: Record<string, { avgRating: number; count: number }> = {}
+
+    for (const r of reviews) {
+      if (!r.skillId?.startsWith(prefix)) continue
+      const id = r.skillId.slice(prefix.length)
+      ;(byId[id] ??= []).push(sanitize(r))
+      const a = (aggregates[id] ??= { avgRating: 0, count: 0 })
+      a.count++
+      a.avgRating += r.rating
+    }
+    for (const id in aggregates) {
+      const a = aggregates[id]
+      a.avgRating = Math.round((a.avgRating / a.count) * 10) / 10
+    }
+    // 각 카드의 리뷰는 최신순으로
+    for (const id in byId) {
+      byId[id].sort((x, y) => (y.createdAt || '').localeCompare(x.createdAt || ''))
+    }
+
+    return Response.json({ byId, aggregates }, {
+      headers: { 'Cache-Control': 'no-store, max-age=0' },
+    })
+  }
 
   if (skillId) {
     const filtered = reviews.filter(r => r.skillId === skillId)
