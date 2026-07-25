@@ -84,6 +84,13 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
   border-radius:var(--r);padding:7px 11px;color:var(--paper);font-size:13px;outline:none;
 }
 .search:focus{border-color:var(--frost)}
+.sortsel{
+  flex:none;background:var(--plate);border:1px solid var(--line);border-radius:var(--r);
+  padding:7px 9px;color:var(--dim);font-family:inherit;font-size:12.5px;outline:none;cursor:pointer;
+}
+.sortsel:hover{border-color:var(--frost);color:var(--frost)}
+.sortsel:focus{border-color:var(--frost);color:var(--paper)}
+.sortsel option{background:var(--plate);color:var(--paper)}
 .search::placeholder{color:var(--dim-2)}
 .btn{
   background:var(--plate);border:1px solid var(--line);color:var(--dim);
@@ -305,6 +312,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
     <div class="topbar">
       <div class="crumb" id="crumb"></div>
       <input class="search" id="q" type="text" placeholder="이름 · 스킬 · 태그 검색">
+      <select class="sortsel" id="sort" title="정렬 기준">
+        <option value="default">기본순 (등록순)</option>
+        <option value="name">이름순 (가나다)</option>
+        <option value="name_desc">이름 역순</option>
+        <option value="class">클래스순</option>
+        <option value="rank">랭크 높은순</option>
+        <option value="rank_asc">랭크 낮은순</option>
+        <option value="reviews">평가 많은순</option>
+      </select>
       <button class="btn" onclick="exportJSON()">내보내기</button>
       <button class="btn" onclick="document.getElementById('imp').click()">가져오기</button>
       <input type="file" id="imp" accept="application/json" hidden onchange="importJSON(this)">
@@ -6679,8 +6695,9 @@ applyAutoMasterSynergy();
 // END AUTO MASTER SYNERGY PATCH
 /* ══════════ 상태 ══════════ */
 let DB = [];
-let UI = {type:"all", cls:null, q:"", page:1};
+let UI = {type:"all", cls:null, q:"", page:1, sort:"default"};
 const PAGE_SIZE = 48;
+const SORT_KEY = "pedomi-sort";
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -6808,7 +6825,7 @@ function setFilter(t,c){ UI.type=t; UI.cls=c; UI.page=1; render(); }
 
 function filtered(){
   const q = UI.q.trim().toLowerCase();
-  return DB.filter(e=>{
+  const rows = DB.filter(e=>{
     if(UI.type!=="all" && e.type!==UI.type) return false;
     if(UI.cls && e.cls!==UI.cls) return false;
     if(!q) return true;
@@ -6817,6 +6834,59 @@ function filtered(){
       (e.synergy||[]).map(s=>s.name+" "+s.text).join(" ")].join(" ").toLowerCase();
     return hay.includes(q);
   });
+  return sortRows(rows);
+}
+
+/* ══════════ 정렬 ══════════ */
+function sortRows(rows){
+  const byName = (a,b) => String(a.name||"").localeCompare(String(b.name||""), "ko");
+  // 클래스 정렬 순서: 마스터 먼저, 그다음 CLASSES 배열 순서
+  const clsIndex = e => e.type==="마스터" ? -1 : (CLASSES.indexOf(e.cls) === -1 ? 999 : CLASSES.indexOf(e.cls));
+  // 평가가 없는 항목은 항상 뒤로 보낸다
+  const rate = e => ratingOf(e.id);
+
+  switch(UI.sort){
+    case "name":      return rows.sort(byName);
+    case "name_desc": return rows.sort((a,b)=>byName(b,a));
+
+    case "class":
+      return rows.sort((a,b)=> clsIndex(a)-clsIndex(b) || byName(a,b));
+
+    case "rank":
+      return rows.sort((a,b)=>{
+        const ra=rate(a), rb=rate(b);
+        if(!ra && !rb) return byName(a,b);
+        if(!ra) return 1;
+        if(!rb) return -1;
+        return rb.avg-ra.avg || rb.count-ra.count || byName(a,b);
+      });
+
+    case "rank_asc":
+      return rows.sort((a,b)=>{
+        const ra=rate(a), rb=rate(b);
+        if(!ra && !rb) return byName(a,b);
+        if(!ra) return 1;
+        if(!rb) return -1;
+        return ra.avg-rb.avg || rb.count-ra.count || byName(a,b);
+      });
+
+    case "reviews":
+      return rows.sort((a,b)=>{
+        const ra=rate(a), rb=rate(b);
+        const ca=ra?ra.count:0, cb=rb?rb.count:0;
+        return cb-ca || (rb?rb.avg:0)-(ra?ra.avg:0) || byName(a,b);
+      });
+
+    default: return rows;   // 등록순 (DB 원래 순서)
+  }
+}
+
+function setSort(v){
+  UI.sort = v; UI.page = 1;
+  try{ localStorage.setItem(SORT_KEY, v); }catch(e){}
+  renderGrid();
+  const list = document.querySelector(".list");
+  if(list) list.scrollTop = 0;
 }
 
 function renderGrid(){
@@ -7213,6 +7283,13 @@ $("#q").addEventListener("input", e=>{
 document.addEventListener("keydown", e=>{
   if(e.key==="Escape"){ if($("#editor").classList.contains("open")) closeEditor(); else closeDetail(); }
 });
+/* 정렬 — 마지막 선택을 기억한다 */
+try{
+  const saved = localStorage.getItem(SORT_KEY);
+  if(saved){ UI.sort = saved; $("#sort").value = saved; }
+}catch(e){}
+$("#sort").addEventListener("change", e=>setSort(e.target.value));
+
 load();
 loadRatings();   // 전체 평균 평점 1회 로드 → 랭크 배지 표시
 </script>
