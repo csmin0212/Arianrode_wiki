@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import { Redis } from '@upstash/redis'
+import { describeError } from '../_lib/errors'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,8 +24,13 @@ export async function GET() {
       { value: value ?? null },
       { headers: { 'Cache-Control': 'no-store, max-age=0' } },
     )
-  } catch {
-    return Response.json({ value: null })
+  } catch (e) {
+    // 저장소 장애를 조용히 넘기면 "서버가 비어 있다"로 오인되어
+    // 시드 데이터를 덮어쓰려 할 수 있다. 실패를 분명히 알린다.
+    return Response.json(
+      { value: null, error: `저장소 오류: ${describeError(e)}` },
+      { status: 502 },
+    )
   }
 }
 
@@ -72,9 +78,9 @@ export async function POST(req: NextRequest) {
     await redis.set(DB_KEY, value)
   } catch (e) {
     // 저장소 오류를 그대로 알려준다. 삼키면 클라이언트가 원인을 알 수 없다.
-    const detail = e instanceof Error ? e.message : String(e)
+    // fetch failed 는 원인이 cause 에 들어 있으므로 함께 꺼낸다.
     return Response.json(
-      { error: `저장소 오류: ${detail}`, sizeKB: Math.round(value.length / 1024) },
+      { error: `저장소 오류: ${describeError(e)}`, sizeKB: Math.round(value.length / 1024) },
       { status: 502 },
     )
   }

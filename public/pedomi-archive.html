@@ -394,11 +394,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
     async get(k){
       try{
         const r = await fetch(API, { cache:"no-store" });
-        if(!r.ok) throw new Error("bad status");
-        const d = await r.json();
+        const d = await r.json().catch(()=>({}));
+        if(!r.ok) throw new Error(d.error || `HTTP ${r.status}`);
+        window.__storageOffline = null;
         return { value: d.value ?? null };
       }catch(e){
-        // 서버 연결 실패 → 로컬 백업본이라도 보여준다
+        // 서버 연결 실패 → 로컬 백업본이라도 보여주되, 오프라인임을 기록한다
+        window.__storageOffline = (e && e.message) ? e.message : "서버에 연결할 수 없습니다";
         return local.get(k);
       }
     },
@@ -6998,12 +7000,30 @@ async function load(){
         return;
       }
     }
-    // 서버가 비어 있음 → SEED로 최초 1회 시드하고 서버에 저장
+    // 서버에 못 닿은 경우: '비어 있음'과 구분해야 한다.
+    // 여기서 시드를 저장하려 들면 실패 알림만 반복되고, 최악의 경우 덮어쓰기가 된다.
+    if(window.__storageOffline){
+      if(!hasLocal){ DB = cloneSeed(); render(); }
+      warnOffline();
+      return;
+    }
+    // 서버가 정말 비어 있음 → SEED로 최초 1회 시드하고 서버에 저장
     if(!hasLocal){ DB = cloneSeed(); render(); }
     await save();
   }catch(e){
     if(!hasLocal && (!Array.isArray(DB) || !DB.length)){ DB = cloneSeed(); render(); }
+    warnOffline();
   }
+}
+
+/* 서버에 못 닿을 때 한 번만 알린다 — 편집해도 공유되지 않는 상태임을 미리 알려준다 */
+let offlineWarned = false;
+function warnOffline(){
+  if(offlineWarned || !window.__storageOffline) return;
+  offlineWarned = true;
+  const msg = window.__storageOffline;
+  toast("서버에 연결할 수 없습니다 — 지금 편집해도 공유되지 않습니다");
+  console.warn("[아카이브] 저장소 연결 실패:", msg, "\n/api/health 에서 원인을 확인하세요.");
 }
 const cloneSeed = (value=SEED) => JSON.parse(JSON.stringify(value));
 function mergeSeed(rows){
