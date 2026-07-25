@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 <style>
 :root{
@@ -20,9 +20,9 @@
   --brass:#d8b44a;
   --frost:#8fdcff;
   --danger:#e2564a;
-  --f-display:"Black Han Sans","Pretendard",sans-serif;
-  --f-body:"Pretendard",system-ui,sans-serif;
-  --f-tech:"Chakra Petch","Pretendard",sans-serif;
+  --f-display:"Black Han Sans","Pretendard Variable",sans-serif;
+  --f-body:"Pretendard Variable","Pretendard",system-ui,-apple-system,sans-serif;
+  --f-tech:"Chakra Petch","Pretendard Variable",sans-serif;
   --r:4px;
 }
 *{box-sizing:border-box}
@@ -60,7 +60,7 @@ button{font-family:inherit}
   display:flex;align-items:center;gap:9px;width:100%;
   padding:7px 9px;border:0;background:transparent;color:var(--dim);
   border-radius:var(--r);cursor:pointer;text-align:left;font-size:13.5px;
-  border-left:3px solid transparent;transition:.13s;
+  border-left:3px solid transparent;transition:background-color .13s,color .13s,border-color .13s;
 }
 .nav:hover{background:var(--plate);color:var(--paper)}
 .nav.on{background:var(--plate-2);color:#fff;border-left-color:var(--c,var(--frost))}
@@ -74,7 +74,7 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
   radial-gradient(900px 500px at 80% -10%, #142544 0%, transparent 60%),var(--ink)}
 .topbar{
   display:flex;align-items:center;gap:10px;padding:14px 20px;
-  border-bottom:1px solid var(--line);background:rgba(7,11,20,.6);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);background:#0a1018;
   flex-wrap:wrap;
 }
 .crumb{font-family:var(--f-tech);font-size:11px;letter-spacing:.2em;color:var(--dim);flex:none}
@@ -87,7 +87,8 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
 .search::placeholder{color:var(--dim-2)}
 .btn{
   background:var(--plate);border:1px solid var(--line);color:var(--dim);
-  padding:7px 13px;border-radius:var(--r);cursor:pointer;font-size:12.5px;transition:.13s;white-space:nowrap;
+  padding:7px 13px;border-radius:var(--r);cursor:pointer;font-size:12.5px;
+  transition:color .13s,border-color .13s,background-color .13s;white-space:nowrap;
 }
 .btn:hover{border-color:var(--frost);color:var(--frost)}
 .btn.primary{background:linear-gradient(160deg,#f3dd93,var(--brass) 45%,#8f7420);border-color:#8f7420;color:#33270a;font-weight:700}
@@ -111,13 +112,13 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
 .item{
   display:flex;gap:0;background:var(--plate);border:1px solid var(--line);
   border-left:3px solid var(--c);border-radius:var(--r);overflow:hidden;
-  cursor:pointer;transition:.14s;text-align:left;padding:0;color:inherit;font:inherit;
-  content-visibility:auto;contain-intrinsic-size:0 96px;
+  cursor:pointer;transition:background-color .14s,border-color .14s;
+  text-align:left;padding:0;color:inherit;font:inherit;
+  contain:layout style paint;
 }
-.item:hover{background:var(--plate-2);border-color:var(--line-2);border-left-color:var(--c);transform:translateY(-1px)}
+.item:hover{background:var(--plate-2);border-color:var(--line-2);border-left-color:var(--c)}
 .item .thumb{
-  width:76px;flex:none;background:
-    repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 10px),var(--plate-2);
+  width:76px;flex:none;background:var(--plate-2);
   position:relative;overflow:hidden;
 }
 .item .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -148,7 +149,7 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
 .empty b{display:block;color:var(--dim);font-size:15px;margin-bottom:6px;font-family:var(--f-body);font-weight:600}
 
 /* ═══ 오버레이 ═══ */
-.ov{position:fixed;inset:0;background:rgba(3,6,12,.78);backdrop-filter:blur(3px);
+.ov{position:fixed;inset:0;background:rgba(3,6,12,.90);
   display:none;z-index:40;overflow-y:auto;padding:26px 16px 60px}
 .ov.open{display:block}
 .panel{
