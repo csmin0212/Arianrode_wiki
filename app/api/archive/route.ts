@@ -68,6 +68,15 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  await redis.set(DB_KEY, value)
+  try {
+    await redis.set(DB_KEY, value)
+  } catch (e) {
+    // 저장소 오류를 그대로 알려준다. 삼키면 클라이언트가 원인을 알 수 없다.
+    const detail = e instanceof Error ? e.message : String(e)
+    return Response.json(
+      { error: `저장소 오류: ${detail}`, sizeKB: Math.round(value.length / 1024) },
+      { status: 502 },
+    )
+  }
   return Response.json({ success: true })
 }
