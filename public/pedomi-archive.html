@@ -97,11 +97,22 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
 .list{flex:1;overflow-y:auto;padding:16px 20px 60px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:11px}
 
+/* ── 페이지 넘김 ── */
+.pager{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:20px}
+.pager .pg{background:var(--plate);border:1px solid var(--line);color:var(--dim);
+  min-width:34px;padding:7px 11px;border-radius:var(--r);cursor:pointer;font-size:13px;font-family:var(--f-tech)}
+.pager .pg:hover:not(:disabled){border-color:var(--frost);color:var(--frost)}
+.pager .pg.on{background:var(--plate-2);border-color:var(--frost);color:#fff}
+.pager .pg:disabled{opacity:.38;cursor:default}
+.pager .pg-gap{color:var(--dim-2);padding:0 2px}
+.pager .pg-info{margin-left:auto;font-size:11px;color:var(--dim-2);font-family:var(--f-tech);letter-spacing:.08em}
+
 /* ── 목록 카드 ── */
 .item{
   display:flex;gap:0;background:var(--plate);border:1px solid var(--line);
   border-left:3px solid var(--c);border-radius:var(--r);overflow:hidden;
   cursor:pointer;transition:.14s;text-align:left;padding:0;color:inherit;font:inherit;
+  content-visibility:auto;contain-intrinsic-size:0 96px;
 }
 .item:hover{background:var(--plate-2);border-color:var(--line-2);border-left-color:var(--c);transform:translateY(-1px)}
 .item .thumb{
@@ -6575,7 +6586,8 @@ applyAutoMasterSynergy();
 // END AUTO MASTER SYNERGY PATCH
 /* ══════════ 상태 ══════════ */
 let DB = [];
-let UI = {type:"all", cls:null, q:""};
+let UI = {type:"all", cls:null, q:"", page:1};
+const PAGE_SIZE = 48;
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -6673,7 +6685,7 @@ function navBtn(type,cls,label,n,color){
     onclick="setFilter('${type}',${cls?`'${cls}'`:"null"})">
     <i class="dot"></i><span class="n">${esc(label)}</span><span class="cnt">${n}</span></button>`;
 }
-function setFilter(t,c){ UI.type=t; UI.cls=c; render(); }
+function setFilter(t,c){ UI.type=t; UI.cls=c; UI.page=1; render(); }
 
 function filtered(){
   const q = UI.q.trim().toLowerCase();
@@ -6696,9 +6708,18 @@ function renderGrid(){
   if(!rows.length){
     $("#grid").innerHTML = `<div class="empty"><b>${UI.q?"검색 결과가 없습니다":"아직 등록된 항목이 없습니다"}</b>
       ${UI.q?"다른 키워드로 찾아보세요.":"우측 상단의 ＋ 새 항목으로 첫 서번트를 등록하세요."}</div>`;
+    renderPager(1, 0);
     return;
   }
-  $("#grid").innerHTML = rows.map(e=>{
+
+  // ── 페이지네이션: 현재 쪽에 해당하는 항목만 렌더 ──
+  const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  if(UI.page > pages) UI.page = pages;
+  if(UI.page < 1) UI.page = 1;
+  const start = (UI.page - 1) * PAGE_SIZE;
+  const pageRows = rows.slice(start, start + PAGE_SIZE);
+
+  $("#grid").innerHTML = pageRows.map(e=>{
     const c = colorOf(e);
     const mini = e.type==="서번트" ? STATS.map(([k,col])=>{
       const v = (e.deck&&e.deck[k])||""; if(!v) return "";
@@ -6708,7 +6729,7 @@ function renderGrid(){
       ? (e.checks||"") + ((e.skills||[]).length?`  ·  스킬 ${e.skills.length}`:"")
       : (e.skills||[]).map(s=>s.name).join(" · ");
     return `<button class="item" style="--c:${c}" onclick="openDetail('${e.id}')">
-      <div class="thumb">${e.illust?`<img src="${e.illust}" alt="">`:`<span class="ph">◈</span>`}</div>
+      <div class="thumb">${e.illust?`<img src="${e.illust}" alt="" loading="lazy" decoding="async">`:`<span class="ph">◈</span>`}</div>
       <div class="meat">
         <div class="top">
           <span class="chip">${esc(e.type==="마스터"?"마스터":e.cls||"미분류")}</span>
@@ -6719,6 +6740,42 @@ function renderGrid(){
         ${line?`<div class="tagline">${esc(line)}</div>`:""}
       </div></button>`;
   }).join("");
+
+  renderPager(pages, rows.length);
+}
+
+function renderPager(pages, total){
+  let el = document.getElementById("pager");
+  if(!el){
+    el = document.createElement("div");
+    el.id = "pager"; el.className = "pager";
+    $("#grid").after(el);
+  }
+  if(pages <= 1){ el.innerHTML = ""; return; }
+
+  const p = UI.page;
+  const btn = (label, page, o={}) =>
+    `<button class="pg${o.on?" on":""}"${o.dis?" disabled":""}${page?` onclick="gotoPage(${page})"`:""}>${label}</button>`;
+
+  // 1쪽·마지막쪽·현재쪽 주변만 숫자로, 나머지는 … 로 축약
+  const list = [];
+  for(let i=1;i<=pages;i++){
+    if(i===1 || i===pages || (i>=p-2 && i<=p+2)) list.push(i);
+    else if(list[list.length-1] !== "…") list.push("…");
+  }
+
+  el.innerHTML =
+    btn("‹ 이전", p>1?p-1:0, {dis:p<=1}) +
+    list.map(n => n==="…" ? `<span class="pg-gap">…</span>` : btn(n, n, {on:n===p})).join("") +
+    btn("다음 ›", p<pages?p+1:0, {dis:p>=pages}) +
+    `<span class="pg-info">${total.toLocaleString()}개 · ${p}/${pages}쪽</span>`;
+}
+
+function gotoPage(n){
+  UI.page = n;
+  renderGrid();
+  const list = document.querySelector(".list");
+  if(list) list.scrollTop = 0;
 }
 
 /* ══════════ 상세 ══════════ */
@@ -7027,7 +7084,12 @@ function importJSON(input){
 }
 
 /* ══════════ 이벤트 ══════════ */
-$("#q").addEventListener("input", e=>{ UI.q = e.target.value; renderGrid(); });
+let searchT;
+$("#q").addEventListener("input", e=>{
+  UI.q = e.target.value; UI.page = 1;
+  clearTimeout(searchT);
+  searchT = setTimeout(renderGrid, 180);
+});
 document.addEventListener("keydown", e=>{
   if(e.key==="Escape"){ if($("#editor").classList.contains("open")) closeEditor(); else closeDetail(); }
 });
