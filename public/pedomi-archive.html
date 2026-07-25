@@ -319,7 +319,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
 
 <style>
 /* ── 공용 리뷰(평점·댓글) 패널 ── */
-.reviews{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.reviews{margin-top:20px;border-top:1px solid var(--line);padding:18px 24px 4px;position:relative;z-index:2}
+@media(max-width:700px){.reviews{padding:18px 16px 4px}}
 .reviews .rv-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .reviews .rv-h h3{margin:0;font-family:var(--f-tech);font-size:14px;letter-spacing:.14em;color:var(--paper)}
 .reviews .rv-h .t{font-family:var(--f-tech);font-size:10px;letter-spacing:.24em;color:var(--dim-2)}
@@ -334,6 +335,17 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
 .rv-item .del{margin-left:auto;background:none;border:0;color:var(--dim-2);cursor:pointer;font-size:15px;line-height:1;padding:2px 4px}
 .rv-item .del:hover{color:var(--danger)}
 .rv-item .body{font-size:13px;line-height:1.7;color:var(--dim);white-space:pre-wrap}
+/* ── 평균 평점 기반 랭크 ── */
+.tier.rank{border-color:color-mix(in srgb,var(--rc) 55%,transparent);color:var(--rc);
+  background:color-mix(in srgb,var(--rc) 14%,transparent)}
+.tier.rank.none{color:var(--dim-2);border-color:var(--line);background:transparent}
+.rankbox{display:flex;align-items:center;gap:8px}
+.rankbox .rk{font-family:var(--f-tech);font-weight:700;font-size:15px;color:var(--rc);
+  border:1px solid color-mix(in srgb,var(--rc) 55%,transparent);
+  background:color-mix(in srgb,var(--rc) 14%,transparent);padding:1px 9px;border-radius:2px}
+.rankbox .meta{font-size:11.5px;color:var(--dim-2);font-family:var(--f-tech);letter-spacing:.05em}
+.autorank{background:var(--deep);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px}
+
 .stars{display:inline-flex;gap:1px;font-size:15px;line-height:1;user-select:none}
 .stars .s{color:var(--dim-2)}
 .stars .s.on{color:var(--brass)}
@@ -374,8 +386,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
       }
     },
     async set(k,v){
-      // 로컬에도 항상 백업
-      local.set(k,v);
       const r = await fetch(API, {
         method:"POST",
         headers:{ "Content-Type":"application/json" },
@@ -389,6 +399,72 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
     },
   };
 })();
+
+/* ══════════ 평균 평점 → 랭크 ══════════
+   방문자들이 남긴 별점의 평균으로 랭크(SS~F)를 자동 산출한다.
+   전체 평균은 /api/reviews (skillId 없이) 한 번의 요청으로 모두 받아온다. */
+const RATINGS_KEY = "pedomi-ratings-cache";
+let RATINGS = {};   // { 카드id: {avg, count} }
+
+const RANKS = [
+  [4.5, "SS", "#ffd76a"],
+  [4.0, "S",  "#f0b429"],
+  [3.5, "A",  "#5fd6dd"],
+  [3.0, "B",  "#3ec98a"],
+  [2.5, "C",  "#8fb0d8"],
+  [2.0, "D",  "#9aa6bb"],
+  [1.5, "E",  "#c08a6a"],
+  [0,   "F",  "#d15a5a"],
+];
+function rankOf(avg){
+  for(const [min, label, color] of RANKS){ if(avg >= min) return {label, color}; }
+  return {label:"F", color:"#d15a5a"};
+}
+const ratingOf = (cardId) => RATINGS[cardId] || null;
+
+/* 랭크 배지 HTML (목록용) — 평가가 없으면 배지를 숨긴다 */
+function rankBadge(cardId){
+  const r = ratingOf(cardId);
+  if(!r || !r.count) return "";
+  const k = rankOf(r.avg);
+  return `<span class="tier rank" style="--rc:${k.color}" title="평균 ${r.avg} · ${r.count}명">${k.label}</span>`;
+}
+
+/* 랭크 표시 HTML (상세용) — 평균 평점과 참여 인원을 함께 보여준다 */
+function rankRow(cardId){
+  const r = ratingOf(cardId);
+  if(!r || !r.count){
+    return `<div class="rankbox"><span class="meta">아직 평가 없음</span></div>`;
+  }
+  const k = rankOf(r.avg);
+  return `<div class="rankbox" style="--rc:${k.color}">
+    <span class="rk">${k.label}</span>
+    <span class="meta">★ ${r.avg} · ${r.count}명</span></div>`;
+}
+
+async function loadRatings(){
+  // 1) 캐시 우선 — 즉시 표시
+  try{
+    const c = localStorage.getItem(RATINGS_KEY);
+    if(c){ RATINGS = JSON.parse(c) || {}; }
+  }catch(e){}
+
+  // 2) 서버에서 전체 집계 1회 요청 후 갱신
+  try{
+    const r = await fetch("/api/reviews", { cache:"no-store" });
+    if(!r.ok) return;
+    const d = await r.json();
+    const agg = d.aggregates || {};
+    const next = {};
+    for(const sid in agg){
+      if(!sid.startsWith("pedomi:")) continue;   // 스킬 위키 리뷰와 분리
+      next[sid.slice(7)] = { avg: agg[sid].avgRating, count: agg[sid].count };
+    }
+    RATINGS = next;
+    try{ localStorage.setItem(RATINGS_KEY, JSON.stringify(next)); }catch(e){}
+    if(typeof renderGrid === "function") renderGrid();
+  }catch(e){}
+}
 
 /* ══════════ 공용 평점 · 댓글 모듈 ══════════
    각 카드(서번트/마스터)에 대해 방문자들이 별점과 댓글을 남긴다.
@@ -449,12 +525,28 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
     const avgEl = sec.querySelector("#rvAvg");
     const errEl = sec.querySelector("#rvErr");
 
+    // 캐시된 평균을 먼저 그려 빈 화면을 없앤다
+    const cached = (typeof ratingOf === "function") ? ratingOf(e.id) : null;
+    if(cached && cached.count){
+      avgEl.innerHTML = `${starRow(Math.round(cached.avg))} <b>${cached.avg}</b> · ${cached.count}개`;
+    }
+
     async function refresh(){
       try{
         const r = await fetch(`${API}?skillId=${encodeURIComponent(key(e.id))}`, { cache:"no-store" });
         const d = await r.json();
         const rv = d.reviews || [];
         avgEl.innerHTML = d.count ? `${starRow(Math.round(d.avgRating))} <b>${d.avgRating}</b> · ${d.count}개` : "";
+
+        // 평점 캐시 갱신 → 목록의 랭크 배지와 상세의 평가란에 즉시 반영
+        if(typeof RATINGS !== "undefined"){
+          if(d.count) RATINGS[e.id] = { avg: d.avgRating, count: d.count };
+          else delete RATINGS[e.id];
+          try{ localStorage.setItem(RATINGS_KEY, JSON.stringify(RATINGS)); }catch(err){}
+          if(typeof renderGrid === "function") renderGrid();
+          const rb = document.querySelector("#detail .rankbox");
+          if(rb) rb.outerHTML = rankRow(e.id);
+        }
         if(!rv.length){ listEl.innerHTML = `<div class="rv-empty">아직 평가가 없습니다. 첫 평가를 남겨보세요.</div>`; return; }
         rv.sort((a,b)=> (b.createdAt||"").localeCompare(a.createdAt||""));
         listEl.innerHTML = rv.map(x=>`
@@ -6608,12 +6700,35 @@ function kw(t){ let h=esc(t); KW.forEach(k=>{ h=h.replace(new RegExp(k+":","g"),
 
 /* ══════════ 저장 ══════════ */
 async function load(){
+  // 1) 로컬 캐시가 있으면 먼저 즉시 렌더 → 반복 방문 시 체감 속도 대폭 개선
+  let hasLocal = false;
+  try{
+    const cached = localStorage.getItem(KEY);
+    if(cached){
+      const p = JSON.parse(cached);
+      if(Array.isArray(p) && p.length){ DB = p; hasLocal = true; render(); }
+    }
+  }catch(e){}
+
+  // 2) 서버 최신본으로 동기화 (수정/삭제가 그대로 반영됨 — SEED 재주입하지 않음)
   try{
     const r = await window.storage.get(KEY);
-    DB = r && r.value ? mergeSeed(JSON.parse(r.value)) : cloneSeed();
-  }catch(e){ DB = SEED.slice(); }
-  if(!Array.isArray(DB) || !DB.length) DB = cloneSeed();
-  render();
+    if(r && r.value){
+      const parsed = JSON.parse(r.value);
+      if(Array.isArray(parsed) && parsed.length){
+        const changed = !hasLocal || JSON.stringify(DB) !== r.value;
+        DB = parsed;
+        try{ localStorage.setItem(KEY, r.value); }catch(e){}
+        if(changed) render();
+        return;
+      }
+    }
+    // 서버가 비어 있음 → SEED로 최초 1회 시드하고 서버에 저장
+    if(!hasLocal){ DB = cloneSeed(); render(); }
+    await save();
+  }catch(e){
+    if(!hasLocal && (!Array.isArray(DB) || !DB.length)){ DB = cloneSeed(); render(); }
+  }
 }
 const cloneSeed = (value=SEED) => JSON.parse(JSON.stringify(value));
 function mergeSeed(rows){
@@ -6657,8 +6772,11 @@ function syncSeedSkills(row, seed){
   });
 }
 async function save(){
-  try{ await window.storage.set(KEY, JSON.stringify(DB)); }
-  catch(e){ toast("저장에 실패했어요. 내보내기로 백업해 두세요."); }
+  const json = JSON.stringify(DB);
+  // 로컬 캐시를 먼저 갱신해 두면 새로고침해도 방금 작업이 남는다
+  try{ localStorage.setItem(KEY, json); }catch(e){}
+  try{ await window.storage.set(KEY, json); }
+  catch(e){ toast("서버 저장에 실패했어요. 내보내기로 백업해 두세요."); }
 }
 
 /* ══════════ 렌더 ══════════ */
@@ -6733,7 +6851,7 @@ function renderGrid(){
       <div class="meat">
         <div class="top">
           <span class="chip">${esc(e.type==="마스터"?"마스터":e.cls||"미분류")}</span>
-          ${e.tier?`<span class="tier">${esc(e.tier)}</span>`:""}
+          ${rankBadge(e.id)}
         </div>
         <div class="nm">${esc(e.name)}</div>
         <div class="mini">${mini||'<span class="v" style="color:var(--dim-2)">덱 정보 없음</span>'}</div>
@@ -6843,7 +6961,7 @@ function openDetail(id, keepNav){
       <div>
         <div class="d-illust">${e.illust?`<img src="${e.illust}" alt="">`:"일러스트 없음"}</div>
         <div class="facts">
-          ${e.tier?`<div class="r"><div class="k">평가</div><div class="v">${esc(e.tier)}</div></div>`:""}
+          <div class="r"><div class="k">평가</div><div class="v">${rankRow(e.id)}</div></div>
           ${e.align?`<div class="r"><div class="k">${isS?"속성":"유형"}</div><div class="v">${esc(e.align)}</div></div>`:""}
           ${e.origin?`<div class="r"><div class="k">출전</div><div class="v">${esc(e.origin)}</div></div>`:""}
           ${e.memo?`<div class="r"><div class="k">메모</div><div class="v">${esc(e.memo)}</div></div>`:""}
@@ -6937,8 +7055,9 @@ function drawEditor(){
           <select onchange="setField('cls',this.value)">
             ${CLASSES.map(k=>`<option${draft.cls===k?" selected":""}>${k}</option>`).join("")}
           </select></div>`:""}
-        <div><label>평가</label>
-          <input type="text" value="${esc(draft.tier)}" placeholder="SS / A / B …" oninput="draft.tier=this.value"></div>
+        <div><label>평가 (자동)</label>
+          <div class="autorank">${rankRow(draft.id)}</div>
+          <div class="hint">방문자 별점의 평균으로 자동 산출됩니다.</div></div>
       </div>
 
       <div class="frow">
@@ -7094,4 +7213,5 @@ document.addEventListener("keydown", e=>{
   if(e.key==="Escape"){ if($("#editor").classList.contains("open")) closeEditor(); else closeDetail(); }
 });
 load();
+loadRatings();   // 전체 평균 평점 1회 로드 → 랭크 배지 표시
 </script>
