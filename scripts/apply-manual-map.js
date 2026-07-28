@@ -47,10 +47,15 @@ async function main() {
 
   const byId = new Map(cards.map(c => [c.id, c]))
 
-  for (const [name, rel] of Object.entries(manual)) {
-    if (name.startsWith('_')) continue
-    // 동명이인이 있는 카드는 이름 대신 카드 ID로 지정할 수 있다
-    const targets = byId.has(name) ? [byId.get(name)] : byName.get(name)
+  // 카드 ID로 지정한 항목이 이름으로 지정한 항목보다 구체적이므로 먼저 처리하고,
+  // 이름 지정으로 이미 채워진 것도 덮어쓴다.
+  // (그렇지 않으면 동명이인 카드가 같은 이미지를 공유해 버린다)
+  const entries = Object.entries(manual).filter(([k]) => !k.startsWith('_'))
+  entries.sort((a, b) => (byId.has(b[0]) ? 1 : 0) - (byId.has(a[0]) ? 1 : 0))
+
+  for (const [name, rel] of entries) {
+    const isIdKey = byId.has(name)
+    const targets = isIdKey ? [byId.get(name)] : byName.get(name)
     if (!targets) { problems.push(`카드 없음: ${name}`); continue }
     const src = resolveFile(rel)
     if (!src) { problems.push(`파일 없음: ${name} → ${rel}`); continue }
@@ -61,7 +66,8 @@ async function main() {
     } catch (e) { problems.push(`변환 실패: ${name} (${e.message})`); continue }
 
     for (const c of targets) {
-      if (mapping[c.id]) { skipped++; continue }      // 이미 있으면 건드리지 않는다
+      // ID로 콕 집어 지정한 것은 덮어쓴다. 이름 지정은 빈 카드만 채운다.
+      if (mapping[c.id] && !isIdKey) { skipped++; continue }
       fs.writeFileSync(path.join(OUT_DIR, `${c.id}.webp`), buf)
       mapping[c.id] = `/cards/${c.id}.webp`
       made++
