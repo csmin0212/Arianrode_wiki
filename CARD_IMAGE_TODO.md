@@ -1,19 +1,14 @@
-# 이미지 매핑 필요 목록
+# 카드 이미지 — 매핑 필요 목록
 
-총 308장 중 이미지 있음 191장, 없음 117장
+- 전체 카드: 308장
+- 이미지 있음: 196장
+- **이미지 없음: 112장** (아래 목록)
 
-## A. 이미지가 잘못 붙은 카드 (4장) — 교체 필요
+이미지 파일은 `C:Usersjoy64바탕 화면MyCode웹` 아래 폴더들에 있습니다.
+매핑해주실 때는 `카드이름 → 폴더/파일명` 형식으로 알려주시면 됩니다.
+예: `길가메시 → pedomi_archer_cards/img_007.webp`
 
-| 카드 이름 | 클래스 | 카드 ID |
-|---|---|---|
-| 여왕 메이브 | 라이더 | `namu_rider_medb` |
-| 부디카 | 라이더 | `namu_rider_boudica` |
-| 게오르기우스 | 라이더 | `namu_rider_georgios` |
-| 카밀라 | 어새신 | `namu_assassin_carmilla` |
-
-## B. 이미지가 없는 카드 (117장)
-
-### 마스터 (41장)
+## 마스터 (40장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -24,7 +19,6 @@
 | 라이네스 엘멜로이 아치조르테 | `namu_master_etc_reines` |
 | 레오나르도 비스타리오 하웨이 | `namu_master_extra_leo` |
 | 로셰 플레인 위그드밀레니아 | `namu_master_apocrypha_roche` |
-| 마토 사쿠라 | `namu_master_sn_sakura` |
 | 마토 조켄 | `namu_master_sn_zouken` |
 | 매지컬 루비 | `namu_master_etc_magical_ruby` |
 | 매지컬 앰버 | `namu_master_etc_magical_amber` |
@@ -59,7 +53,7 @@
 | 후지마루 리츠카(남) | `namu_master_grandorder_ritsuka_m` |
 | 후지마루 리츠카(여) | `namu_master_grandorder_ritsuka_f` |
 
-### 세이버 (8장)
+## 세이버 (7장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -67,17 +61,15 @@
 | 미야모토 무사시 | `namu_saber_musashi` |
 | 베디비어 | `namu_saber_bedivere` |
 | 센지 무라마사 | `namu_saber_muramasa` |
-| 알트리아 펜드래곤 얼터 | `namu_saber_artoria_alter` |
 | 오키타 소지 얼터 | `namu_saber_okita_alter` |
 | 이부키도지 | `namu_saber_ibuki` |
 | 이아손 | `namu_saber_jason` |
 
-### 아처 (10장)
+## 아처 (9장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
 | 길가메시 | `namu_archer_gilgamesh` |
-| 메카에리짱 | `namu_archer_mecha_eli` |
 | 미나모토노 타메토모 | `namu_archer_tametomo` |
 | 바반 시 | `namu_archer_baobhan_sith` |
 | 세이 쇼나곤 | `namu_archer_sei` |
@@ -87,7 +79,7 @@
 | 제임스 모리어티 | `namu_archer_moriarty` |
 | 케이론 | `namu_archer_chiron` |
 
-### 랜서 (9장)
+## 랜서 (9장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -101,7 +93,7 @@
 | 엘키두 | `namu_lancer_enkidu` |
 | 카이니스 | `namu_lancer_caenis` |
 
-### 라이더 (9장)
+## 라이더 (9장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -115,7 +107,7 @@
 | 태세성군 | `namu_rider_taisui` |
 | 헤파이스티온 | `namu_rider_hephaestion` |
 
-### 캐스터 (11장)
+## 캐스터 (11장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -131,13 +123,12 @@
 | 엘레나 블라바츠키 | `namu_caster_helena` |
 | 한스 크리스티안 안데르센 | `namu_caster_andersen` |
 
-### 어새신 (10장)
+## 어새신 (9장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
 | 백모의 하산 사바흐 | `namu_assassin_hundred_faces` |
 | 사사키 코지로 | `namu_assassin_kojiro` |
-| 수수께끼의 히로인 X | `namu_assassin_mhx` |
 | 에미야 [어새신] | `namu_assassin_emiya` |
 | 잭 더 리퍼 | `namu_assassin_jack` |
 | 정밀의 하산 사바흐 | `namu_assassin_serenity` |
@@ -146,7 +137,7 @@
 | 테스카틀리포카 | `namu_assassin_tezcatlipoca` |
 | 헨리 지킬&하이드 | `namu_assassin_jekyll` |
 
-### 버서커 (7장)
+## 버서커 (6장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -155,24 +146,23 @@
 | 알퀘이드 브륜스터드 | `namu_berserker_arcueid` |
 | 키요히메 | `namu_berserker_kiyohime` |
 | 항우 | `namu_berserker_xiang_yu` |
-| 헤라클레스 | `namu_berserker_heracles` |
 | 히지카타 토시조 | `namu_berserker_hijikata` |
 
-### 룰러 (2장)
+## 룰러 (2장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
 | 아마쿠사 시로 도키사다 | `namu_extra_amakusa` |
 | 히미코 | `namu_extra_himiko` |
 
-### 어벤져 (2장)
+## 어벤져 (2장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
 | 안토니오 살리에리 | `namu_extra_salieri` |
 | 앙리마유 | `namu_extra_angra_mainyu` |
 
-### 문캔서 (3장)
+## 문캔서 (3장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -180,7 +170,7 @@
 | 야오비쿠니 | `namu_extra_yaobikuni` |
 | BB | `namu_extra_bb` |
 
-### 포리너 (4장)
+## 포리너 (4장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
@@ -189,8 +179,9 @@
 | 애비게일 윌리엄스 | `namu_extra_abigail` |
 | 카츠시카 호쿠사이 | `namu_extra_hokusai` |
 
-### 비스트 (1장)
+## 비스트 (1장)
 
 | 카드 이름 | 카드 ID |
 |---|---|
 | 네로 드라코 | `namu_extra_nero_draco` |
+
