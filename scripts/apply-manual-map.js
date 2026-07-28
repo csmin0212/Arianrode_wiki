@@ -45,9 +45,12 @@ async function main() {
   let made = 0, skipped = 0
   const problems = []
 
+  const byId = new Map(cards.map(c => [c.id, c]))
+
   for (const [name, rel] of Object.entries(manual)) {
     if (name.startsWith('_')) continue
-    const targets = byName.get(name)
+    // 동명이인이 있는 카드는 이름 대신 카드 ID로 지정할 수 있다
+    const targets = byId.has(name) ? [byId.get(name)] : byName.get(name)
     if (!targets) { problems.push(`카드 없음: ${name}`); continue }
     const src = resolveFile(rel)
     if (!src) { problems.push(`파일 없음: ${name} → ${rel}`); continue }
