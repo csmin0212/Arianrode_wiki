@@ -229,6 +229,7 @@ main{display:flex;flex-direction:column;overflow:hidden;background:
 .badge svg{width:12px;height:12px}
 .sk .eff{padding:8px 9px;font-size:12px;line-height:1.72;color:#c0cee6;flex:1;white-space:pre-wrap}
 .sk .eff kw{color:var(--frost);font-weight:700}
+.sk .eff kwt{color:#eace43;font-weight:700}
 
 .prose{font-size:13.5px;line-height:1.9;color:#cbd7ea;white-space:pre-wrap}
 .synergy{display:flex;flex-direction:column;gap:7px}
@@ -686,7 +687,10 @@ const CC = {
 };
 const STATS = [["근력","#e2453c"],["민첩","#3ad684"],["마술","#4aa8ff"]];
 const TAGCOLOR = {"근력":"#e2564a","민첩":"#3ad684","마술":"#4aa8ff","특수":"#9aa6bb","보구":"#d8b44a","잔류":"#a86ff0"};
-const KW = ["진명 개방","진명개방","상시","전투","행동","잔류","준비","급행","행운"];
+/* 효과 텍스트에서 색을 입힐 타이밍 키워드.
+   "상시/행동:", "고유/전투:" 처럼 슬래시로 이어 쓰는 복합형도 함께 처리한다.
+   화이트리스트로 두는 이유: "얻는다:", "이상:" 같은 일반 문장까지 물들면 안 되기 때문. */
+const KW = ["상시","전투","행동","잔류","준비","전초","사용시","고유","얼터","급행","행운"];
 const KEY = "pedomi-archive";
 
 /* ══════════ 시드 데이터 ══════════ */
@@ -7022,7 +7026,22 @@ const roleOf = e => e.type==="마스터" ? "마스터" : (e.cls||"서번트");
 let NAV = [], CUR = null;
 
 function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1900); }
-function kw(t){ let h=esc(t); KW.forEach(k=>{ h=h.replace(new RegExp(k+":","g"), "<kw>"+k+":</kw>"); }); return h; }
+/* 효과 텍스트에 키워드 색을 입힌다. 저장된 원문은 건드리지 않고 표시할 때만 적용하므로,
+   카드를 새로 등록하거나 수정해도 그대로 반영된다. */
+const KW_ALT = KW.join("|");
+// 상시: / 상시/행동: / 고유/전투: … (슬래시로 이어진 복합형까지)
+const KW_RE  = new RegExp(`(?:${KW_ALT})(?:\\s*\\/\\s*(?:${KW_ALT}))*\\s*:`, "g");
+// <1회용>, <3회용> — esc() 이후라 꺾쇠가 엔티티로 바뀌어 있다
+const KW_USE = /&lt;\d+회용&gt;/g;
+// [진명개방] / [진명 개방]
+const KW_TRUE = /\[진명\s*개방\]/g;
+
+function kw(t){
+  return esc(t)
+    .replace(KW_RE,   m => `<kw>${m}</kw>`)
+    .replace(KW_USE,  m => `<kw>${m}</kw>`)
+    .replace(KW_TRUE, m => `<kwt>${m}</kwt>`);
+}
 
 /* 기본 일러스트 채우기 — 서버 데이터에도 적용한다.
    이미 이미지가 있는 카드(직접 올린 것 포함)는 건드리지 않는다. */
