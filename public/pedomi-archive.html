@@ -7107,12 +7107,15 @@ async function load(){
   try{
     const r = await window.storage.get(KEY);
     if(r && r.value){
-      const parsed = JSON.parse(r.value);
+      // 서버가 문자열 대신 배열을 돌려주는 경우도 받아준다.
+      // (Upstash가 JSON 문자열을 자동 파싱해 버리는 일이 있다)
+      const parsed = typeof r.value === "string" ? JSON.parse(r.value) : r.value;
       if(Array.isArray(parsed) && parsed.length){
-        const changed = !hasLocal || JSON.stringify(DB) !== r.value;
+        const json = JSON.stringify(parsed);
+        const changed = !hasLocal || JSON.stringify(DB) !== json;
         DB = parsed;
         fillCardImages();
-        try{ localStorage.setItem(KEY, r.value); }catch(e){}
+        try{ localStorage.setItem(KEY, json); }catch(e){}
         if(changed) render();
         return;
       }

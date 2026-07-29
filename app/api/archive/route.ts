@@ -19,9 +19,18 @@ const MAX_DB_BYTES = 800 * 1024
 // GET → { value: string | null }
 export async function GET() {
   try {
-    const value = await redis.get<string>(DB_KEY)
+    // 주의: Upstash는 JSON처럼 보이는 문자열을 저장하면 읽을 때 자동으로 파싱해
+    // 배열/객체로 돌려준다. 클라이언트는 문자열을 기대하므로 항상 문자열로 맞춘다.
+    // (이 처리가 없으면 클라이언트의 JSON.parse가 실패해 서버 데이터가
+    //  통째로 무시되고 로컬 사본만 쓰이게 된다)
+    const raw = await redis.get<unknown>(DB_KEY)
+    const value =
+      raw == null ? null :
+      typeof raw === 'string' ? raw :
+      JSON.stringify(raw)
+
     return Response.json(
-      { value: value ?? null },
+      { value },
       { headers: { 'Cache-Control': 'no-store, max-age=0' } },
     )
   } catch (e) {
