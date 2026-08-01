@@ -7153,6 +7153,35 @@ function syncSeedSkills(row, seed){
     dst.text = src.text || dst.text || "";
   });
 }
+/* 저장 직전에 서버 최신본을 받아, 내가 건드린 카드만 그 위에 얹는다.
+   내 화면의 DB를 통째로 덮어쓰면, 내가 페이지를 연 뒤에 다른 사람이 한
+   수정·추가가 전부 사라진다(= 롤백). 그래서 항상 최신본을 기준으로 삼는다.
+     op.upsert  : 추가하거나 수정한 카드 (또는 카드 배열)
+     op.remove  : 삭제한 카드의 id */
+async function saveMerged(op){
+  let base = null;
+  try{
+    const r = await window.storage.get(KEY);
+    const parsed = (r && r.value)
+      ? (typeof r.value === "string" ? JSON.parse(r.value) : r.value)
+      : null;
+    if(Array.isArray(parsed) && parsed.length) base = parsed;
+  }catch(e){}
+
+  if(base){
+    const ups = op.upsert ? (Array.isArray(op.upsert) ? op.upsert : [op.upsert]) : [];
+    for(const card of ups){
+      const i = base.findIndex(c => c && c.id === card.id);
+      if(i >= 0) base[i] = card; else base.unshift(card);
+    }
+    if(op.remove) base = base.filter(c => c && c.id !== op.remove);
+    DB = base;
+    fillCardImages();
+  }
+  // 서버를 못 읽었으면 어쩔 수 없이 로컬 기준으로 저장한다 (실패 시 save가 알린다)
+  await save();
+}
+
 async function save(){
   // 카드 안에 base64 이미지가 남아 있으면 먼저 분리한다.
   // (이미지를 DB blob에 넣으면 저장할 때마다 함께 전송되어 요청 크기 한도를 넘는다)
@@ -7458,7 +7487,9 @@ async function removeEntry(id){
   const e = DB.find(x=>x.id===id);
   if(!confirm(`"${e.name}" 항목을 삭제할까요? 되돌릴 수 없습니다.`)) return;
   DB = DB.filter(x=>x.id!==id);
-  await save(); closeDetail(); render(); toast("삭제했습니다");
+  closeDetail(); render();
+  await saveMerged({ remove: id });     // 서버 최신본에서 이 카드만 뺀다
+  render(); toast("삭제했습니다");
 }
 
 /* ══════════ 편집 ══════════ */
@@ -7659,8 +7690,10 @@ async function commit(){
   draft.synergy = draft.synergy.filter(s=>s.name||s.text);
   const i = DB.findIndex(x=>x.id===draft.id);
   if(i>=0) DB[i] = draft; else DB.unshift(draft);
-  const id = draft.id;
-  await save(); closeEditor(); render(); toast("저장했습니다");
+  const id = draft.id, card = draft;
+  closeEditor(); render();
+  await saveMerged({ upsert: card });   // 서버 최신본 위에 이 카드만 얹는다
+  render(); toast("저장했습니다");
   openDetail(id);
 }
 
@@ -7681,7 +7714,9 @@ function importJSON(input){
       if(!Array.isArray(data)) throw 0;
       const ids = new Set(DB.map(e=>e.id));
       data.forEach(e=>{ if(!e.id||ids.has(e.id)) e.id = uid(); DB.push(e); });
-      await save(); render(); toast(`${data.length}개 항목을 불러왔습니다`);
+      // 가져오기도 서버 최신본 위에 얹는다 (남의 수정을 지우지 않도록)
+      await saveMerged({ upsert: data });
+      render(); toast(`${data.length}개 항목을 불러왔습니다`);
     }catch(e){ toast("파일을 읽을 수 없습니다. JSON 형식을 확인해 주세요."); }
     input.value = "";
   };
