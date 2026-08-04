@@ -293,6 +293,111 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 :focus-visible{outline:2px solid var(--frost);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 넓은 화면에서는 상단바가 한 줄로 유지되어야 한다.
+   (검색창이 flex-basis 0에서 남는 공간을 전부 먹어 정렬·버튼이 줄바꿈되고 있었다) */
+@media(min-width:821px){
+  .topbar{flex-wrap:nowrap}
+  .search{flex:1 1 auto;min-width:160px}
+  .sortsel{flex:0 0 auto;width:auto}
+}
+
+/* ═══════════ 모바일 ═══════════
+   좁은 화면에서는 좌측 분류 레일이 세로로 펼쳐져 화면을 통째로 먹고,
+   카드 목록이 화면 밖으로 밀려나 아무것도 조작할 수 없었다.
+   레일을 가로 스크롤 칩 바로 바꾸고, 나머지 요소도 손가락 크기에 맞춘다. */
+@media(max-width:820px){
+  /* 주소창 때문에 100vh가 실제 화면보다 커지는 문제 → dvh 사용 */
+  .app{height:100dvh;grid-template-columns:1fr;grid-template-rows:auto auto 1fr}
+
+  /* ── 분류 레일: 세로 목록 → 가로 스크롤 칩 ── */
+  .rail{
+    grid-row:1;border-right:0;border-bottom:1px solid var(--line);
+    flex-direction:row;align-items:center;gap:8px;
+    padding:8px 10px;overflow:hidden;
+  }
+  .brand{padding:0 4px 0 0;border-bottom:0;flex:none}
+  .brand .logo{font-size:15px;white-space:nowrap}
+  .brand .sub{display:none}
+  .railscroll{
+    flex:1;display:flex;align-items:center;gap:6px;
+    overflow-x:auto;overflow-y:hidden;padding:2px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .railscroll::-webkit-scrollbar{display:none}
+  .grouplab{display:none}
+  .nav{
+    width:auto;flex:none;white-space:nowrap;
+    padding:8px 12px;border-radius:999px;border-left:0;
+    border:1px solid var(--line);background:var(--plate);min-height:38px;
+  }
+  .nav.on{border-color:var(--c,var(--frost));background:var(--plate-2)}
+  .nav .n{flex:none}
+
+  /* ── 상단바: 검색은 한 줄 전체, 나머지는 그 아래 ── */
+  main{grid-row:2/4;display:contents}
+  .topbar{grid-row:2;padding:8px 10px;gap:6px}
+  .crumb{width:100%;order:-1;font-size:10px}
+  .search{flex:1 1 100%;min-width:0;padding:10px 12px;font-size:16px} /* 16px: iOS 확대 방지 */
+  /* 정렬과 버튼은 한 줄에 나란히 (줄 수를 줄여 목록 공간을 확보) */
+  .sortsel{flex:1 1 90px;min-width:0;padding:9px 6px;font-size:12.5px}
+  .topbar .btn{flex:0 0 auto;padding:9px 8px;min-height:38px;font-size:12px}
+
+  /* ── 목록 ── */
+  .list{grid-row:3;padding:10px 10px 80px;-webkit-overflow-scrolling:touch}
+  .grid{grid-template-columns:1fr;gap:8px}
+  .item .thumb{width:64px}
+  .item .nm{font-size:15px}
+
+  /* ── 상세/편집 오버레이: 전체 화면 시트 ── */
+  .ov{padding:0}
+  .panel{max-width:none;margin:0;padding:0;border-radius:0;min-height:100dvh}
+  /* overflow:hidden이 있으면 아래 d-foot의 sticky가 동작하지 않는다.
+     모바일은 모서리를 둥글게 자를 일이 없으므로 풀어준다. */
+  .panel-in{border-radius:0;border-left:0;border-right:0;overflow:visible}
+  .d-head{padding:16px 14px 12px}
+  .d-name{font-size:24px}
+  .banner{right:12px;width:38px}
+  .banner span{font-size:14px}
+  .d-body{grid-template-columns:1fr;gap:14px;padding:0 14px 16px}
+  .d-illust{max-width:220px;margin:0 auto;width:100%}
+  .cards{grid-template-columns:1fr}
+  .reviews{padding:16px 14px 4px}
+
+  /* 하단 버튼은 손가락으로 누를 수 있게, 화면 아래 고정 */
+  .d-foot{
+    position:sticky;bottom:0;padding:10px 12px;gap:6px;
+    background:rgba(4,7,13,.95);
+  }
+  .d-foot .btn{flex:1 1 auto;min-height:44px;font-size:13px}
+  .d-foot .sp{display:none}
+
+  /* ── 편집 폼 ── */
+  .form{padding:14px 14px 8px}
+  .frow{grid-template-columns:1fr;gap:9px}
+  .form input,.form select,.form textarea{font-size:16px;padding:10px 12px}
+  .repeat .rh .x{min-width:38px;min-height:38px}
+  .dropzone{min-height:150px}
+
+  /* ── 페이지 넘김: 손가락 크기 ── */
+  .pager{gap:5px;justify-content:center}
+  .pager .pg{min-width:42px;min-height:42px;padding:9px 10px}
+  .pager .pg-info{width:100%;text-align:center;margin:6px 0 0}
+
+  /* ── 리뷰 폼 ── */
+  .rv-form input,.rv-form textarea{font-size:16px;padding:10px 12px}
+  .rv-form .fr>div{flex:1 1 100%}
+  .stars{font-size:26px;gap:4px}
+  .rv-item .del{min-width:34px;min-height:34px}
+  .toast{bottom:16px;width:calc(100% - 32px);text-align:center}
+}
+
+/* 아주 좁은 화면(소형 폰) */
+@media(max-width:380px){
+  .brand .logo{display:none}
+  .d-name{font-size:21px}
+  .item .thumb{width:56px}
+}
 </style>
 
 <svg style="display:none">
@@ -379,6 +484,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--frost);background:var
 .rv-form .act{display:flex;align-items:center;gap:10px;margin-top:4px}
 .rv-form .err{color:var(--danger);font-size:12px}
 .rv-form .sp{flex:1}
+
+/* 모바일 — 이 규칙들은 위쪽 style 블록보다 뒤에 오므로 여기서 다시 지정해야 한다 */
+@media(max-width:820px){
+  .reviews{padding:16px 14px 4px}
+  .rv-form input,.rv-form textarea{font-size:16px;padding:10px 12px} /* 16px: iOS 자동 확대 방지 */
+  .rv-form .fr{gap:8px}
+  .rv-form .fr>div{flex:1 1 100%;min-width:0}
+  .rv-form textarea{min-height:88px}
+  .rv-form .act .btn{min-height:44px;padding:10px 18px}
+  .stars{font-size:28px;gap:6px}          /* 별점은 손가락으로 눌러야 한다 */
+  .stars.pick .s{padding:2px}
+  .rv-item .del{min-width:36px;min-height:36px;font-size:18px}
+  .rv-h{flex-wrap:wrap;gap:6px}
+  .rv-avg{margin-left:0;width:100%}
+}
 </style>
 
 <script>
